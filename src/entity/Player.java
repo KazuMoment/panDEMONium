@@ -1,0 +1,584 @@
+package entity;
+
+import java.awt.AlphaComposite;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+
+import main.GamePanel;
+import main.KeyHandler;
+import object.Object_Key;
+import object.Object_Fireball;
+import object.Object_Health_Potion_Small;
+import object.Object_Shield_Wood;
+import object.Object_Sword_Normal;
+
+
+public class Player extends Entity{
+
+    KeyHandler keyH;
+
+    public final int screenX;
+    public final int screenY;
+    public boolean hasBoots = false;
+    int snapFirstSpriteCounter = 0;
+    public boolean lightUpdated = false;
+    
+    
+    public Player (GamePanel gp, KeyHandler keyH){
+        
+        super(gp);
+        this.keyH = keyH;
+
+        screenX = gp.screenWidth/2 - (gp.tileSize/2);
+        screenY = gp.screenHeight/2 - (gp.tileSize/2);
+
+        //Solid Area 
+        solidArea = new Rectangle(8, 16 , 32, 32);
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+
+        setDefaultValues();
+        getPlayerImage();
+        getPlayerAttackImage();
+        setItems();
+
+    }
+    public void setDefaultValues() {
+        
+        worldX = gp.tileSize * 23;
+        worldY = gp.tileSize * 21;
+
+        defaultSpeed = 4;
+        speed = defaultSpeed;
+        direction = "down";
+
+        // Player Status
+        level = 1;
+        maxHP = 6;
+        HP = maxHP;
+        maxMP = 4;
+        MP = maxMP;
+        strength = 1; // Attack
+        dexterity = 1; // Defense
+        EXP = 0;
+        nextLevelEXP = 5;
+        gold = 500;
+        currentWeapon = new Object_Sword_Normal(gp);
+        currentShield = new Object_Shield_Wood(gp);
+        projectile = new Object_Fireball(gp);
+        attack = getAttack();
+        defense = getDefense();
+    }
+
+    public void setDefaultPosition(){
+        
+        worldX = gp.tileSize * 23;
+        worldY = gp.tileSize * 21;
+        direction = "down";
+
+    }
+
+    public void restoreHPandMP(){
+
+        HP = maxHP;
+        MP = maxMP;
+        invulnerable = false;
+
+    }
+
+    public void setItems(){
+
+        inventory.clear();
+        inventory.add(currentWeapon);
+        inventory.add(currentShield);
+        inventory.add(new Object_Key(gp));
+        inventory.add(new Object_Key(gp));
+        inventory.add(new Object_Health_Potion_Small(gp));
+
+    }
+
+    public int getAttack(){
+        attackArea = currentWeapon.attackArea;
+        motion1_duration = currentWeapon.motion1_duration;
+        motion2_duration = currentWeapon.motion2_duration;
+        return attack = strength * currentWeapon.attackValue; // Attack scales from Strength
+    }
+
+    public int getDefense(){
+        return defense = dexterity * currentShield.defenseValue; // Defense scales from Dexterity
+    }
+
+    public void getPlayerImage(){
+
+        up1 = setup("/player/player_girl_up1", gp.tileSize, gp.tileSize);
+        up2 = setup ("/player/player_girl_up2", gp.tileSize, gp.tileSize);
+        down1 = setup ("/player/player_girl_down1", gp.tileSize, gp.tileSize);
+        down2 = setup ("/player/player_girl_down2", gp.tileSize, gp.tileSize);
+        left1 = setup ("/player/player_girl_left1", gp.tileSize, gp.tileSize);
+        left2 = setup ("/player/player_girl_left2", gp.tileSize, gp.tileSize);
+        right1 = setup ("/player/player_girl_right1", gp.tileSize, gp.tileSize);
+        right2 = setup ("/player/player_girl_right2", gp.tileSize, gp.tileSize);
+    }
+
+    public void getSleepingImage(BufferedImage image){
+        up1 = image;
+        up2 = image;
+        down1 = image;
+        down2 = image;
+        left1 = image;
+        left2 = image;
+        right1 = image;
+        right2 = image;
+    }
+
+    public void getPlayerAttackImage(){
+
+        if (currentWeapon.name == "Tinvaak Sword"){
+            attackUp1 = setup("/player/player_girl_attack_sword_up1", gp.tileSize, gp.tileSize * 2);
+            attackUp2 = setup("/player/player_girl_attack_sword_up2", gp.tileSize, gp.tileSize* 2);
+            attackDown1 = setup("/player/player_girl_attack_sword_down1", gp.tileSize, gp.tileSize * 2);
+            attackDown2 = setup("/player/player_girl_attack_sword_down2", gp.tileSize, gp.tileSize * 2);
+            attackLeft1 = setup("/player/player_girl_attack_sword_left1", gp.tileSize * 2, gp.tileSize);
+            attackLeft2 = setup("/player/player_girl_attack_sword_left2", gp.tileSize * 2, gp.tileSize);
+            attackRight1 = setup("/player/player_girl_attack_sword_right1", gp.tileSize * 2, gp.tileSize);
+            attackRight2 = setup("/player/player_girl_attack_sword_right2", gp.tileSize * 2, gp.tileSize);
+        }
+
+        if (currentWeapon.name == "Axe"){
+            attackUp1 = setup("/player/player_girl_attack_axe_up1", gp.tileSize, gp.tileSize * 2);
+            attackUp2 = setup("/player/player_girl_attack_axe_up2", gp.tileSize, gp.tileSize* 2);
+            attackDown1 = setup("/player/player_girl_attack_axe_down1", gp.tileSize, gp.tileSize * 2);
+            attackDown2 = setup("/player/player_girl_attack_axe_down2", gp.tileSize, gp.tileSize * 2);
+            attackLeft1 = setup("/player/player_girl_attack_axe_left1", gp.tileSize * 2, gp.tileSize);
+            attackLeft2 = setup("/player/player_girl_attack_axe_left2", gp.tileSize * 2, gp.tileSize);
+            attackRight1 = setup("/player/player_girl_attack_axe_right1", gp.tileSize * 2, gp.tileSize);
+            attackRight2 = setup("/player/player_girl_attack_axe_right2", gp.tileSize * 2, gp.tileSize);
+        }
+    }
+    
+
+    public void update(){
+
+        if (attacking == true){
+            attacking();
+        }
+
+        else if (keyH.upPressed == true || keyH.downPressed == true || 
+            keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true ||
+            keyH.ePressed == true){
+
+            if (keyH.upPressed == true){
+                direction  = "up";
+            }
+            else if (keyH.downPressed == true){
+                direction = "down";
+            }
+            else if (keyH.leftPressed == true){
+                direction = "left";
+            }
+            else if (keyH.rightPressed == true){
+                direction = "right";
+            }
+
+            if (keyH.shiftPressed == true){
+                if (hasBoots == true){
+                    speed = 6;
+                }
+            }
+            else if (keyH.shiftPressed == false){
+                speed = defaultSpeed;
+            }
+
+            if (keyH.ePressed == true){
+                attacking = true;
+                gp.playSoundEffect(8);
+            }
+            
+            // Check Tile Collision
+            collisionOn = false;
+            gp.collisionChecker.checkTile(this);
+
+            // Check Object Collision
+            int objectIndex = gp.collisionChecker.checkObject(this, true);
+            pickUpObject(objectIndex);
+
+            // Check NPC Collision
+            int npcIndex = gp.collisionChecker.checkEntity(this, gp.npc);
+            interactNPC(npcIndex);
+
+            // Check Enemy Collision
+            int enemyIndex = gp.collisionChecker.checkEntity(this, gp.enemy);
+            contactEnemy(enemyIndex);
+
+            // Check Interactive Tile Collision
+            gp.collisionChecker.checkEntity(this, gp.iTile);
+
+
+            // Check Event Collision
+            gp.eHandler.checkEvent();
+
+            // If Collision is false, Player can move
+            if (collisionOn == false && keyH.enterPressed == false){
+                switch(direction){
+                    case "up": worldY -= speed; break;
+                    case "down": worldY += speed; break;
+                    case "left": worldX -= speed; break;
+                    case "right": worldX += speed; break;
+                }
+                
+            }
+            
+            gp.keyH.enterPressed = false; // Used here to toggle enter to false after checking entity collision for dialogue box
+            spriteCounter++;
+            if (spriteCounter > 12){
+                if (spriteNumber == 1){
+                    spriteNumber = 2;
+                }
+                else if (spriteNumber == 2){
+                    spriteNumber = 1;
+                }
+                spriteCounter = 0;
+            }
+        }
+        else{
+            snapFirstSpriteCounter++;
+            if (snapFirstSpriteCounter == 15){
+                spriteNumber = 1; 
+                snapFirstSpriteCounter = 0;
+            }
+        }
+
+        if (gp.keyH.shootPressed == true && projectile.alive == false && shootCounter == 30 
+            && projectile.enoughCost(this) == true){
+            // Set Defautlt Coordinates, Direction, and user
+            projectile.set(worldX, worldY, direction, true, this);
+
+            // Subtract Cost
+            projectile.payCost(this);
+
+            // Check Vacancy, then add
+            for (int i = 0; i < gp.projectile[1].length; i++){
+                if (gp.projectile[gp.currentMap][i] == null){
+                    gp.projectile[gp.currentMap][i] = projectile;
+                    break;
+                }
+            }
+
+            shootCounter = 0;
+
+            gp.playSoundEffect(11);
+        }
+
+
+        if (invulnerable == true){
+            invulnerableCounter++;
+            if (invulnerableCounter > 60){
+                invulnerable = false;
+                invulnerableCounter = 0;
+            }
+        }
+        if (shootCounter < 30){
+            shootCounter++;
+        }
+        if (HP > maxHP){
+            HP = maxHP;
+        }
+        if (MP > maxMP){
+            MP = maxMP;
+        }
+        if (HP <= 0){
+            gp.gameState = gp.gameOverState;
+            gp.stopMusic();
+            gp.playSoundEffect(13);
+        }
+
+
+    }
+
+    public void pickUpObject(int i){
+
+        if (i != 999){
+
+            // Pickup Only Items
+            if (gp.obj[gp.currentMap][i].type == type_pickuponly){
+
+                gp.obj[gp.currentMap][i].use(this);
+                gp.obj[gp.currentMap][i] = null;
+
+            }
+
+            // Obstacle
+            else if (gp.obj[gp.currentMap][i].type == type_obstacle){
+                if (keyH.enterPressed == true){
+                    gp.obj[gp.currentMap][i].interact();
+                }
+            }
+
+            // Inventory Items
+            else {
+
+                String text;
+
+                if (canObtainItem(gp.obj[gp.currentMap][i]) == true){
+                    gp.playSoundEffect(2);
+                    text = "Picked up " + gp.obj[gp.currentMap][i].name + "!";
+                }
+                else{
+                    text = "You cannot carry any more items!";
+                }   
+                gp.ui.addMessage(text);
+                gp.obj[gp.currentMap][i] = null;
+
+            }
+        }
+    }
+
+    public void interactNPC(int i){
+         if (i != 999){
+            if (gp.keyH.enterPressed == true){
+                gp.gameState = gp.dialogueState;
+                gp.npc[gp.currentMap][i].speak();
+
+            }
+        }
+    }
+
+    public void contactEnemy(int i){
+        if (i != 999){
+            if (invulnerable == false && gp.enemy[gp.currentMap][i].dying == false){
+                gp.playSoundEffect(7);
+                int damage = gp.enemy[gp.currentMap][i].attack - gp.player.defense;
+                if (damage < 0){
+                    damage = 0;
+                }
+                HP -= damage;
+                invulnerable = true;
+            }
+        }
+    }
+
+    public void damageEnemy(int i, Entity attacker, int attack, int knockbackPower){
+        if (i != 999){
+            if (gp.enemy[gp.currentMap][i].invulnerable == false){
+                gp.playSoundEffect(6);
+                if (knockbackPower > 0){
+                    setKnockback(gp.enemy[gp.currentMap][i], attacker, knockbackPower);
+                }
+
+                int damage = attack - gp.enemy[gp.currentMap][i].defense;
+                if (damage < 0){
+                    damage = 0;
+                }
+                gp.enemy[gp.currentMap][i].HP -= damage;
+                gp.ui.addMessage(damage + " damage!");
+                gp.enemy[gp.currentMap][i].invulnerable = true;
+                gp.enemy[gp.currentMap][i].damageReaction();
+
+                if (gp.enemy[gp.currentMap][i].HP <= 0){
+                    gp.enemy[gp.currentMap][i].dying = true;
+                    gp.ui.addMessage(gp.enemy[gp.currentMap][i].EXP + " EXP gained!");
+                    EXP += gp.enemy[gp.currentMap][i].EXP;
+                    checkLevelUp();
+                }
+            }
+        }
+    }
+
+    public void interactTile(int i){
+
+        if (i != 999 && gp.iTile[gp.currentMap][i].destructible == true && gp.iTile[gp.currentMap][i].isCorrectItem(this) == true
+            && gp.iTile[gp.currentMap][i].invulnerable == false){
+            gp.iTile[gp.currentMap][i].playSoundEffect();
+            gp.iTile[gp.currentMap][i].HP--;
+            gp.iTile[gp.currentMap][i].invulnerable = true;
+
+            // Generate Particle
+            generateParticle(gp.iTile[gp.currentMap][i], gp.iTile[gp.currentMap][i]);
+
+            if (gp.iTile[gp.currentMap][i].HP == 0){
+                gp.iTile[gp.currentMap][i] = gp.iTile[gp.currentMap][i].getDestroyedForm();
+            }
+        }
+
+    }
+
+    public void damageProjectile(int i){
+        if (i != 999){
+            Entity projectile  = gp.projectile[gp.currentMap][i];
+            projectile.alive = false;
+            generateParticle(projectile, projectile);
+        }
+    }
+
+    
+
+    public void checkLevelUp(){
+        if (EXP >= nextLevelEXP){
+            level++;
+            nextLevelEXP *= 1.5;
+            maxHP += 2;
+            maxMP += 1;
+            HP = maxHP;
+            MP = maxMP;
+            strength++;
+            dexterity++;
+            attack = getAttack();
+            defense = getDefense();
+            gp.playSoundEffect(9);
+            gp.gameState = gp.dialogueState;
+            gp.ui.currentDialogue = "You leveled up! Your level now is " + level + "!\n" + "You feel stronger!";
+            gp.player.EXP = 0;
+        }
+    }
+
+    public void selectItem(){
+
+        int itemIndex = gp.ui.getItemIndexOnSlot(gp.ui.playerSlotColumn, gp.ui.playerSlotRow);
+
+        if (itemIndex < inventory.size()){
+
+            Entity selectedItem = inventory.get(itemIndex);
+
+            if (selectedItem.type == type_sword || selectedItem.type == type_axe){
+                currentWeapon = selectedItem;
+                attack = getAttack();
+                getPlayerAttackImage();
+            }
+
+            if (selectedItem.type == type_shield ){
+                currentShield = selectedItem;
+                defense = getDefense();
+            }
+
+            if (selectedItem.type == type_consumable ){
+                if (selectedItem.use(this) == true){
+                    if (selectedItem.amount > 1){
+                        selectedItem.amount--;
+                    }
+                    else{
+                        inventory.remove(itemIndex);
+                    }
+                }   
+            }
+
+            if (selectedItem.type == type_light ){
+                if (currentLight == selectedItem){
+                    currentLight = null;
+                }
+                else{
+                    currentLight = selectedItem;
+                }
+                lightUpdated = true;
+            }
+
+        }
+
+    }
+
+    public int searchItemInInventory(String itemName){
+
+        int itemIndex = 999;
+
+        for (int i = 0; i < inventory.size(); i++){
+            if (inventory.get(i).name.equals(itemName)){
+                itemIndex = i;
+                break;
+            }
+        }
+        return itemIndex;
+    }
+
+    public boolean canObtainItem(Entity item){
+
+        boolean canObtain = false;
+
+        // Check if item is stackable
+        if (item.stackable == true){
+
+            int index = searchItemInInventory(item.name);
+
+            if (index != 999){
+                inventory.get(index).amount++;
+                canObtain = true;
+            }
+            else{ // New item so check vacancy
+                if (inventory.size() != maxInventorySize){
+                    inventory.add(item);
+                    canObtain = true;
+                }
+            }
+        }
+
+        else { // Not stackable
+            if (inventory.size() != maxInventorySize){
+                    inventory.add(item);
+                    canObtain = true;
+                }
+        }
+        return canObtain;
+    }
+
+    public void draw(Graphics2D g2){
+        
+        BufferedImage image = null;
+        int tempScreenX = screenX;
+        int tempScreenY = screenY;
+
+        switch(direction){
+            case "up":
+                if (attacking == false){
+                    if (spriteNumber == 1){image = up1;} 
+                    if (spriteNumber == 2){image = up2;} 
+                }
+                if (attacking == true){
+                    tempScreenY = screenY - gp.tileSize;
+                    if (spriteNumber == 1){image = attackUp1;} 
+                    if (spriteNumber == 2){image = attackUp2;} 
+                } 
+                break;
+
+            case "down":
+                if (attacking == false){
+                    if (spriteNumber == 1){image = down1;} 
+                    if (spriteNumber == 2){image = down2;} 
+                }
+                if (attacking == true){
+                    if (spriteNumber == 1){image = attackDown1;} 
+                    if (spriteNumber == 2){image = attackDown2;} 
+                }
+                break;
+
+            case "left":
+                if (attacking == false){
+                    if (spriteNumber == 1){image = left1;} 
+                    if (spriteNumber == 2){image = left2;} 
+                }
+                if (attacking == true){
+                    tempScreenX = screenX - gp.tileSize;
+                    if (spriteNumber == 1){image = attackLeft1;} 
+                    if (spriteNumber == 2){image = attackLeft2;} 
+                }
+                break; 
+
+            case "right":
+                if (attacking == false){
+                    if (spriteNumber == 1){image = right1;} 
+                    if (spriteNumber == 2){image = right2;} 
+                }
+                if (attacking == true){
+                    if (spriteNumber == 1){image = attackRight1;} 
+                    if (spriteNumber == 2){image = attackRight2;} 
+                }
+                break; 
+        }
+
+        if (invulnerable == true){
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+        }
+        g2.drawImage(image, tempScreenX, tempScreenY, null);
+
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+    }
+
+}
