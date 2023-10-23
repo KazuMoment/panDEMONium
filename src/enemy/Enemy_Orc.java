@@ -26,6 +26,7 @@ public class Enemy_Orc extends Entity{
         attack = 5; 
         defense = 2;
         EXP = 10;
+        knockbackPower = 6;
 
         solidArea.x = 4;
         solidArea.y = 4;
@@ -34,7 +35,7 @@ public class Enemy_Orc extends Entity{
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
         attackArea.width = 48;
-        attackArea.height = 48;
+        attackArea.height = 45;
         motion1_duration = 40;
         motion2_duration = 85;
 
@@ -73,7 +74,7 @@ public class Enemy_Orc extends Entity{
         if (onPath == true){
 
             // Check if player is still in range
-            checkStopAggroRange(gp.player, 12, 100);
+            checkStopAggroRange(gp.player, 6, 100);
 
             // Search direction
             searchPath(getGoalColumn(gp.player), getGoalRow(gp.player));

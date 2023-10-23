@@ -7,7 +7,7 @@ public class KeyHandler implements KeyListener{
 
     GamePanel gp;
 
-    public boolean upPressed, downPressed, leftPressed, rightPressed, shiftPressed, enterPressed, ePressed, shootPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, shiftPressed, enterPressed, ePressed, shootPressed, spacePressed;
 
     //Debug 
     boolean showDebugMenu = false;
@@ -185,7 +185,10 @@ public class KeyHandler implements KeyListener{
             else{
                 gp.map.miniMapOn = false;
             }
+        }
 
+        if (code == KeyEvent.VK_SPACE){
+            spacePressed = true;
         }
 
         // Debug
@@ -310,13 +313,13 @@ public class KeyHandler implements KeyListener{
         if (code == KeyEvent.VK_ENTER){
             if(gp.ui.commandNumber == 0){
                 gp.gameState = gp.playState;
-                gp.retry();
+                gp.resetGame(false);
                 gp.playMusic(1);
             }
             else if (gp.ui.commandNumber == 1){
                 gp.gameState = gp.titleState;
                 gp.ui.titleScreenState = 0;
-                gp.restart();
+                gp.resetGame(true);
             }
         }
 
@@ -441,12 +444,17 @@ public class KeyHandler implements KeyListener{
         if (code == KeyEvent.VK_SHIFT){
             shiftPressed = false;
         }
-
+        if (code == KeyEvent.VK_ENTER){
+            enterPressed = false;
+        }
         if (code == KeyEvent.VK_E){
             ePressed = false;
         }
         if (code == KeyEvent.VK_F){
             shootPressed = false;
+        }
+        if (code == KeyEvent.VK_SPACE){
+            spacePressed = false;
         }
     }
 }

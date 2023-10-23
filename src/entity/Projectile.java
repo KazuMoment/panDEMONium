@@ -41,7 +41,7 @@ public class Projectile extends Entity {
             boolean contactPlayer = gp.collisionChecker.checkPlayer(this);
             if (gp.player.invulnerable == false && contactPlayer == true){
                 damagePlayer(attack);
-                generateParticle(user.projectile, gp.player);
+                generateParticle(user.projectile, user.projectile);
                 alive = false; 
             }
         }

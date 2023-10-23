@@ -39,11 +39,8 @@ public class Player extends Entity{
         solidAreaDefaultY = solidArea.y;
 
         setDefaultValues();
-        getPlayerImage();
-        getPlayerAttackImage();
-        setItems();
-
     }
+
     public void setDefaultValues() {
         
         worldX = gp.tileSize * 23;
@@ -66,9 +63,15 @@ public class Player extends Entity{
         gold = 500;
         currentWeapon = new Object_Sword_Normal(gp);
         currentShield = new Object_Shield_Wood(gp);
+        currentLight = null;
         projectile = new Object_Fireball(gp);
         attack = getAttack();
         defense = getDefense();
+
+        getImage();
+        getAttackImage();
+        getGuardImage();
+        setItems();
     }
 
     public void setDefaultPosition(){
@@ -79,12 +82,16 @@ public class Player extends Entity{
 
     }
 
-    public void restoreHPandMP(){
+    public void restoreStatus(){
 
         HP = maxHP;
         MP = maxMP;
         invulnerable = false;
-
+        transparent = false;
+        attacking = false;
+        guarding = false;
+        knockback = false;
+        lightUpdated = true;
     }
 
     public void setItems(){
@@ -109,7 +116,7 @@ public class Player extends Entity{
         return defense = dexterity * currentShield.defenseValue; // Defense scales from Dexterity
     }
 
-    public void getPlayerImage(){
+    public void getImage(){
 
         up1 = setup("/player/player_girl_up1", gp.tileSize, gp.tileSize);
         up2 = setup ("/player/player_girl_up2", gp.tileSize, gp.tileSize);
@@ -132,7 +139,7 @@ public class Player extends Entity{
         right2 = image;
     }
 
-    public void getPlayerAttackImage(){
+    public void getAttackImage(){
 
         if (currentWeapon.name == "Tinvaak Sword"){
             attackUp1 = setup("/player/player_girl_attack_sword_up1", gp.tileSize, gp.tileSize * 2);
@@ -156,12 +163,58 @@ public class Player extends Entity{
             attackRight2 = setup("/player/player_girl_attack_axe_right2", gp.tileSize * 2, gp.tileSize);
         }
     }
+
+    public void getGuardImage(){
+
+        if (currentShield.name == "Tinvaak Shield"){
+            guardUp = setup("/player/player_shield_tinvaak_up_1", gp.tileSize, gp.tileSize);
+            guardDown = setup("/player/player_shield_tinvaak_down_1", gp.tileSize, gp.tileSize);
+            guardLeft = setup("/player/player_shield_tinvaak_left_1", gp.tileSize, gp.tileSize);
+            guardRight = setup("/player/player_shield_tinvaak_right_1", gp.tileSize, gp.tileSize);
+        }
+
+    }
     
 
     public void update(){
 
-        if (attacking == true){
+        if (knockback == true){
+
+            collisionOn = false;
+            gp.collisionChecker.checkTile(this);
+            gp.collisionChecker.checkObject(this, true);
+            gp.collisionChecker.checkEntity(this, gp.npc);
+            gp.collisionChecker.checkEntity(this, gp.enemy);
+            gp.collisionChecker.checkEntity(this, gp.iTile);
+
+            if (collisionOn == true){
+                knockbackCounter = 0;
+                knockback = false;
+                speed = defaultSpeed;
+            }
+            else if (collisionOn == false){
+                switch(knockbackDirection){
+                    case "up": worldY -= speed; break;
+                    case "down": worldY += speed; break;
+                    case "left": worldX -= speed; break;
+                    case "right": worldX += speed; break;
+                }
+            }
+            knockbackCounter++;
+            if (knockbackCounter == 10){
+                knockbackCounter = 0;
+                knockback = false;
+                speed = defaultSpeed;
+            } 
+        }
+
+        else if (attacking == true){
             attacking();
+        }
+
+        else if (keyH.spacePressed == true){
+            guarding = true;
+            guardCounter++;
         }
 
         else if (keyH.upPressed == true || keyH.downPressed == true || 
@@ -226,10 +279,13 @@ public class Player extends Entity{
                     case "left": worldX -= speed; break;
                     case "right": worldX += speed; break;
                 }
-                
             }
-            
+
+        
             gp.keyH.enterPressed = false; // Used here to toggle enter to false after checking entity collision for dialogue box
+            guarding = false;
+            guardCounter = 0;
+
             spriteCounter++;
             if (spriteCounter > 12){
                 if (spriteNumber == 1){
@@ -247,6 +303,8 @@ public class Player extends Entity{
                 spriteNumber = 1; 
                 snapFirstSpriteCounter = 0;
             }
+            guarding = false;
+            guardCounter = 0;
         }
 
         if (gp.keyH.shootPressed == true && projectile.alive == false && shootCounter == 30 
@@ -275,6 +333,7 @@ public class Player extends Entity{
             invulnerableCounter++;
             if (invulnerableCounter > 60){
                 invulnerable = false;
+                transparent = false;
                 invulnerableCounter = 0;
             }
         }
@@ -349,11 +408,12 @@ public class Player extends Entity{
             if (invulnerable == false && gp.enemy[gp.currentMap][i].dying == false){
                 gp.playSoundEffect(7);
                 int damage = gp.enemy[gp.currentMap][i].attack - gp.player.defense;
-                if (damage < 0){
-                    damage = 0;
+                if (damage < 1){
+                    damage = 1;
                 }
                 HP -= damage;
                 invulnerable = true;
+                transparent = true;
             }
         }
     }
@@ -364,6 +424,10 @@ public class Player extends Entity{
                 gp.playSoundEffect(6);
                 if (knockbackPower > 0){
                     setKnockback(gp.enemy[gp.currentMap][i], attacker, knockbackPower);
+                }
+
+                if (gp.enemy[gp.currentMap][i].parried == true){
+                    attack *= 3;
                 }
 
                 int damage = attack - gp.enemy[gp.currentMap][i].defense;
@@ -443,7 +507,7 @@ public class Player extends Entity{
             if (selectedItem.type == type_sword || selectedItem.type == type_axe){
                 currentWeapon = selectedItem;
                 attack = getAttack();
-                getPlayerAttackImage();
+                getAttackImage();
             }
 
             if (selectedItem.type == type_shield ){
@@ -536,6 +600,9 @@ public class Player extends Entity{
                     if (spriteNumber == 1){image = attackUp1;} 
                     if (spriteNumber == 2){image = attackUp2;} 
                 } 
+                if (guarding == true){
+                    image = guardUp;
+                }
                 break;
 
             case "down":
@@ -546,6 +613,9 @@ public class Player extends Entity{
                 if (attacking == true){
                     if (spriteNumber == 1){image = attackDown1;} 
                     if (spriteNumber == 2){image = attackDown2;} 
+                }
+                if (guarding == true){
+                    image = guardDown;
                 }
                 break;
 
@@ -559,6 +629,9 @@ public class Player extends Entity{
                     if (spriteNumber == 1){image = attackLeft1;} 
                     if (spriteNumber == 2){image = attackLeft2;} 
                 }
+                if (guarding == true){
+                    image = guardLeft;
+                }
                 break; 
 
             case "right":
@@ -570,10 +643,13 @@ public class Player extends Entity{
                     if (spriteNumber == 1){image = attackRight1;} 
                     if (spriteNumber == 2){image = attackRight2;} 
                 }
+                if (guarding == true){
+                    image = guardRight;
+                }
                 break; 
         }
 
-        if (invulnerable == true){
+        if (transparent == true){
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
         }
         g2.drawImage(image, tempScreenX, tempScreenY, null);

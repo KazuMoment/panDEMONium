@@ -15,6 +15,7 @@ import java.util.Comparator;
 import javax.swing.JPanel;
 
 import ai.Pathfinder;
+import data.SaveLoad;
 import entity.Entity;
 import entity.Player;
 import environment.EnvironmentManager;
@@ -65,6 +66,7 @@ public class GamePanel extends JPanel implements Runnable{
     public Pathfinder pFinder = new Pathfinder(this);
     EnvironmentManager eManager = new EnvironmentManager(this);
     Map map = new Map(this);
+    SaveLoad saveLoad = new SaveLoad(this);
     Thread gameThread; 
    
     // Entity and Object
@@ -118,26 +120,19 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
 
-    public void retry(){
+    public void resetGame(boolean restart){
 
         player.setDefaultPosition();
-        player.restoreHPandMP();
+        player.restoreStatus();
         aSetter.setNPC();
         aSetter.setEnemy();
-
-    }
-
-    public void restart(){  
         
-        player.setDefaultValues();
-        player.setDefaultPosition();
-        player.restoreHPandMP();
-        player.setItems();
-        aSetter.setObject();
-        aSetter.setNPC();
-        aSetter.setEnemy();
-        aSetter.setInteractiveTile();
-
+        if (restart == true){
+            player.setDefaultValues();
+            aSetter.setObject();
+            aSetter.setInteractiveTile();
+            eManager.lighting.resetDay(); 
+        }
     }
 
     public void setFullscreen(){

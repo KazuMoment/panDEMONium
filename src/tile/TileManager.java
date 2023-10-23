@@ -66,6 +66,7 @@ public class TileManager {
         
         loadMap("/maps/worldmap.txt", 0); 
         loadMap("/maps/indoor01.txt", 1);
+        loadMap("/maps/forest_tutorial.txt", 2);
     }
 
     public void getTileImage(){

@@ -827,6 +827,7 @@ public class UI {
                 subState = 0;
                 gp.stopMusic();
                 gp.gameState = gp.titleState;
+                gp.resetGame(true);
                 titleScreenState = 0;
             }
         }
@@ -1062,7 +1063,7 @@ public class UI {
                 gp.eManager.lighting.dayState = gp.eManager.lighting.day;
                 gp.eManager.lighting.dayCounter = 0;
                 gp.gameState = gp.playState;
-                gp.player.getPlayerImage();
+                gp.player.getAttackImage();
             }
         }
     }

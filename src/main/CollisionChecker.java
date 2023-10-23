@@ -131,11 +131,8 @@ public class CollisionChecker {
 
                 switch(direction){
                     case "up": entity.solidArea.y -= entity.speed; break;
-
                     case "down": entity.solidArea.y += entity.speed; break;
-                    
                     case "left": entity.solidArea.x -= entity.speed;break;
-                    
                     case "right": entity.solidArea.x += entity.speed;break;
                     }   
 

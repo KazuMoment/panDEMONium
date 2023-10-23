@@ -18,7 +18,9 @@ public class Entity {
     
     GamePanel gp;
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
-    public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
+    public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, 
+    attackLeft1, attackLeft2, attackRight1, attackRight2, 
+    guardUp, guardDown, guardLeft, guardRight;
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
     public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
     public int solidAreaDefaultX, solidAreaDefaultY;
@@ -42,6 +44,9 @@ public class Entity {
     public boolean following = false;
     public boolean knockback = false;
     public String knockbackDirection;
+    public boolean guarding = false;   
+    public boolean transparent = false;
+    public boolean parried = false;
     
     // Counter 
     public int spriteCounter = 0;
@@ -51,6 +56,8 @@ public class Entity {
     int hpBarCounter = 0;
     public int shootCounter;
     int knockbackCounter = 0;
+    public int guardCounter = 0;
+    public int parriedCounter = 0;
 
     // Character Attributes
     public String name;
@@ -254,18 +261,16 @@ public class Entity {
                     case "left": worldX -= speed; break;
                     case "right": worldX += speed; break;
                 }
-                knockbackCounter++;
-                if (knockbackCounter == 10){
-                    knockbackCounter = 0;
-                    knockback = false;
-                    speed = defaultSpeed;
-                }
             }
-
-            else if (attacking == true){
-                attacking();
-            }
-
+            knockbackCounter++;
+            if (knockbackCounter == 10){
+                knockbackCounter = 0;
+                knockback = false;
+                speed = defaultSpeed;
+            } 
+        }
+        else if (attacking == true){
+            attacking();
         }
 
         else{
@@ -305,6 +310,27 @@ public class Entity {
         if (shootCounter < 30){
             shootCounter++;
         }
+
+        if (parried == true){
+            parriedCounter++;
+            if (parriedCounter > 120){
+                parried = false;
+                parriedCounter = 0;
+            }
+        }
+    }
+
+    public String getOppositeDirection(String direction){
+
+        String oppositeDirection = "";
+
+        switch(direction){
+            case "up": oppositeDirection = "down"; break;
+            case "down": oppositeDirection = "up"; break;
+            case "left": oppositeDirection = "right"; break;
+            case "right": oppositeDirection = "left"; break;
+        }
+        return oppositeDirection;
     }
 
     public void attacking(){
@@ -373,14 +399,45 @@ public class Entity {
 
     public void damagePlayer(int attack){
         if (gp.player.invulnerable == false){
-                gp.playSoundEffect(7);
                 int damage = attack - gp.player.defense;
-                if (damage < 0){
-                    damage = 0;
+
+                // Get opposite direction of attacker
+                String canGuardDirection = getOppositeDirection(direction);
+
+                if (gp.player.guarding == true && gp.player.direction == canGuardDirection){
+
+                    // Parry
+                    if (gp.player.guardCounter < 10){
+                        damage = 0;
+                        gp.playSoundEffect(18);
+                        setKnockback(this, gp.player, knockbackPower);
+                        parried = true;
+                        spriteCounter -= 120;
+                    }
+
+                    // Block
+                    else{ 
+                        damage /= 3;
+                        gp.playSoundEffect(17);
+                    }
                 }
+
+                else{
+                    gp.playSoundEffect(7);
+                    if (damage < 1){
+                        damage = 1;
+                    }
+                }
+
+                if (damage != 0){
+                    gp.player.transparent = true;
+                    setKnockback(gp.player, this, knockbackPower);
+                }
+
                 gp.player.HP -= damage;
                 gp.player.invulnerable = true;
-            }
+                
+            } 
     }
 
     public void setKnockback(Entity target, Entity attacker, int knockbackPower){
