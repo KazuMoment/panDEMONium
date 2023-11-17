@@ -6,6 +6,7 @@ public class EventHandler {
 
     GamePanel gp;
     EventRectangle eventRectangle[][][];
+    Entity eventMaster;
 
     int previousEventX, previousEventY;
     boolean canTriggerEvent = true;
@@ -13,6 +14,8 @@ public class EventHandler {
 
     public EventHandler(GamePanel gp){
         this.gp = gp;
+
+        eventMaster = new Entity(gp);
 
         eventRectangle = new EventRectangle[gp.maxMap][gp.maxWorldColumn][gp.maxWorldRow];
 
@@ -41,7 +44,14 @@ public class EventHandler {
             }
         }
 
-        
+        setDialogue();
+    }
+
+    public void setDialogue(){
+
+        eventMaster.dialogue[0][0] = "You fucked up.";
+        eventMaster.dialogue[1][0] = "You drank the water.\nYour HP and MP have been recovered!\nProgress is saved.";
+
     }
 
     public void checkEvent(){
@@ -56,10 +66,11 @@ public class EventHandler {
         if (canTriggerEvent == true){
             if (hit(0, 27, 16, "right") == true){damagePit(gp.dialogueState);}
             else if (hit(0, 23, 12, "up") == true){healingPool(gp.dialogueState);}
-            else if (hit(0, 10, 39, "up") == true){teleport(1, 12, 13);}
-            else if (hit(1, 12, 13, "down") == true){teleport(0, 10, 39);}
-            else if (hit(0, 12, 9, "any") == true){teleport(2, 9, 90);}
-            else if (hit (1, 12, 9, "up") == true){speak(gp.npc[1][0]);}
+            else if (hit(0, 11, 32, "up") == true){teleport(1, 43, 41, gp.dungeon, gp.tinvaak_dungeon);} // dungeon 
+            else if (hit(1, 45, 42, "right") == true){teleport(0, 11, 32, gp.outdoor, gp.tutorial_forest);} // back to forest 
+            else if (hit(0, 40, 12, "up") == true){teleport(2, 25, 27, gp.outdoor, gp.merchant_tent);} // merchant tent 
+            else if (hit(2, 25, 27, "down") == true){teleport(0, 40, 12, gp.outdoor, gp.tutorial_forest);} // back to forest 
+            else if (hit (1, 12, 9, "up") == true){speak(gp.npc[1][0]);} // talk to merchant interacting with table
         }
     
 
@@ -95,7 +106,7 @@ public class EventHandler {
 
     public void damagePit(int gameState){
         gp.gameState = gameState;
-        gp.ui.currentDialogue = "You fucked up.";
+        eventMaster.startDialogue(eventMaster, 0);
         gp.player.HP -= 1;
         canTriggerEvent = false;
     }
@@ -103,24 +114,27 @@ public class EventHandler {
     public void healingPool (int gameState){
         if (gp.keyH.enterPressed == true){
             gp.gameState = gameState;
-            gp.ui.currentDialogue = "You drank the water.\nYour HP is recovered!";
+            eventMaster.startDialogue(eventMaster, 1);
             gp.player.HP = gp.player.maxHP;
             gp.player.MP = gp.player.maxMP;
             gp.aSetter.setEnemy();
+            gp.saveLoad.save();
         }
     }
 
-    public void teleport(int map, int column, int row){
+    public void teleport(int map, int column, int row, int area, int level){
         gp.gameState = gp.transitionState;
+        gp.nextArea = area;
+        gp.nextLevel = level;
         tempMap = map;
         tempColumn = column;
         tempRow = row;
         
-    
         canTriggerEvent = false;
         gp.playSoundEffect(14);
 
     }
+
     public void speak (Entity entity){
         if (gp.keyH.enterPressed == true){
             gp.gameState = gp.dialogueState;

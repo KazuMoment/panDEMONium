@@ -36,13 +36,23 @@ public class NPC_Farid extends Entity {
 
     public void setDialogue(){
 
-        dialogue[0] = "Ah. Hello, stranger.";
-        dialogue[1] = "Before we do some business, it is appropriate \nthat I introduce myself";
-        dialogue[2] = "I am Farid, a humble merchant.";
-        dialogue[3] = "Ah. These? They are my goggles!";
-        dialogue[4] = "Huh? You were talking about my horns?\nThey're nothing special, I tell you.";
-        dialogue[5] = "I am a demon, so what? Am I not \nallowed to do business?";
-        dialogue[6] = "So? Are we doing business or what?";
+        dialogue[0][0] = "Ah. Hello, stranger.";
+        dialogue[0][1] = "Before we do some business, it is appropriate \nthat I introduce myself.";
+        dialogue[0][2] = "I am Farid, a humble merchant.";
+        dialogue[0][3] = "Ah. These? They are my goggles!";
+        dialogue[0][4] = "Huh? You were talking about my horns?\nThey're nothing special, I tell you.";
+        dialogue[0][5] = "I am a demon? So what? Am I not \nallowed to do business?";
+        dialogue[0][6] = "So? Are we doing business or what?";
+
+        dialogue[1][0] = "Doing business?";
+
+        dialogue[2][0] = "Come again, stranger.";
+
+        dialogue[3][0] = "You need more gold to buy that, stranger!";
+
+        dialogue[4][0] = "Where are you gonna put this? Your pocket!?";
+
+        dialogue[5][0] = "You gotta unequip that first, stranger.";
         
     }
 
@@ -52,14 +62,13 @@ public class NPC_Farid extends Entity {
     }
 
     public void speak(){
-        if (dialogue[dialogueIndex] != null){
-            super.speak();
-        }
-        if (dialogue[dialogueIndex] == null){
-            gp.ui.currentDialogue = dialogue[6];
+        facePlayer();
+        startDialogue(this, dialogueSet);
+
+        if (introDone == true){
+            dialogueSet = 1;
             gp.gameState = gp.shopState;
-            gp.ui.npc = this;
         }
+        
     }
-    
 }

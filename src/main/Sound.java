@@ -36,7 +36,10 @@ public class Sound {
         soundURL[16] = getClass().getResource("/sound/sleep.wav");
         soundURL[17] = getClass().getResource("/sound/block.wav");
         soundURL[18] = getClass().getResource("/sound/parry.wav");
-
+        soundURL[19] = getClass().getResource("/sound/speak.wav");
+        soundURL[20] = getClass().getResource("/sound/Monk Dance - panDEMONium.wav");               
+        soundURL[21] = getClass().getResource("/sound/Ending Theme - panDEMONium.wav");   
+        soundURL[22] = getClass().getResource("/sound/Tutorial Forest.wav");   
 
     }
 

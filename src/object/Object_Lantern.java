@@ -5,11 +5,14 @@ import main.GamePanel;
 
 public class Object_Lantern extends Entity{
 
+    GamePanel gp;
+    public static final String objectName = "Lantern";
+
     public Object_Lantern(GamePanel gp){
         super(gp);
 
         type = type_light;
-        name = "Lantern";
+        name = objectName;
         down1 = setup("/objects/lantern", gp.tileSize, gp.tileSize);
         description = "[Lantern]\nIlluminates your\nsurroundings";
         price = 200;

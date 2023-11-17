@@ -8,10 +8,11 @@ import java.awt.image.BufferedImage;
 import main.GamePanel;
 import main.KeyHandler;
 import object.Object_Key;
+import object.Object_Lantern;
 import object.Object_Fireball;
 import object.Object_Health_Potion_Small;
-import object.Object_Shield_Wood;
-import object.Object_Sword_Normal;
+import object.Object_Shield_Tinvaak;
+import object.Object_Sword_Tinvaak;
 
 
 public class Player extends Entity{
@@ -43,8 +44,8 @@ public class Player extends Entity{
 
     public void setDefaultValues() {
         
-        worldX = gp.tileSize * 23;
-        worldY = gp.tileSize * 21;
+        worldX = gp.tileSize * 30;
+        worldY = gp.tileSize * 26;
 
         defaultSpeed = 4;
         speed = defaultSpeed;
@@ -61,8 +62,8 @@ public class Player extends Entity{
         EXP = 0;
         nextLevelEXP = 5;
         gold = 500;
-        currentWeapon = new Object_Sword_Normal(gp);
-        currentShield = new Object_Shield_Wood(gp);
+        currentWeapon = new Object_Sword_Tinvaak(gp);
+        currentShield = new Object_Shield_Tinvaak(gp);
         currentLight = null;
         projectile = new Object_Fireball(gp);
         attack = getAttack();
@@ -76,9 +77,15 @@ public class Player extends Entity{
 
     public void setDefaultPosition(){
         
-        worldX = gp.tileSize * 23;
-        worldY = gp.tileSize * 21;
+        worldX = gp.tileSize * 30;
+        worldY = gp.tileSize * 26;
         direction = "down";
+
+    }
+
+    public void setDialogue(){
+
+        dialogue[0][0] = "You leveled up! Your level now is " + level + "!\n" + "You feel stronger!";
 
     }
 
@@ -102,6 +109,7 @@ public class Player extends Entity{
         inventory.add(new Object_Key(gp));
         inventory.add(new Object_Key(gp));
         inventory.add(new Object_Health_Potion_Small(gp));
+        inventory.add(new Object_Lantern(gp));
 
     }
 
@@ -114,6 +122,26 @@ public class Player extends Entity{
 
     public int getDefense(){
         return defense = dexterity * currentShield.defenseValue; // Defense scales from Dexterity
+    }
+
+    public int getCurrentWeaponSlot(){
+        int currentWeaponSlot = 0;
+        for (int i = 0; i < inventory.size(); i++){
+            if (inventory.get(i) == currentWeapon){
+                currentWeaponSlot = i;
+            }
+        }
+        return currentWeaponSlot;
+    }
+
+    public int getCurrentShieldSlot(){
+        int currentShieldSlot = 0;
+        for (int i = 0; i < inventory.size(); i++){
+            if (inventory.get(i) == currentShield){
+                currentShieldSlot = i;
+            }
+        }
+        return currentShieldSlot;
     }
 
     public void getImage(){
@@ -396,9 +424,7 @@ public class Player extends Entity{
     public void interactNPC(int i){
          if (i != 999){
             if (gp.keyH.enterPressed == true){
-                gp.gameState = gp.dialogueState;
                 gp.npc[gp.currentMap][i].speak();
-
             }
         }
     }
@@ -490,8 +516,8 @@ public class Player extends Entity{
             attack = getAttack();
             defense = getDefense();
             gp.playSoundEffect(9);
-            gp.gameState = gp.dialogueState;
-            gp.ui.currentDialogue = "You leveled up! Your level now is " + level + "!\n" + "You feel stronger!";
+            setDialogue();
+            startDialogue(this, 0);
             gp.player.EXP = 0;
         }
     }
@@ -557,10 +583,12 @@ public class Player extends Entity{
 
         boolean canObtain = false;
 
-        // Check if item is stackable
-        if (item.stackable == true){
+        Entity newItem = gp.eGenerator.getObject(item.name);
 
-            int index = searchItemInInventory(item.name);
+        // Check if item is stackable
+        if (newItem.stackable == true){
+
+            int index = searchItemInInventory(newItem.name);
 
             if (index != 999){
                 inventory.get(index).amount++;
@@ -568,7 +596,7 @@ public class Player extends Entity{
             }
             else{ // New item so check vacancy
                 if (inventory.size() != maxInventorySize){
-                    inventory.add(item);
+                    inventory.add(newItem);
                     canObtain = true;
                 }
             }
@@ -576,7 +604,7 @@ public class Player extends Entity{
 
         else { // Not stackable
             if (inventory.size() != maxInventorySize){
-                    inventory.add(item);
+                    inventory.add(newItem);
                     canObtain = true;
                 }
         }

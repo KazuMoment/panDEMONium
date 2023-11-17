@@ -91,54 +91,19 @@ public class KeyHandler implements KeyListener{
                 }
                 if (code == KeyEvent.VK_ENTER){
                     if (gp.ui.commandNumber == 0){
-                        gp.stopMusic();
-                        gp.ui.titleScreenState = 1;
+                        gp.gameState = gp.playState;
+                        gp.checkMusic();
                     }
                     if (gp.ui.commandNumber == 1){
-
+                        gp.saveLoad.load();
+                        gp.gameState = gp.playState;
+                        gp.checkMusic();
                     }
                     if (gp.ui.commandNumber == 2){
                         System.exit(0);
                     }
                 } 
             }
-
-            else if (gp.ui.titleScreenState == 1){
-
-                if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP){
-                    gp.ui.commandNumber--;
-                        if (gp.ui.commandNumber < 0){
-                            gp.ui.commandNumber = 3;
-                        }
-                }
-                if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN){
-                    gp.ui.commandNumber++;
-                        if (gp.ui.commandNumber > 3){
-                            gp.ui.commandNumber = 0;
-                        }
-                }
-                if (code == KeyEvent.VK_ENTER){
-                    if (gp.ui.commandNumber == 0){
-                        //Fighter
-                        gp.gameState = gp.playState;
-                        gp.playMusic(1);
-                    }
-                    if (gp.ui.commandNumber == 1){
-                        //Mage
-                        gp.gameState = gp.playState;
-                        gp.playMusic(1);
-                    }
-                    if (gp.ui.commandNumber == 2){
-                        //Thief
-                        gp.gameState = gp.playState;
-                        gp.playMusic(1);
-                    }
-                    if (gp.ui.commandNumber == 3){
-                        gp.ui.titleScreenState = 0;
-                        gp.playMusic(0);
-                }
-            } 
-        }
     }
 
     public void playState(int code){
@@ -202,8 +167,9 @@ public class KeyHandler implements KeyListener{
         }
         if (code == KeyEvent.VK_F5){
             switch(gp.currentMap){
-                case 0: gp.tileM.loadMap("/maps/worldV3.txt", 0);
-                case 1: gp.tileM.loadMap("/maps/interior01.txt", 1);
+                case 0: gp.tileM.loadMap("/maps/forest_tutorial.txt", 0);
+                case 1: gp.tileM.loadMap("/maps/dungeon_1.txt", 1);
+                case 2: gp.tileM.loadMap("/maps/merchant_house.txt", 2);
             }
             
         }
@@ -218,7 +184,7 @@ public class KeyHandler implements KeyListener{
 
     public void dialogueState(int code){
         if (code == KeyEvent.VK_ENTER){
-            gp.gameState = gp.playState;
+            enterPressed = true;
         }
         
     }
@@ -314,7 +280,7 @@ public class KeyHandler implements KeyListener{
             if(gp.ui.commandNumber == 0){
                 gp.gameState = gp.playState;
                 gp.resetGame(false);
-                gp.playMusic(1);
+                gp.checkMusic();
             }
             else if (gp.ui.commandNumber == 1){
                 gp.gameState = gp.titleState;

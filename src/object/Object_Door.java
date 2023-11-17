@@ -6,13 +6,14 @@ import main.GamePanel;
 public class Object_Door extends Entity{
 
     GamePanel gp;
+    public static final String objectName = "Door";
 
     public Object_Door(GamePanel gp){
         super(gp);
         this.gp = gp;
 
         type = type_obstacle;
-        name = "Door";
+        name = objectName;
         direction = "down";
         down1 = setup("/objects/door", gp.tileSize, gp.tileSize);
         down2 = setup("/objects/tent", gp.tileSize, gp.tileSize);
@@ -25,13 +26,21 @@ public class Object_Door extends Entity{
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+
+        setDialogue();
     
+    }
+
+    public void setDialogue(){
+
+        dialogue[0][0] = "You need a key to open this door!";
+
     }
 
     public void interact(){
 
-        gp.gameState = gp.dialogueState;
-        gp.ui.currentDialogue = "You need a key to open this door!";
+        startDialogue(this, 0);
+        
 
     }
 }

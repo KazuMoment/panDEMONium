@@ -37,7 +37,27 @@ public class NPC_Reul extends Entity{
 
     public void setDialogue(){
 
-        dialogue[0] = "Hello, lad.";
+        dialogue[0][0] = "You gave me a fright, lad.";
+        dialogue[0][1] = "You just suddenly appeared out of thin air!";
+        dialogue[0][2] = "Huh? You don't know where you are?";
+        dialogue[0][3] = "This is the land of Nurvia! The land of peace and tranquility.";
+        dialogue[0][4] = "But we have a problem.";
+        dialogue[0][5] = "The Demon King has taken over the land!";
+        dialogue[0][6] = "We are hopeless in his tyranny!";
+        dialogue[0][7] = "Listen closely, lad.";
+        dialogue[0][8] = "I have summoned you here for a purpose.";
+        dialogue[0][9] = "It will be through only your power to defeat the Demon King!";
+        dialogue[0][10] = "But do not worry. I will guide you every step of the way.";
+        dialogue[0][11] = "Please do follow me.";
+
+        dialogue[1][0] = "I will be staying here for a while.";
+        dialogue[1][1] = "There are many slimes around.";
+        dialogue[1][2] = "Can you take care of them for me?";
+
+        dialogue[2][0] = "Huh? You don't know how to fight?";
+        dialogue[2][1] = "Just press E!";
+        dialogue[2][2] = "Your sword will just come out.";
+
   
 
     }
@@ -46,14 +66,19 @@ public class NPC_Reul extends Entity{
 
         if (onPath == true){
 
-            int goalColumn = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
-            int goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
+            int goalColumn = 24;
+            int goalRow = 43;
 
             searchPath(goalColumn, goalRow);
 
         }
 
         else{
+
+            if (introDone == true){
+                onPath = true;
+            }
+
              actionLockCounter++;
 
             if (actionLockCounter == 120){
@@ -77,11 +102,13 @@ public class NPC_Reul extends Entity{
     }
 
     public void speak(){
-        super.speak();
-        if (dialogue[dialogueIndex] == null){
-            following = true;
-            onPath = true;
+        facePlayer();
+        startDialogue(this, dialogueSet);
+
+        if (introDone == true){
+            dialogueSet = 1;
         }
+
 
     }
     

@@ -6,13 +6,14 @@ import main.GamePanel;
 public class Object_Tent extends Entity{
 
     GamePanel gp;
+    public static final String objectName = "Tent";
 
     public Object_Tent(GamePanel gp){
         super(gp);
         this.gp = gp;
 
         type = type_consumable;
-        name = "Tent";
+        name = objectName;
         down1 = setup("/objects/tent", gp.tileSize, gp.tileSize);
         description = "[Tent]\nYou can use this to sleep\nuntil dawn.";
         price = 300;

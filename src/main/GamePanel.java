@@ -67,6 +67,7 @@ public class GamePanel extends JPanel implements Runnable{
     EnvironmentManager eManager = new EnvironmentManager(this);
     Map map = new Map(this);
     SaveLoad saveLoad = new SaveLoad(this);
+    public EntityGenerator eGenerator = new EntityGenerator(this);
     Thread gameThread; 
    
     // Entity and Object
@@ -93,6 +94,22 @@ public class GamePanel extends JPanel implements Runnable{
     public final int sleepState = 9;
     public final int mapState = 10;
 
+    // Area
+    public int currentArea;
+    public int nextArea;
+    public final int outdoor = 50;
+    public final int indoor = 51;
+    public final int dungeon = 52;
+
+    // Level
+    public int currentLevel;
+    public int nextLevel;
+    public final int tutorial_forest = 100;
+    public final int tinvaak_village = 101;
+    public final int tinvaak_dungeon = 102;
+    public final int merchant_tent = 103;
+    public final int victoria_town = 104;
+
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
@@ -111,6 +128,8 @@ public class GamePanel extends JPanel implements Runnable{
         
         playMusic(0);
         gameState = titleState;
+        currentArea = outdoor;
+        currentLevel = tutorial_forest;
 
         tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
         g2 = (Graphics2D)tempScreen.getGraphics();
@@ -124,7 +143,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         player.setDefaultPosition();
         player.restoreStatus();
-        aSetter.setNPC();
+        player.resetCounter();
         aSetter.setEnemy();
         
         if (restart == true){
@@ -369,6 +388,27 @@ public class GamePanel extends JPanel implements Runnable{
         public void playSoundEffect(int i){
             soundEffect.setFile(i);
             soundEffect.play();
+        }
+
+        public void checkMusic(){
+            stopMusic();
+            switch(currentLevel){
+                case tutorial_forest: playMusic(22); break;
+                case tinvaak_village: playMusic(20); break;
+                case tinvaak_dungeon: playMusic(21); break;
+                case merchant_tent: playMusic(20); break;
+                case victoria_town: playMusic(20); break;
+            }
+        }
+
+        public void changeArea(){
+
+            if (nextLevel != currentLevel){
+                currentLevel = nextLevel;
+                checkMusic();
+            }
+            currentArea = nextArea; 
+            aSetter.setEnemy();
         }
 
 }

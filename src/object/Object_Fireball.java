@@ -10,12 +10,13 @@ import main.GamePanel;
 public class Object_Fireball extends Projectile{
 
     GamePanel gp;
+    public static final String objectName = "Fireball";
 
     public Object_Fireball(GamePanel gp){
         super(gp);
         this.gp = gp;
 
-        name = "Fireball";
+        name = objectName;
         solidArea = new Rectangle(8, 16 , 32, 32);
         solidAreaDefaultX = solidArea.x;
         speed = 9;

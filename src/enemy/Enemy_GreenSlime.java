@@ -4,7 +4,7 @@ import java.util.Random;
 
 import entity.Entity;
 import main.GamePanel;
-import object.Obejct_Slimeball;
+import object.Object_Slimeball;
 import object.Object_Gold;
 import object.Object_Heart;
 import object.Object_ManaCrystal;
@@ -27,7 +27,7 @@ public class Enemy_GreenSlime extends Entity{
         attack = 4; 
         defense = 0;
         EXP = 2;
-        projectile = new Obejct_Slimeball(gp);
+        projectile = new Object_Slimeball(gp);
 
         solidArea.x = 2;
         solidArea.y = 6;

@@ -37,12 +37,12 @@ public class NPC_Kane extends Entity{
 
     public void setDialogue(){
 
-        dialogue[0] = "Hello, stranger. You seem troubled.";
-        dialogue[1] = "May I ask what you are doing here?";
-        dialogue[2] = "What? You don't know where you are?";
-        dialogue[3] = "Well, this is Nurvia. The land of tranquility.";
-        dialogue[4] = "That is, until the Demon King took control \nof this land.";
-        dialogue[5] = "Be careful, stranger. One does not cross\nthe Tenari Rivers so casually.";
+        dialogue[0][0] = "Hello, stranger. You seem troubled.";
+        dialogue[0][1] = "May I ask what you are doing here?";
+        dialogue[0][2] = "What? You don't know where you are?";
+        dialogue[0][3] = "Well, this is Nurvia. The land of tranquility.";
+        dialogue[0][4] = "That is, until the Demon King took control \nof this land.";
+        dialogue[0][5] = "Be careful, stranger. One does not cross\nthe Tenari Rivers so casually.";
 
     }
 

@@ -26,14 +26,15 @@ public class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collision = false;
     public BufferedImage image, image2, image3;
-    String dialogue[] = new String[20];   
+    public String dialogue[][] = new String[20][20];   
     public Entity attacker;
    
     // State
     public int worldX, worldY;
     public String direction = "down";
     public boolean collisionOn = false;
-    int dialogueIndex = 0;
+    public int dialogueSet = 0;
+    public int dialogueIndex = 0;
     public int spriteNumber = 1;
     public boolean invulnerable = false;
     public boolean attacking = false;
@@ -47,6 +48,9 @@ public class Entity {
     public boolean guarding = false;   
     public boolean transparent = false;
     public boolean parried = false;
+    public Entity loot;
+    public boolean opened = false;
+    public boolean introDone = false;
     
     // Counter 
     public int spriteCounter = 0;
@@ -54,7 +58,7 @@ public class Entity {
     public int actionLockCounter = 0;
     int dyingCounter = 0;
     int hpBarCounter = 0;
-    public int shootCounter;
+    public int shootCounter = 0;
     int knockbackCounter = 0;
     public int guardCounter = 0;
     public int parriedCounter = 0;
@@ -81,6 +85,8 @@ public class Entity {
     public Entity currentShield;
     public Projectile projectile; 
     public Entity currentLight;
+    public int obstacleNumber;
+    public int obstacleIndex;
 
     // Item Attributes
     public ArrayList<Entity> inventory = new ArrayList<>();
@@ -157,24 +163,44 @@ public class Entity {
         return goalRow;
     }
 
+    public void resetCounter(){
+
+        spriteCounter = 0;
+        invulnerableCounter = 0;
+        actionLockCounter = 0;  
+        dyingCounter = 0;
+        hpBarCounter = 0;
+        shootCounter = 0;
+        knockbackCounter = 0;
+        guardCounter = 0;
+        parriedCounter = 0;
+
+    }
+
+    public void setLoot(Entity loot){}
+
+    public void setOpen(int mapNumber, int index){}
+
     public void setMovement(){}
 
     public void damageReaction(){}
     
-    public void speak(){
+    public void speak(){}
 
-        if (dialogue[dialogueIndex] == null){
-            dialogueIndex = 0;
-        }
-        gp.ui.currentDialogue = dialogue[dialogueIndex];
-        dialogueIndex++;
-
+    public void facePlayer(){
         switch(gp.player.direction){
             case "up": direction = "down"; break;  
             case "down": direction = "up"; break;
             case "left": direction = "right"; break;
             case "right":direction = "left"; break;
         }
+    }
+
+    public void startDialogue(Entity entity, int setNumber){
+
+        gp.gameState = gp.dialogueState;
+        gp.ui.npc = entity;
+        dialogueSet = setNumber;
     }
 
     public void interact(){}

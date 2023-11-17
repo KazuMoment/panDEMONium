@@ -35,7 +35,9 @@ public class UI {
     public int npcSlotRow = 0;
     int subState = 0;
     int counter = 0;
-    public Entity npc;
+    public Entity npc; 
+    int charIndex = 0;
+    String combinedText = ""; 
 
     public UI(GamePanel gp){
         this.gp = gp;
@@ -262,54 +264,6 @@ public class UI {
                 g2.drawString(">", x - gp.tileSize, y);
             }
         }
-        
-        else if (titleScreenState == 1){
-
-            g2.setColor(new Color(0, 0, 0)); 
-            g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
-
-            g2.setColor(Color.WHITE);
-            g2.setFont(g2.getFont().deriveFont(42F));
-
-            String text = "Select your Class";
-            int x = getXforCenteredText(text);
-            int y = gp.tileSize * 3;
-            g2.drawString(text, x, y);
-
-            text = "Warrior";
-            x = getXforCenteredText(text);
-            y += gp.tileSize * 3;
-            g2.drawString(text, x, y);
-            if (commandNumber == 0){
-                g2.drawString(">", x - gp.tileSize, y);;
-            }
-
-            text = "Mage";
-            x = getXforCenteredText(text);
-            y += gp.tileSize;
-            g2.drawString(text, x, y);
-            if (commandNumber == 1){
-                g2.drawString(">", x - gp.tileSize, y);;
-            }
-
-            text = "Thief";
-            x = getXforCenteredText(text);
-            y += gp.tileSize;
-            g2.drawString(text, x, y);
-            if (commandNumber == 2){
-                g2.drawString(">", x - gp.tileSize, y);;
-            }
-
-            text = "Back";
-            x = getXforCenteredText(text);
-            y += gp.tileSize * 2;
-            g2.drawString(text, x, y);
-            if (commandNumber == 3){
-                g2.drawString(">", x - gp.tileSize, y);;
-            }
-
-        }
-        
  
     }
 
@@ -337,6 +291,36 @@ public class UI {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 25F));
         x += gp.tileSize;
         y += gp.tileSize;
+
+        if (npc.dialogue[npc.dialogueSet][npc.dialogueIndex] != null){
+            char characters[] = npc.dialogue[npc.dialogueSet][npc.dialogueIndex].toCharArray();
+            if (charIndex < characters.length){
+                gp.playSoundEffect(19);
+                String s  = String.valueOf(characters[charIndex]);
+                combinedText = combinedText + s;
+                currentDialogue = combinedText;
+                charIndex++;
+            }
+
+            if (gp.keyH.enterPressed == true){
+
+                charIndex = 0;
+                combinedText = "";
+
+                if (gp.gameState == gp.dialogueState){
+                    npc.dialogueIndex++;
+                    gp.keyH.enterPressed = false;
+                }
+            }
+        }
+        else{ // If no text is in array
+            npc.introDone = true;
+            npc.dialogueIndex = 0;
+
+            if (gp.gameState == gp.dialogueState){
+                gp.gameState = gp.playState;
+            }
+        }
 
         for (String line : currentDialogue.split("\n")){
             g2.drawString(line, x, y);
@@ -860,6 +844,7 @@ public class UI {
             gp.player.worldY = gp.tileSize * gp.eHandler.tempRow;
             gp.eHandler.previousEventX = gp.player.worldX;
             gp.eHandler.previousEventY = gp.player.worldY;
+            gp.changeArea();
         }
     }
 
@@ -907,8 +892,7 @@ public class UI {
             g2.drawString(">", x - 24, y);
             if (gp.keyH.enterPressed == true){
                 commandNumber = 0;
-                gp.gameState = gp.dialogueState;
-                currentDialogue = "Come again, stranger.";
+                npc.startDialogue(npc, 2);
             }
         }
         y += gp.tileSize;
@@ -960,9 +944,7 @@ public class UI {
             if (gp.keyH.enterPressed == true){
                 if (npc.inventory.get(itemIndex).price > gp.player.gold){
                     subState = 0;
-                    gp.gameState = gp.dialogueState;
-                    currentDialogue = "You need more gold to buy that, stranger!";
-                    drawDialogueScreen();
+                    npc.startDialogue(npc, 3);
                 }
                 else {
                     if (gp.player.canObtainItem(npc.inventory.get(itemIndex)) == true){
@@ -970,9 +952,7 @@ public class UI {
                     }
                     else {
                         subState = 0;
-                        gp.gameState = gp.dialogueState;
-                        currentDialogue = "Where are you gonna put this? Your pocket!?";
-                        drawDialogueScreen();  
+                        npc.startDialogue(npc, 4);
                     }  
                 }
             }
@@ -1026,11 +1006,11 @@ public class UI {
             // Sell Item
             if (gp.keyH.enterPressed == true){
                 if (gp.player.inventory.get(itemIndex) == gp.player.currentWeapon ||
-                    gp.player.inventory.get(itemIndex) == gp.player.currentShield){
+                    gp.player.inventory.get(itemIndex) == gp.player.currentShield ||
+                    gp.player.inventory.get(itemIndex) == gp.player.currentLight){
                         commandNumber = 0;
                         subState = 0;
-                        gp.gameState = gp.dialogueState;
-                        currentDialogue = "You gotta unequip that first, stranger.";
+                        npc.startDialogue(npc, 5);
                     }
                 else {
                     if (gp.player.inventory.get(itemIndex).amount > 1){
@@ -1046,7 +1026,7 @@ public class UI {
     }
 
     public void drawSleepScreen(){
-
+        
         counter++;
 
         if (counter < 120){
@@ -1063,7 +1043,7 @@ public class UI {
                 gp.eManager.lighting.dayState = gp.eManager.lighting.day;
                 gp.eManager.lighting.dayCounter = 0;
                 gp.gameState = gp.playState;
-                gp.player.getAttackImage();
+                gp.player.getImage();
             }
         }
     }
@@ -1087,19 +1067,15 @@ public class UI {
     }
 
     public int getXforCenteredText (String text){
-
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = gp.screenWidth/2 - length/2;
         return x;
-
     }
 
     public int getXforAlignRight (String text, int tailX){
-
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = tailX - length;
         return x;
-
     }
     
 }
