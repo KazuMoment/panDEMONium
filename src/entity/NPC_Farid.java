@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 
 import main.GamePanel;
 import object.Object_Health_Potion_Small;
+import object.Object_Mana_Potion_Small;
 
 public class NPC_Farid extends Entity {
 
@@ -58,6 +59,7 @@ public class NPC_Farid extends Entity {
 
     public void setItems(){
         inventory.add(new Object_Health_Potion_Small(gp));
+        inventory.add(new Object_Mana_Potion_Small(gp));
         
     }
 

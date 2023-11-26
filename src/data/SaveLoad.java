@@ -113,7 +113,6 @@ public class SaveLoad {
             gp.player.getAttackImage();
 
             // Objects on Map
-
             for (int mapNum = 0; mapNum < gp.maxMap; mapNum++){
                 for (int i = 0; i < gp.obj[1].length; i++){
 
@@ -125,7 +124,7 @@ public class SaveLoad {
                         gp.obj[mapNum][i].worldX = ds.mapObjectWorldX[mapNum][i];
                         gp.obj[mapNum][i].worldY = ds.mapObjectWorldY[mapNum][i];
                         if (ds.mapObjectLootName[mapNum][i] != null){
-                            gp.obj[mapNum][i].loot =  gp.eGenerator.getObject(ds.mapObjectLootName[mapNum][i]);
+                            gp.obj[mapNum][i].setLoot(gp.eGenerator.getObject(ds.mapObjectLootName[mapNum][i]));   
                         }
                         gp.obj[mapNum][i].opened = ds.mapObjectOpened[mapNum][i];
                         if (gp.obj[mapNum][i].opened == true){

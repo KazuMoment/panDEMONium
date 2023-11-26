@@ -16,9 +16,7 @@ public class Object_Door extends Entity{
         name = objectName;
         direction = "down";
         down1 = setup("/objects/door", gp.tileSize, gp.tileSize);
-        down2 = setup("/objects/tent", gp.tileSize, gp.tileSize);
         collision = true;
-        speed = 0;
 
         solidArea.x = 0;
         solidArea.y = 16;

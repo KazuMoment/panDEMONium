@@ -27,27 +27,27 @@ public class KeyHandler implements KeyListener{
         
         int code = e.getKeyCode();
 
-        //Title State
+        // Title State
         if (gp.gameState == gp.titleState){
             titleState(code);
         }
 
-        //Play State
+        // Play State
         else if (gp.gameState == gp.playState){
             playState(code);
         }
 
-        //Pause State
+        // Pause State
         else if(gp.gameState == gp.pauseState){
             pauseState(code);
         }
 
-        //Dialogue State
+        // Dialogue State
         else if(gp.gameState == gp.dialogueState){
             dialogueState(code);
         }
 
-        //Character State
+        // Character State
         else if (gp.gameState == gp.characterState){
             characterState(code);
         }
@@ -70,6 +70,11 @@ public class KeyHandler implements KeyListener{
         // Map State
         else if (gp.gameState == gp.mapState){
             mapState(code);
+        }
+
+        // Save State
+        else if (gp.gameState == gp.saveState){
+            saveState(code);
         }
 
     }
@@ -289,6 +294,26 @@ public class KeyHandler implements KeyListener{
             }
         }
 
+    }
+
+    public void saveState(int code){
+         if (code == KeyEvent.VK_ENTER){
+            enterPressed = true;
+        }
+        if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP){
+            gp.ui.commandNumber--;
+            if (gp.ui.commandNumber < 0){
+                gp.ui.commandNumber = 1;
+            } 
+            gp.playSoundEffect(10);
+        }
+        if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN){
+            gp.ui.commandNumber++;
+            if (gp.ui.commandNumber > 1){
+                gp.ui.commandNumber = 0;
+            } 
+            gp.playSoundEffect(10);
+        }
     }
 
     public void shopState(int code){

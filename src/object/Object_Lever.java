@@ -53,6 +53,7 @@ public class Object_Lever extends Entity{
             down1 = image2;
             opened = true;
             openObstacle(obstacleNumber, obstacleIndex);
+            gp.playSoundEffect(24);
         }
 
         else{

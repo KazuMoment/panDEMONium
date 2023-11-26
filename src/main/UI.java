@@ -35,7 +35,7 @@ public class UI {
     public int npcSlotRow = 0;
     int subState = 0;
     int counter = 0;
-    public Entity npc; 
+    public Entity npc;
     int charIndex = 0;
     String combinedText = ""; 
 
@@ -118,13 +118,18 @@ public class UI {
         if (gp.gameState == gp.transitionState){
             drawTransition();
         }
-        //Shop State
+        // Shop State
         if (gp.gameState == gp.shopState){
             drawShopScreen();
         }
         // Sleep State
         if (gp.gameState == gp.sleepState){
             drawSleepScreen();
+        }
+
+        // Save State
+        if (gp.gameState == gp.saveState){
+            drawSaveScreen();
         }
 
 
@@ -429,11 +434,13 @@ public class UI {
         g2.drawString(value, textX, textY);
         textY += lineHeight;
 
-        g2.drawImage(gp.player.currentWeapon.down1, tailX - gp.tileSize, textY - 24, null);
-        textY += gp.tileSize;
+        if(gp.player.currentWeapon != null && gp.player.currentShield != null){
+            g2.drawImage(gp.player.currentWeapon.down1, tailX - gp.tileSize, textY - 24, null);
+            textY += gp.tileSize;
 
-        g2.drawImage(gp.player.currentShield.down1, tailX - gp.tileSize, textY - 24, null);
-        textY += gp.tileSize;
+            g2.drawImage(gp.player.currentShield.down1, tailX - gp.tileSize, textY - 24, null);
+            textY += gp.tileSize;
+        }
 
     }
 
@@ -1044,6 +1051,43 @@ public class UI {
                 gp.eManager.lighting.dayCounter = 0;
                 gp.gameState = gp.playState;
                 gp.player.getImage();
+            }
+        }
+    }
+
+    public void drawSaveScreen(){
+
+        drawDialogueScreen();
+
+        // Draw Window
+        int x = gp.tileSize * 15;
+        int y = gp.tileSize * 3;
+        int width = gp.tileSize * 3;
+        int height = (int)(gp.tileSize * 3.5);
+        drawSubWindow(x, y, width, height);
+
+        // Draw Dialogue Options
+        x += gp.tileSize;
+        y += gp.tileSize;
+        g2.drawString("Yes", x, y);
+        if (commandNumber == 0){
+            g2.drawString(">", x - 24, y);
+            if (gp.keyH.enterPressed == true){
+                gp.player.HP = gp.player.maxHP;
+                gp.player.MP = gp.player.maxMP;
+                gp.saveLoad.save();
+                npc.startDialogue(npc, 2);
+                gp.gameState = gp.sleepState;
+                gp.aSetter.setEnemy();
+                gp.playSoundEffect(16);
+            }
+        }
+        y += gp.tileSize;
+        g2.drawString("No", x, y);
+        if (commandNumber == 1){
+            g2.drawString(">", x - 24, y);
+            if (gp.keyH.enterPressed == true){
+                npc.startDialogue(npc, 2);
             }
         }
     }

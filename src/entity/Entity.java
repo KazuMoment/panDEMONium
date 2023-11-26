@@ -28,6 +28,7 @@ public class Entity {
     public BufferedImage image, image2, image3;
     public String dialogue[][] = new String[20][20];   
     public Entity attacker;
+    public Entity linekdEntity;
    
     // State
     public int worldX, worldY;
@@ -51,6 +52,12 @@ public class Entity {
     public Entity loot;
     public boolean opened = false;
     public boolean introDone = false;
+    public boolean pickedQuestObject = false;
+    public boolean doneQuest1 = false;
+    public boolean doneQuest2 = false;
+    public boolean doneQuest3 = false;
+    public boolean receivedReward1 = false;
+
     
     // Counter 
     public int spriteCounter = 0;
@@ -179,9 +186,25 @@ public class Entity {
 
     public void setLoot(Entity loot){}
 
+
     public void setOpen(int mapNumber, int index){}
 
     public void setMovement(){}
+
+    public void move(String direction){
+        this.direction = direction;
+
+        checkCollision();
+        
+        if (collisionOn == false){
+            switch(direction){
+                case "up": worldY -= speed; break;
+                case "down": worldY += speed; break;
+                case "left": worldX -= speed; break;
+                case "right": worldX += speed; break;   
+            }
+        }
+    }
 
     public void damageReaction(){}
     

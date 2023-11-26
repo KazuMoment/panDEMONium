@@ -28,7 +28,6 @@ public class InteractiveTile extends Entity{
     }
 
     public void update(){
-
         if (invulnerable == true){
             invulnerableCounter++;
             if (invulnerableCounter > 20){

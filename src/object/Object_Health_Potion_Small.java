@@ -7,7 +7,7 @@ public class Object_Health_Potion_Small extends Entity {
 
     GamePanel gp;
     public static final String objectName = "Small Health Potion";
-    int value = 5;
+    int value = 3;
 
     public Object_Health_Potion_Small (GamePanel gp){
         super (gp);

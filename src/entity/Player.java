@@ -21,9 +21,12 @@ public class Player extends Entity{
 
     public final int screenX;
     public final int screenY;
-    public boolean hasBoots = false;
     int snapFirstSpriteCounter = 0;
     public boolean lightUpdated = false;
+
+    // Quests
+    public boolean slimeQuest = false;
+    public boolean hasBoots = false;
     
     
     public Player (GamePanel gp, KeyHandler keyH){
@@ -62,8 +65,6 @@ public class Player extends Entity{
         EXP = 0;
         nextLevelEXP = 5;
         gold = 500;
-        currentWeapon = new Object_Sword_Tinvaak(gp);
-        currentShield = new Object_Shield_Tinvaak(gp);
         currentLight = null;
         projectile = new Object_Fireball(gp);
         attack = getAttack();
@@ -104,9 +105,6 @@ public class Player extends Entity{
     public void setItems(){
 
         inventory.clear();
-        inventory.add(currentWeapon);
-        inventory.add(currentShield);
-        inventory.add(new Object_Key(gp));
         inventory.add(new Object_Key(gp));
         inventory.add(new Object_Health_Potion_Small(gp));
         inventory.add(new Object_Lantern(gp));
@@ -114,14 +112,26 @@ public class Player extends Entity{
     }
 
     public int getAttack(){
-        attackArea = currentWeapon.attackArea;
-        motion1_duration = currentWeapon.motion1_duration;
-        motion2_duration = currentWeapon.motion2_duration;
-        return attack = strength * currentWeapon.attackValue; // Attack scales from Strength
+        if (currentWeapon != null){
+            attackArea = currentWeapon.attackArea;
+            motion1_duration = currentWeapon.motion1_duration;
+            motion2_duration = currentWeapon.motion2_duration;
+            return attack = strength * currentWeapon.attackValue; // Attack scales from Strength
+        }
+        else{
+            attack = 0;
+            return attack;
+        }        
     }
 
     public int getDefense(){
-        return defense = dexterity * currentShield.defenseValue; // Defense scales from Dexterity
+        if (currentShield != null){
+            return defense = dexterity * currentShield.defenseValue; // Defense scales from Dexterity
+        }
+        else{
+            defense = 0;
+            return defense;
+        }
     }
 
     public int getCurrentWeaponSlot(){
@@ -169,38 +179,43 @@ public class Player extends Entity{
 
     public void getAttackImage(){
 
-        if (currentWeapon.name == "Tinvaak Sword"){
-            attackUp1 = setup("/player/player_girl_attack_sword_up1", gp.tileSize, gp.tileSize * 2);
-            attackUp2 = setup("/player/player_girl_attack_sword_up2", gp.tileSize, gp.tileSize* 2);
-            attackDown1 = setup("/player/player_girl_attack_sword_down1", gp.tileSize, gp.tileSize * 2);
-            attackDown2 = setup("/player/player_girl_attack_sword_down2", gp.tileSize, gp.tileSize * 2);
-            attackLeft1 = setup("/player/player_girl_attack_sword_left1", gp.tileSize * 2, gp.tileSize);
-            attackLeft2 = setup("/player/player_girl_attack_sword_left2", gp.tileSize * 2, gp.tileSize);
-            attackRight1 = setup("/player/player_girl_attack_sword_right1", gp.tileSize * 2, gp.tileSize);
-            attackRight2 = setup("/player/player_girl_attack_sword_right2", gp.tileSize * 2, gp.tileSize);
-        }
+        if (currentWeapon != null){
+            if (currentWeapon.name == "Tinvaak Sword"){
+                attackUp1 = setup("/player/player_girl_attack_sword_up1", gp.tileSize, gp.tileSize * 2);
+                attackUp2 = setup("/player/player_girl_attack_sword_up2", gp.tileSize, gp.tileSize* 2);
+                attackDown1 = setup("/player/player_girl_attack_sword_down1", gp.tileSize, gp.tileSize * 2);
+                attackDown2 = setup("/player/player_girl_attack_sword_down2", gp.tileSize, gp.tileSize * 2);
+                attackLeft1 = setup("/player/player_girl_attack_sword_left1", gp.tileSize * 2, gp.tileSize);
+                attackLeft2 = setup("/player/player_girl_attack_sword_left2", gp.tileSize * 2, gp.tileSize);
+                attackRight1 = setup("/player/player_girl_attack_sword_right1", gp.tileSize * 2, gp.tileSize);
+                attackRight2 = setup("/player/player_girl_attack_sword_right2", gp.tileSize * 2, gp.tileSize);
+            }
 
-        if (currentWeapon.name == "Axe"){
-            attackUp1 = setup("/player/player_girl_attack_axe_up1", gp.tileSize, gp.tileSize * 2);
-            attackUp2 = setup("/player/player_girl_attack_axe_up2", gp.tileSize, gp.tileSize* 2);
-            attackDown1 = setup("/player/player_girl_attack_axe_down1", gp.tileSize, gp.tileSize * 2);
-            attackDown2 = setup("/player/player_girl_attack_axe_down2", gp.tileSize, gp.tileSize * 2);
-            attackLeft1 = setup("/player/player_girl_attack_axe_left1", gp.tileSize * 2, gp.tileSize);
-            attackLeft2 = setup("/player/player_girl_attack_axe_left2", gp.tileSize * 2, gp.tileSize);
-            attackRight1 = setup("/player/player_girl_attack_axe_right1", gp.tileSize * 2, gp.tileSize);
-            attackRight2 = setup("/player/player_girl_attack_axe_right2", gp.tileSize * 2, gp.tileSize);
-        }
+            if (currentWeapon.name == "Axe"){
+                attackUp1 = setup("/player/player_girl_attack_axe_up1", gp.tileSize, gp.tileSize * 2);
+                attackUp2 = setup("/player/player_girl_attack_axe_up2", gp.tileSize, gp.tileSize* 2);
+                attackDown1 = setup("/player/player_girl_attack_axe_down1", gp.tileSize, gp.tileSize * 2);
+                attackDown2 = setup("/player/player_girl_attack_axe_down2", gp.tileSize, gp.tileSize * 2);
+                attackLeft1 = setup("/player/player_girl_attack_axe_left1", gp.tileSize * 2, gp.tileSize);
+                attackLeft2 = setup("/player/player_girl_attack_axe_left2", gp.tileSize * 2, gp.tileSize);
+                attackRight1 = setup("/player/player_girl_attack_axe_right1", gp.tileSize * 2, gp.tileSize);
+                attackRight2 = setup("/player/player_girl_attack_axe_right2", gp.tileSize * 2, gp.tileSize);
+            }
+
+        }   
     }
 
     public void getGuardImage(){
+        
+        if (currentShield != null){
+            if (currentShield.name == "Tinvaak Shield"){
+                guardUp = setup("/player/player_shield_tinvaak_up_1", gp.tileSize, gp.tileSize);
+                guardDown = setup("/player/player_shield_tinvaak_down_1", gp.tileSize, gp.tileSize);
+                guardLeft = setup("/player/player_shield_tinvaak_left_1", gp.tileSize, gp.tileSize);
+                guardRight = setup("/player/player_shield_tinvaak_right_1", gp.tileSize, gp.tileSize);
+            }
 
-        if (currentShield.name == "Tinvaak Shield"){
-            guardUp = setup("/player/player_shield_tinvaak_up_1", gp.tileSize, gp.tileSize);
-            guardDown = setup("/player/player_shield_tinvaak_down_1", gp.tileSize, gp.tileSize);
-            guardLeft = setup("/player/player_shield_tinvaak_left_1", gp.tileSize, gp.tileSize);
-            guardRight = setup("/player/player_shield_tinvaak_right_1", gp.tileSize, gp.tileSize);
         }
-
     }
     
 
@@ -240,14 +255,14 @@ public class Player extends Entity{
             attacking();
         }
 
-        else if (keyH.spacePressed == true){
+        else if (keyH.spacePressed == true && currentShield != null){
             guarding = true;
             guardCounter++;
         }
 
-        else if (keyH.upPressed == true || keyH.downPressed == true || 
-            keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true ||
-            keyH.ePressed == true){
+        else if ((keyH.upPressed == true || keyH.downPressed == true || 
+            keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true) ||
+            (keyH.ePressed == true && currentWeapon != null)){
 
             if (keyH.upPressed == true){
                 direction  = "up";
@@ -271,7 +286,7 @@ public class Player extends Entity{
                 speed = defaultSpeed;
             }
 
-            if (keyH.ePressed == true){
+            if (keyH.ePressed == true && currentWeapon !=  null){
                 attacking = true;
                 gp.playSoundEffect(8);
             }
@@ -383,6 +398,7 @@ public class Player extends Entity{
 
     }
 
+
     public void pickUpObject(int i){
 
         if (i != 999){
@@ -416,7 +432,7 @@ public class Player extends Entity{
                 }   
                 gp.ui.addMessage(text);
                 gp.obj[gp.currentMap][i] = null;
-
+            
             }
         }
     }
@@ -426,6 +442,7 @@ public class Player extends Entity{
             if (gp.keyH.enterPressed == true){
                 gp.npc[gp.currentMap][i].speak();
             }
+            gp.npc[gp.currentMap][i].move(direction);
         }
     }
 

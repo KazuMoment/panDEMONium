@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.Random;
 
 import main.GamePanel;
+import object.Object_Health_Potion_Small;
 
 public class NPC_Reul extends Entity{
 
@@ -11,7 +12,8 @@ public class NPC_Reul extends Entity{
         super(gp);
 
         direction = "left";
-        speed = 1;
+        defaultSpeed = 3;
+        speed = defaultSpeed;
 
         solidArea = new Rectangle(8, 16, 32, 32);
         solidAreaDefaultX = solidArea.x;
@@ -44,57 +46,90 @@ public class NPC_Reul extends Entity{
         dialogue[0][4] = "But we have a problem.";
         dialogue[0][5] = "The Demon King has taken over the land!";
         dialogue[0][6] = "We are hopeless in his tyranny!";
-        dialogue[0][7] = "Listen closely, lad.";
+        dialogue[0][7] = "Listen closely, lad. My name is Reul.";
         dialogue[0][8] = "I have summoned you here for a purpose.";
         dialogue[0][9] = "It will be through only your power to defeat the Demon King!";
         dialogue[0][10] = "But do not worry. I will guide you every step of the way.";
-        dialogue[0][11] = "Please do follow me.";
+        dialogue[0][11] = "Now, how do we get out of this forest...?";
+        dialogue[0][12] = "Maybe pick up that axe over there?";
 
-        dialogue[1][0] = "I will be staying here for a while.";
-        dialogue[1][1] = "There are many slimes around.";
-        dialogue[1][2] = "Can you take care of them for me?";
+        dialogue[1][0] = "Oh, you got the axe. Good. Now, just cut the tree over there!";
+        dialogue[1][1] = "It's the tree over there with a different shape!";
+        dialogue[1][2] = "Just get close there and press E!";
+        dialogue[1][3] = "You can interact with objects too by pressing ENTER!";
 
-        dialogue[2][0] = "Huh? You don't know how to fight?";
-        dialogue[2][1] = "Just press E!";
-        dialogue[2][2] = "Your sword will just come out.";
+        dialogue[2][0] = "You cut the tree! Good job!";
+        dialogue[2][1] = "Now, follow me.";
+        
+        dialogue[3][0] = "I will be staying here for a while.";
+        dialogue[3][1] = "There are many slimes around.";
+        dialogue[3][2] = "Can you take care of them for me?";
 
-  
+        dialogue[4][0] = "Thank you for taking care of the slimes.";
+        dialogue[4][1] = "I'll just stay here for a bit. Gather my bearings.";
+        dialogue[4][2] = "Anyway, here's a potion! For getting rid of the slimes!";
+
+        dialogue[5][0] = "Received a Small Health Potion from Reul!";
+
+        dialogue[6][0] = "I can't give you it yet. Your inventory is full.";
 
     }
 
     public void setMovement(){
 
-        if (onPath == true){
+        if (introDone == false){
+            onPath = true;
+            searchPath(getGoalColumn(gp.player), getGoalRow(gp.player));
+            if (gp.collisionChecker.checkPlayer(this) == true){
+                this.speak();
+            } 
+        }
 
+        else if (gp.obj[0][0] == null && pickedQuestObject == false){
+            dialogueSet = 1;
+            searchPath(getGoalColumn(gp.player), getGoalRow(gp.player));
+            if (gp.collisionChecker.checkPlayer(this) == true){
+                this.speak();
+                pickedQuestObject = true;
+            }      
+        }
+
+        else if (gp.iTile[0][0].HP == 0 && doneQuest1 == false){
+            dialogueSet = 2;
+            startDialogue(this, dialogueSet);
+            doneQuest1 = true;
+        }
+
+        else if (doneQuest1 == true && doneQuest2 == false){
+            
             int goalColumn = 24;
             int goalRow = 43;
 
             searchPath(goalColumn, goalRow);
-
+            if (gp.enemy[0][0] == null && 
+                gp.enemy[0][1] == null &&
+                gp.enemy[0][2] == null &&
+                gp.enemy[0][3] == null &&
+                gp.enemy[0][4] == null){
+                doneQuest2 = true;
+            } 
         }
-
+        
         else{
-
-            if (introDone == true){
-                onPath = true;
-            }
-
              actionLockCounter++;
 
             if (actionLockCounter == 120){
                 Random random = new Random();
                 int i = random.nextInt(100)+1; // random number from 1 to 100
                 if (i <= 25){
-                    direction = "up";
-                }
-                if (i > 25 && i <= 50){
-                    direction = "down";
-                }
-                if (i > 50 && i <= 75){
                     direction = "left";
                 }
-                if (i > 75 && i <= 100){
+                if (i > 25 && i <= 50){
                     direction = "right";
+                }
+                if (i > 50 && i <= 75){
+                }
+                if (i > 75 && i <= 100){
                 }
                 actionLockCounter = 0;
             }
@@ -104,12 +139,26 @@ public class NPC_Reul extends Entity{
     public void speak(){
         facePlayer();
         startDialogue(this, dialogueSet);
-
-        if (introDone == true){
-            dialogueSet = 1;
+        if (doneQuest1 == true && doneQuest2 == false){
+            dialogueSet = 2;
+            dialogueSet++;
+            if (dialogue[dialogueSet][0] == null){
+                dialogueSet--;
+            }
         }
-
-
+        if (doneQuest2 == true){
+            dialogueSet = 3;
+            dialogueSet++;
+            if (receivedReward1 == false){
+                    gp.playSoundEffect(2);
+                    startDialogue(this, 5);
+                    gp.player.inventory.add(new Object_Health_Potion_Small(gp));
+                    receivedReward1 = true;
+                }
+            else if (dialogue[dialogueSet][0] == null){
+                dialogueSet--;
+            }
+        }
     }
     
 }

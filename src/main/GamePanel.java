@@ -66,7 +66,7 @@ public class GamePanel extends JPanel implements Runnable{
     public Pathfinder pFinder = new Pathfinder(this);
     EnvironmentManager eManager = new EnvironmentManager(this);
     Map map = new Map(this);
-    SaveLoad saveLoad = new SaveLoad(this);
+    public SaveLoad saveLoad = new SaveLoad(this);
     public EntityGenerator eGenerator = new EntityGenerator(this);
     Thread gameThread; 
    
@@ -93,6 +93,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int shopState = 8;
     public final int sleepState = 9;
     public final int mapState = 10;
+    public final int saveState = 11;
 
     // Area
     public int currentArea;
@@ -396,7 +397,7 @@ public class GamePanel extends JPanel implements Runnable{
                 case tutorial_forest: playMusic(22); break;
                 case tinvaak_village: playMusic(20); break;
                 case tinvaak_dungeon: playMusic(21); break;
-                case merchant_tent: playMusic(20); break;
+                case merchant_tent: playMusic(23); break;
                 case victoria_town: playMusic(20); break;
             }
         }

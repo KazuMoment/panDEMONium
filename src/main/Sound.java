@@ -40,6 +40,8 @@ public class Sound {
         soundURL[20] = getClass().getResource("/sound/Monk Dance - panDEMONium.wav");               
         soundURL[21] = getClass().getResource("/sound/Ending Theme - panDEMONium.wav");   
         soundURL[22] = getClass().getResource("/sound/Tutorial Forest.wav");   
+        soundURL[23] = getClass().getResource("/sound/Hyrule Castle Town - The Legend of Zelda Twilight Princess.wav"); 
+        soundURL[24] = getClass().getResource("/sound/open wall.wav");   
 
     }
 
