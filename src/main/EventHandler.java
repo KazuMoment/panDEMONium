@@ -68,7 +68,7 @@ public class EventHandler {
             else if (hit(1, 45, 42, "right") == true){teleport(0, 11, 32, gp.outdoor, gp.tutorial_forest);} // back to forest 
             else if (hit(0, 40, 12, "up") == true){teleport(2, 25, 30, gp.outdoor, gp.merchant_tent);} // merchant tent 
             else if (hit(2, 25, 30, "down") == true){teleport(0, 40, 12, gp.outdoor, gp.tutorial_forest);} // back to forest 
-            else if (hit (2, 25, 25, "up") == true){speak(gp.npc[2][0]);} // talk to merchant interacting with table
+            else if (hit (2, 25, 26, "up") == true){speak(gp.npc[2][0]);} // talk to merchant interacting with table
         }
     
 

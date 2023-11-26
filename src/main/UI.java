@@ -1087,9 +1087,11 @@ public class UI {
         if (commandNumber == 1){
             g2.drawString(">", x - 24, y);
             if (gp.keyH.enterPressed == true){
+                commandNumber = 0;
                 npc.startDialogue(npc, 2);
             }
         }
+        gp.keyH.enterPressed = false;
     }
 
     public int getItemIndexOnSlot(int slotColumn, int slotRow){
