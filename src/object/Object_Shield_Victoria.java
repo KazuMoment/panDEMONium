@@ -12,7 +12,7 @@ public class Object_Shield_Victoria extends Entity{
         type = type_shield;
         name = objectName;
         down1 = setup("/objects/shield_metal", gp.tileSize, gp.tileSize);
-        defenseValue = 2;
+        defenseValue = 3;
         description = "[" + name + "]\nA wooden shield from the city\nof Victoria. It has a star symbol.";
         price = 75;
     }

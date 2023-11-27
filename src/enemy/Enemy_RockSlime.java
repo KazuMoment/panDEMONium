@@ -6,6 +6,7 @@ import entity.Entity;
 import main.GamePanel;
 import object.Object_Gold;
 import object.Object_Heart;
+import object.Object_Lavaball;
 import object.Object_ManaCrystal;
 import object.Object_Slimeball;
 
@@ -27,7 +28,7 @@ public class Enemy_RockSlime extends Entity{
         attack = 2; 
         defense = 2;
         EXP = 4;
-        projectile = new Object_Slimeball(gp);
+        projectile = new Object_Lavaball(gp);
 
         solidArea.x = 2;
         solidArea.y = 6;

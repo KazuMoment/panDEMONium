@@ -9,6 +9,7 @@ import main.GamePanel;
 import main.KeyHandler;
 import object.Object_Key;
 import object.Object_Lantern;
+import object.Object_Paddle;
 import object.Object_Fireball;
 import object.Object_Health_Potion_Small;
 import object.Object_Shield_Tinvaak;
@@ -77,9 +78,16 @@ public class Player extends Entity{
     }
 
     public void setDefaultPosition(){
-        
-        worldX = gp.tileSize * 30;
-        worldY = gp.tileSize * 26;
+
+        switch(gp.currentMap){
+            case 0: worldX = gp.tileSize * 30; worldY = gp.tileSize * 26; break;
+            case 1: worldX = gp.tileSize * 41; worldY = gp.tileSize * 40; break;
+            case 2: worldX = gp.tileSize * 25; worldY = gp.tileSize * 28; break;
+            case 3:
+            case 4:
+            case 5:
+            default: 
+        }
         direction = "down";
 
     }
@@ -105,6 +113,7 @@ public class Player extends Entity{
     public void setItems(){
 
         inventory.clear();
+        inventory.add(new Object_Paddle(gp));
         inventory.add(new Object_Key(gp));
         inventory.add(new Object_Health_Potion_Small(gp));
         inventory.add(new Object_Lantern(gp));
@@ -213,6 +222,19 @@ public class Player extends Entity{
                 guardDown = setup("/player/player_shield_tinvaak_down_1", gp.tileSize, gp.tileSize);
                 guardLeft = setup("/player/player_shield_tinvaak_left_1", gp.tileSize, gp.tileSize);
                 guardRight = setup("/player/player_shield_tinvaak_right_1", gp.tileSize, gp.tileSize);
+            }
+            if (currentShield.name == "Victoria Shield"){
+                guardUp = setup("/player/player_shield_victoria_up_1", gp.tileSize, gp.tileSize);
+                guardDown = setup("/player/player_shield_victoria_down_1", gp.tileSize, gp.tileSize);
+                guardLeft = setup("/player/player_shield_victoria_left_1", gp.tileSize, gp.tileSize);
+                guardRight = setup("/player/player_shield_victoria_right_1", gp.tileSize, gp.tileSize);
+            }
+
+            if (currentShield.name == "Wooden Shield"){
+                guardUp = setup("/player/player_shield_wood_up_1", gp.tileSize, gp.tileSize);
+                guardDown = setup("/player/player_shield_wood_down_1", gp.tileSize, gp.tileSize);
+                guardLeft = setup("/player/player_shield_wood_left_1", gp.tileSize, gp.tileSize);
+                guardRight = setup("/player/player_shield_wood_right_1", gp.tileSize, gp.tileSize);
             }
 
         }
@@ -556,6 +578,7 @@ public class Player extends Entity{
             if (selectedItem.type == type_shield ){
                 currentShield = selectedItem;
                 defense = getDefense();
+                getGuardImage();
             }
 
             if (selectedItem.type == type_consumable ){

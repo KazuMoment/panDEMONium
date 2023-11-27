@@ -16,8 +16,10 @@ import object.Object_Lantern;
 import object.Object_Lever;
 import object.Object_ManaCrystal;
 import object.Object_Mana_Potion_Small;
+import object.Object_Paddle;
 import object.Object_Shield_Tinvaak;
 import object.Object_Shield_Victoria;
+import object.Object_Shield_Wood;
 import object.Object_Slimeball;
 import object.Object_Sword_Tinvaak;
 import object.Object_Tent;
@@ -50,9 +52,11 @@ public class EntityGenerator {
             case Object_Lever.objectName: obj = new Object_Lever(gp); break;
             case Object_ManaCrystal.objectName: obj = new Object_ManaCrystal(gp); break;
             case Object_Mana_Potion_Small.objectName: obj = new Object_Mana_Potion_Small(gp); break;
+            case Object_Paddle.objectName: obj = new Object_Paddle(gp); break;
             case Object_Sword_Tinvaak.objectName: obj = new Object_Sword_Tinvaak(gp); break;
             case Object_Shield_Tinvaak.objectName: obj = new Object_Shield_Tinvaak(gp); break;
             case Object_Shield_Victoria.objectName: obj = new Object_Shield_Victoria(gp); break;
+            case Object_Shield_Wood.objectName: obj = new Object_Shield_Wood(gp); break;
             case Object_Slimeball.objectName: obj = new Object_Slimeball(gp); break;
             case Object_Tent.objectName: obj = new Object_Tent(gp); break; 
         }

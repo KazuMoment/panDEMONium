@@ -7,6 +7,7 @@ import main.GamePanel;
 import object.Object_Gold;
 import object.Object_Heart;
 import object.Object_ManaCrystal;
+import object.Object_Paddle;
 
 public class Enemy_Orc extends Entity{
 
@@ -80,7 +81,6 @@ public class Enemy_Orc extends Entity{
             searchPath(getGoalColumn(gp.player), getGoalRow(gp.player));
             
         }
-    
 
         else{
 
@@ -99,20 +99,7 @@ public class Enemy_Orc extends Entity{
     }
 
     public void checkDrop(){
-        //Cast die
-        int i = new Random().nextInt(100)+1;
-
-        //Set Enemy Drop
-        if (i < 50){
-            dropItem(new Object_Gold(gp));
-        }
-        if (i >= 50 && i < 75){
-            dropItem(new Object_Heart(gp));
-        }
-        if (i >= 75 && i < 100){
-            dropItem(new Object_ManaCrystal(gp));
-        }
-
+        dropItem(new Object_Paddle(gp));
     }
 
     public void dropItem(){

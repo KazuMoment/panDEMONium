@@ -57,6 +57,9 @@ public class Entity {
     public boolean doneQuest2 = false;
     public boolean doneQuest3 = false;
     public boolean receivedReward1 = false;
+    public boolean standby = true;
+    public boolean goalReached = false;
+    boolean unmovable = true;
 
     
     // Counter 
@@ -192,16 +195,19 @@ public class Entity {
     public void setMovement(){}
 
     public void move(String direction){
-        this.direction = direction;
 
-        checkCollision();
+        if (unmovable == false){
+            this.direction = direction;
+
+            checkCollision();
         
-        if (collisionOn == false){
-            switch(direction){
-                case "up": worldY -= speed; break;
-                case "down": worldY += speed; break;
-                case "left": worldX -= speed; break;
-                case "right": worldX += speed; break;   
+            if (collisionOn == false){
+                switch(direction){
+                    case "up": worldY -= speed; break;
+                    case "down": worldY += speed; break;
+                    case "left": worldX -= speed; break;
+                    case "right": worldX += speed; break;   
+                }
             }
         }
     }
@@ -334,16 +340,17 @@ public class Entity {
                     case "right": worldX += speed; break;
                 }
             }
-
-            spriteCounter++;
-            if (spriteCounter > 24){
-                if (spriteNumber == 1){
-                    spriteNumber = 2;
+            if (speed > 0){
+                spriteCounter++;
+                if (spriteCounter > 24){
+                    if (spriteNumber == 1){
+                        spriteNumber = 2;
+                    }
+                    else if (spriteNumber == 2){
+                        spriteNumber = 1;
+                    }
+                    spriteCounter = 0;
                 }
-                else if (spriteNumber == 2){
-                    spriteNumber = 1;
-                }
-                spriteCounter = 0;
             }
             
         }
@@ -800,6 +807,7 @@ public class Entity {
                 int nextRow = gp.pFinder.pathList.get(0).row;
                 if (nextColumn == goalColumn && nextRow == goalRow){
                     onPath = false;
+                    goalReached = true;
                 }
             }
         }

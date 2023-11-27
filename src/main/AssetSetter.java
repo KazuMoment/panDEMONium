@@ -2,6 +2,7 @@ package main;
 
 import enemy.Enemy_GreenSlime;
 import enemy.Enemy_Orc;
+import enemy.Enemy_RockSlime;
 import entity.NPC_Farid;
 import entity.NPC_Kane;
 import entity.NPC_Piyaye;
@@ -16,6 +17,7 @@ import object.Object_Key;
 import object.Object_Lantern;
 import object.Object_Lever;
 import object.Object_Shield_Victoria;
+import object.Object_Shield_Wood;
 import object.Object_Slimeball;
 import object.Object_Sword_Tinvaak;
 import object.Object_Tent;
@@ -60,6 +62,12 @@ public class AssetSetter {
 		gp.obj[mapNumber][i].setLoot(new Object_Health_Potion_Small(gp));
 		gp.obj[mapNumber][i].worldX = gp.tileSize * 32;
 		gp.obj[mapNumber][i].worldY = gp.tileSize * 22;
+		i++;
+
+		gp.obj[mapNumber][i] = new Object_Chest(gp);
+		gp.obj[mapNumber][i].setLoot(new Object_Shield_Wood(gp));
+		gp.obj[mapNumber][i].worldX = gp.tileSize * 18;
+		gp.obj[mapNumber][i].worldY = gp.tileSize * 10;
 		i++;
 
 		gp.obj[mapNumber][i] = new Object_Key(gp);
@@ -188,16 +196,28 @@ public class AssetSetter {
 		gp.enemy[mapNumber][i].worldY = gp.tileSize * 34;
 		i++;
 
-		// gp.enemy[mapNumber][i] = new Enemy_Orc(gp);
-		// gp.enemy[mapNumber][i].worldX = gp.tileSize * 27;
-		// gp.enemy[mapNumber][i].worldY = gp.tileSize * 16;
-		// i++;
+		gp.enemy[mapNumber][i] = new Enemy_Orc(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 28;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 16;
+		i++;
 
-		// gp.enemy[mapNumber][i] = new Enemy_Orc(gp);
-		// gp.enemy[mapNumber][i].worldX = gp.tileSize * 31;
-		// gp.enemy[mapNumber][i].worldY = gp.tileSize * 12;
-		// i++;
+		mapNumber = 1;
+		i = 0;
+		
+		gp.enemy[mapNumber][i] = new Enemy_RockSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 25;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 38;
+		i++;
 
+		gp.enemy[mapNumber][i] = new Enemy_RockSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 22;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 38;
+		i++;
+
+		gp.enemy[mapNumber][i] = new Enemy_RockSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 25;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 40;
+		i++;
 
     }
 

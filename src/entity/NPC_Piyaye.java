@@ -7,11 +7,15 @@ import main.GamePanel;
 
 public class NPC_Piyaye extends Entity {
 
+    public static final String npcName = "Piyaye";
+
     public NPC_Piyaye(GamePanel gp){
         super(gp);
 
         direction = "down";
-        speed = 2;
+        defaultSpeed = 2;
+        speed = defaultSpeed;
+        name = npcName;
 
         solidArea = new Rectangle(8, 16, 32, 32);
         solidAreaDefaultX = solidArea.x;
@@ -42,6 +46,7 @@ public class NPC_Piyaye extends Entity {
         dialogue[0][4] = "Tell you what. Defeat that orc and give me my paddle back,\nand I'll take you to Tinvaak Village.";
 
         dialogue[1][0] = "Got the paddle back, I hope? The orc over there has it!";
+        dialogue[1][1] = "I hid a wooden shield back there! \nEquip it and talk to me when you get it!";
 
         dialogue[2][0] = "Oh. By the way, you have a shield, right?";
         dialogue[2][1] = "Press SPACE and you'll block! It'll\nreduce damage!";
@@ -49,7 +54,7 @@ public class NPC_Piyaye extends Entity {
         dialogue[2][3] = "When you hear a big banging sound, attack them!";
         dialogue[2][4] = "It'll do a big critical hit!";
 
-        dialogue[3][0] = "You got the paddle? Perfect! Let's \ngo to the boat right away!";
+        dialogue[3][0] = "Alright. The boat's all fixed up. \nJust enter the boat when you're ready.";
 
 
     }
@@ -59,31 +64,22 @@ public class NPC_Piyaye extends Entity {
         if (onPath == true){
 
             int goalColumn = 33;
-            int goalRow = 38;
+            int goalRow = 36;
 
             searchPath(goalColumn, goalRow);
-
+            if (goalReached == true){
+                standby = true;
+            }
         }
 
         else{
-             actionLockCounter++;
-
-            if (actionLockCounter == 120){
-                Random random = new Random();
-                int i = random.nextInt(100)+1; // random number from 1 to 100
-                if (i <= 25){
-                    direction = "up";
-                }
-                if (i > 25 && i <= 50){
-                    direction = "down";
-                }
-                if (i > 50 && i <= 75){
-                    direction = "left";
-                }
-                if (i > 75 && i <= 100){
-                    direction = "right";
-                }
-                actionLockCounter = 0;
+            if (standby == true && doneQuest1 == false){
+                direction = "down";
+                speed = 0;
+            }
+            else if (standby == true && doneQuest1 == true){
+                direction = "left";
+                speed = 0;
             }
         }
     }
@@ -92,10 +88,22 @@ public class NPC_Piyaye extends Entity {
         facePlayer();
         startDialogue(this, dialogueSet);
 
-        if (introDone == true){
+        if (introDone == true && 
+            gp.player.currentShield == null && 
+            doneQuest1 == false) {
             dialogueSet = 1;
         }
-        
+        else if (gp.player.currentShield != null 
+            && gp.player.currentShield.name == "Wooden Shield" 
+            && doneQuest1 == false){
+            dialogueSet = 2;
+        }
+
+        else if (introDone == true && doneQuest1 == true){
+            dialogueSet = 3;
+        }
+
+
     }
     
 }
