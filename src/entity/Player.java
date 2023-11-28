@@ -59,7 +59,7 @@ public class Player extends Entity{
         level = 1;
         maxHP = 6;
         HP = maxHP;
-        maxMP = 4;
+        maxMP = 3;
         MP = maxMP;
         strength = 1; // Attack
         dexterity = 1; // Defense
@@ -411,12 +411,14 @@ public class Player extends Entity{
         if (MP > maxMP){
             MP = maxMP;
         }
-        if (HP <= 0){
-            gp.gameState = gp.gameOverState;
-            gp.stopMusic();
-            gp.playSoundEffect(13);
+        if (keyH.godModeOn == false){
+            if (HP <= 0){
+                gp.gameState = gp.gameOverState;
+                gp.stopMusic();
+                gp.playSoundEffect(13);
+            }
         }
-
+        
 
     }
 
@@ -720,7 +722,10 @@ public class Player extends Entity{
         if (transparent == true){
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
         }
-        g2.drawImage(image, tempScreenX, tempScreenY, null);
+
+        if (drawing == true){
+            g2.drawImage(image, tempScreenX, tempScreenY, null);
+        }   
 
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }

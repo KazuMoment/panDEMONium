@@ -12,6 +12,7 @@ import object.Object_ManaCrystal;
 public class Enemy_GreenSlime extends Entity{
 
     GamePanel gp;
+    public static final String enemyName = "Green Slime";
 
     public Enemy_GreenSlime(GamePanel gp) {
         super(gp);
@@ -19,12 +20,12 @@ public class Enemy_GreenSlime extends Entity{
         this.gp = gp;
 
         type = type_enemy;
-        name = "Greem Slime";
+        name = enemyName;
         defaultSpeed = 1;
         speed = defaultSpeed;
         maxHP = 6;
         HP = maxHP;
-        attack = 4; 
+        attack = 1; 
         defense = 0;
         EXP = 2;
         projectile = new Object_Slimeball(gp);
@@ -73,13 +74,12 @@ public class Enemy_GreenSlime extends Entity{
             // checkStartAggroRange(gp.player, 5, 100);
 
             // Get a random direction
-            getRandomDirection();
+            getRandomDirection(120);
         }
 
     }
 
     public void damageReaction(){
-
         actionLockCounter = 0;
         following = true;
         onPath = true;

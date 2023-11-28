@@ -68,6 +68,7 @@ public class GamePanel extends JPanel implements Runnable{
     Map map = new Map(this);
     public SaveLoad saveLoad = new SaveLoad(this);
     public EntityGenerator eGenerator = new EntityGenerator(this);
+    public CutsceneManager csManager = new CutsceneManager(this);
     Thread gameThread; 
    
     // Entity and Object
@@ -94,6 +95,10 @@ public class GamePanel extends JPanel implements Runnable{
     public final int sleepState = 9;
     public final int mapState = 10;
     public final int saveState = 11;
+    public final int cutsceneState = 12;
+
+    // Others
+    public boolean bossBattleOn = false;
 
     // Area
     public int currentArea;
@@ -142,6 +147,8 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void resetGame(boolean restart){
 
+        removeTempEntity();
+        bossBattleOn = false;
         player.setDefaultPosition();
         player.restoreStatus();
         player.resetCounter();
@@ -349,12 +356,18 @@ public class GamePanel extends JPanel implements Runnable{
                 // Minimap
                 map.drawMiniMap(g2);
 
+                // Cutscene
+                csManager.draw(g2);
+
                 // Draw UI
                 ui.draw(g2);
                 
             }
 
             if (keyH.showDebugMenu ==  true){
+                // long drawEnd = System.nanoTime();
+                // long passed = drawEnd - drawStart;
+
                 g2.setFont(new Font ("Arial", Font.PLAIN, 20));
                 g2.setColor(Color.white);
                 int x = 10;
@@ -365,6 +378,7 @@ public class GamePanel extends JPanel implements Runnable{
                 g2.drawString("WorldY: " + player.worldY, x, y); y += lineHeight;
                 g2.drawString("Column: " + (player.worldX + player.solidArea.x)/tileSize, x, y); y += lineHeight;
                 g2.drawString("Row: " + (player.worldY + player.solidArea.y)/tileSize, x, y); y += lineHeight;
+                g2.drawString("God Mode:" + keyH.godModeOn, x, y);
             } 
 
         }
@@ -410,6 +424,16 @@ public class GamePanel extends JPanel implements Runnable{
             }
             currentArea = nextArea; 
             aSetter.setEnemy();
+        }
+
+        public void removeTempEntity(){
+            for (int mapNumber = 0; mapNumber < maxMap; mapNumber++){
+                for (int i = 0; i < obj[1].length; i++){
+                    if (obj[mapNumber][i] != null && obj[mapNumber][i].temp == true){
+                        obj[mapNumber][i] = null;
+                    }
+                }
+            }
         }
 
 }

@@ -74,7 +74,7 @@ public class Enemy_RockSlime extends Entity{
             checkStartAggroRange(gp.player, 5, 100);
 
             // Get a random direction
-            getRandomDirection();
+            getRandomDirection(120);
         }
 
     }

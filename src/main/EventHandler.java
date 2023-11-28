@@ -1,6 +1,9 @@
 package main;
 
+import data.Progress;
 import entity.Entity;
+import entity.NPC_Piyaye;
+import entity.NPC_Reul;
 
 public class EventHandler {
 
@@ -49,7 +52,7 @@ public class EventHandler {
 
     public void setDialogue(){
 
-        eventMaster.dialogue[0][0] = "You fucked up.";
+        eventMaster.dialogue[0][0] = "Oh, finally!";
         eventMaster.dialogue[1][0] = "You drank the water.\nYour HP and MP have been recovered!\nProgress is saved.";
 
     }
@@ -67,8 +70,11 @@ public class EventHandler {
             if (hit(0, 11, 32, "up") == true){teleport(1, 43, 41, gp.dungeon, gp.tinvaak_dungeon);} // dungeon 
             else if (hit(1, 45, 42, "right") == true){teleport(0, 11, 32, gp.outdoor, gp.tutorial_forest);} // back to forest 
             else if (hit(0, 40, 12, "up") == true){teleport(2, 25, 30, gp.outdoor, gp.merchant_tent);} // merchant tent 
-            else if (hit(2, 25, 30, "down") == true){teleport(0, 40, 12, gp.outdoor, gp.tutorial_forest);} // back to forest 
             else if (hit (2, 25, 26, "up") == true){speak(gp.npc[2][0]);} // talk to merchant interacting with table
+            else if (hit(2, 25, 30, "down") == true){teleport(0, 40, 12, gp.outdoor, gp.tutorial_forest);} // back to forest 
+            else if (hit(0, 34, 39, "down") == true){teleport(3, 31, 42, gp.outdoor, gp.tinvaak_village);} // tinvaak village
+            else if (hit(3, 31, 42, "down") == true){teleport(0, 34, 38, gp.outdoor, gp.tutorial_forest);} // back to forest 
+            else if (hit(1, 35, 22, "any") == true){demonMonk();} // Devil Monk Cutscene
         }
     
 
@@ -137,6 +143,13 @@ public class EventHandler {
         if (gp.keyH.enterPressed == true){
             gp.gameState = gp.dialogueState;
             entity.speak();
+        }
+    }
+
+    public void demonMonk(){
+        if (gp.bossBattleOn == false && Progress.demonMonkDefeated == false){
+            gp.gameState = gp.cutsceneState;
+            gp.csManager.sceneNumber = gp.csManager.demonMonk;
         }
     }
 

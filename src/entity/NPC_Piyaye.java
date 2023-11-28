@@ -1,7 +1,6 @@
 package entity;
 
 import java.awt.Rectangle;
-import java.util.Random;
 
 import main.GamePanel;
 
@@ -16,6 +15,7 @@ public class NPC_Piyaye extends Entity {
         defaultSpeed = 2;
         speed = defaultSpeed;
         name = npcName;
+        sleep = true;
 
         solidArea = new Rectangle(8, 16, 32, 32);
         solidAreaDefaultX = solidArea.x;
@@ -54,7 +54,7 @@ public class NPC_Piyaye extends Entity {
         dialogue[2][3] = "When you hear a big banging sound, attack them!";
         dialogue[2][4] = "It'll do a big critical hit!";
 
-        dialogue[3][0] = "Alright. The boat's all fixed up. \nJust enter the boat when you're ready.";
+        dialogue[3][0] = "Alright. The boat's all fixed up. Help me set it up \nby interacting with the boat.";
 
 
     }
@@ -64,22 +64,17 @@ public class NPC_Piyaye extends Entity {
         if (onPath == true){
 
             int goalColumn = 33;
-            int goalRow = 36;
+            int goalRow = 38;
 
             searchPath(goalColumn, goalRow);
             if (goalReached == true){
-                standby = true;
+                sleep = true;
             }
         }
 
         else{
-            if (standby == true && doneQuest1 == false){
+            if (sleep == true){
                 direction = "down";
-                speed = 0;
-            }
-            else if (standby == true && doneQuest1 == true){
-                direction = "left";
-                speed = 0;
             }
         }
     }

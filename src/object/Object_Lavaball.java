@@ -41,7 +41,7 @@ public class Object_Lavaball extends Projectile {
     }
 
     public Color getParticleColor(){
-        Color color = new Color(121, 235, 123);
+        Color color = new Color(246, 66, 28);
         return color;
     }
     public int getParticleSize(){

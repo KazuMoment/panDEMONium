@@ -1,12 +1,13 @@
 package entity;
 
 import java.awt.Rectangle;
-import java.util.Random;
 
+import enemy.Enemy_GreenSlime;
 import main.GamePanel;
-import object.Object_Health_Potion_Small;
 
 public class NPC_Reul extends Entity{
+
+    public static final String npcName = "Reul";
 
     public NPC_Reul(GamePanel gp){
         super(gp);
@@ -14,6 +15,7 @@ public class NPC_Reul extends Entity{
         direction = "left";
         defaultSpeed = 3;
         speed = defaultSpeed;
+        name = npcName;
 
         solidArea = new Rectangle(8, 16, 32, 32);
         solidAreaDefaultX = solidArea.x;
@@ -21,7 +23,6 @@ public class NPC_Reul extends Entity{
 
 
         getImage();
-        setDialogue();
 
     }
 
@@ -75,6 +76,11 @@ public class NPC_Reul extends Entity{
 
     }
 
+    public void setReward(Entity reward){
+        this.reward = reward;
+        setDialogue();
+    }
+
     public void setMovement(){
 
         if (introDone == false){
@@ -102,38 +108,33 @@ public class NPC_Reul extends Entity{
 
         else if (doneQuest1 == true && doneQuest2 == false){
             
-            int goalColumn = 24;
+            int goalColumn = 22;
             int goalRow = 43;
 
             searchPath(goalColumn, goalRow);
-            if (gp.enemy[0][0] == null && 
-                gp.enemy[0][1] == null &&
-                gp.enemy[0][2] == null &&
-                gp.enemy[0][3] == null &&
-                gp.enemy[0][4] == null){
-                doneQuest2 = true;
-            } 
-        }
-        
-        else{
-             actionLockCounter++;
+            
+            boolean allSlimesKilled = true;
 
-            if (actionLockCounter == 120){
-                Random random = new Random();
-                int i = random.nextInt(100)+1; // random number from 1 to 100
-                if (i <= 25){
-                    direction = "left";
+            for (int i = 0; i < gp.enemy[1].length; i++){
+                if (gp.enemy[gp.currentMap][i] != null && gp.enemy[gp.currentMap][i].name.equals(Enemy_GreenSlime.enemyName)){
+                    allSlimesKilled = false;
                 }
-                if (i > 25 && i <= 50){
-                    direction = "right";
-                }
-                if (i > 50 && i <= 75){
-                }
-                if (i > 75 && i <= 100){
-                }
-                actionLockCounter = 0;
+            }
+
+            if (allSlimesKilled == true){
+                doneQuest2 = true;
             }
         }
+
+        if (sleep == true){
+            if (pickedQuestObject == true){
+                direction = "left";
+            }
+            else{
+                direction = "right";
+            }
+        }
+        
     }
 
     public void speak(){
@@ -150,10 +151,15 @@ public class NPC_Reul extends Entity{
             dialogueSet = 3;
             dialogueSet++;
             if (receivedReward1 == false){
-                    gp.playSoundEffect(2);
-                    startDialogue(this, 5);
-                    gp.player.inventory.add(new Object_Health_Potion_Small(gp));
-                    receivedReward1 = true;
+                    if (gp.player.canObtainItem(reward) == false){
+                        startDialogue(this, 6);
+                    }
+                    else{
+                        gp.playSoundEffect(2);
+                        startDialogue(this, 5);
+                        receivedReward1 = true;
+                    }
+                    
                 }
             else if (dialogue[dialogueSet][0] == null){
                 dialogueSet--;

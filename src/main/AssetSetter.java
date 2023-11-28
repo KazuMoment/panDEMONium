@@ -1,6 +1,7 @@
 package main;
 
 import enemy.Enemy_GreenSlime;
+import enemy.Enemy_Monk;
 import enemy.Enemy_Orc;
 import enemy.Enemy_RockSlime;
 import entity.NPC_Farid;
@@ -8,6 +9,7 @@ import entity.NPC_Kane;
 import entity.NPC_Piyaye;
 import entity.NPC_Reul;
 import object.Object_Axe_Normal;
+import object.Object_Boat;
 import object.Object_Bonfire;
 import object.Object_Chest;
 import object.Object_Door;
@@ -16,6 +18,8 @@ import object.Object_Iron_Gate;
 import object.Object_Key;
 import object.Object_Lantern;
 import object.Object_Lever;
+import object.Object_Mana_Potion_Small;
+import object.Object_Shield_Tinvaak;
 import object.Object_Shield_Victoria;
 import object.Object_Shield_Wood;
 import object.Object_Slimeball;
@@ -35,7 +39,6 @@ public class AssetSetter {
 
         int mapNumber = 0;
         int i = 0;
-
         gp.obj[mapNumber][i] = new Object_Axe_Normal(gp);
 		gp.obj[mapNumber][i].worldX = gp.tileSize * 25;
 		gp.obj[mapNumber][i].worldY = gp.tileSize * 25;
@@ -80,6 +83,10 @@ public class AssetSetter {
 		gp.obj[mapNumber][i].worldY = gp.tileSize * 38;
 		i++;
 
+		gp.obj[mapNumber][i] = new Object_Boat(gp);
+		gp.obj[mapNumber][i].worldX = gp.tileSize * 34;
+		gp.obj[mapNumber][i].worldY = gp.tileSize * 39;
+		i++;
 		
 		mapNumber = 1;
 		i = 0;
@@ -130,6 +137,32 @@ public class AssetSetter {
 		gp.obj[mapNumber][i].worldX = gp.tileSize * 15;
 		gp.obj[mapNumber][i].worldY = gp.tileSize * 20;
 		i++;
+
+		mapNumber = 3;
+		i = 0;
+		gp.obj[mapNumber][i] = new Object_Chest(gp);
+		gp.obj[mapNumber][i].setLoot(new Object_Mana_Potion_Small(gp));
+		gp.obj[mapNumber][i].worldX = gp.tileSize * 27;
+		gp.obj[mapNumber][i].worldY = gp.tileSize * 4;
+		i++;
+
+		gp.obj[mapNumber][i] = new Object_Chest(gp);
+		gp.obj[mapNumber][i].setLoot(new Object_Health_Potion_Small(gp));
+		gp.obj[mapNumber][i].worldX = gp.tileSize * 14;
+		gp.obj[mapNumber][i].worldY = gp.tileSize * 13;
+		i++;
+
+		gp.obj[mapNumber][i] = new Object_Chest(gp);
+		gp.obj[mapNumber][i].setLoot(new Object_Health_Potion_Small(gp));
+		gp.obj[mapNumber][i].worldX = gp.tileSize * 22;
+		gp.obj[mapNumber][i].worldY = gp.tileSize * 17;
+		i++;
+
+		gp.obj[mapNumber][i] = new Object_Chest(gp);
+		gp.obj[mapNumber][i].setLoot(new Object_Shield_Tinvaak(gp));
+		gp.obj[mapNumber][i].worldX = gp.tileSize * 38;
+		gp.obj[mapNumber][i].worldY = gp.tileSize * 42;
+		i++;
         
 
          
@@ -140,10 +173,11 @@ public class AssetSetter {
         int mapNumber = 0;
         int i = 0;
 
-        // gp.npc[mapNumber][i] = new NPC_Reul(gp);
-        // gp.npc[mapNumber][i].worldX = gp.tileSize  *  25;
-        // gp.npc[mapNumber][i].worldY = gp.tileSize  *  26;
-        // i++;
+        gp.npc[mapNumber][i] = new NPC_Reul(gp);
+        gp.npc[mapNumber][i].worldX = gp.tileSize * 25;
+        gp.npc[mapNumber][i].worldY = gp.tileSize * 26;
+		gp.npc[mapNumber][i].setReward(new Object_Health_Potion_Small(gp));
+        i++;
 
 		gp.npc[mapNumber][i] = new NPC_Piyaye(gp);
         gp.npc[mapNumber][i].worldX = gp.tileSize * 10;
@@ -217,6 +251,11 @@ public class AssetSetter {
 		gp.enemy[mapNumber][i] = new Enemy_RockSlime(gp);
 		gp.enemy[mapNumber][i].worldX = gp.tileSize * 25;
 		gp.enemy[mapNumber][i].worldY = gp.tileSize * 40;
+		i++;
+
+		gp.enemy[mapNumber][i] = new Enemy_Monk(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 29;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 27;
 		i++;
 
     }

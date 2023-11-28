@@ -10,7 +10,8 @@ public class KeyHandler implements KeyListener{
     public boolean upPressed, downPressed, leftPressed, rightPressed, shiftPressed, enterPressed, ePressed, shootPressed, spacePressed;
 
     //Debug 
-    boolean showDebugMenu = false;
+    public boolean showDebugMenu = false;
+    public boolean godModeOn = false;
 
     public KeyHandler(GamePanel gp){
         this.gp = gp;
@@ -43,7 +44,7 @@ public class KeyHandler implements KeyListener{
         }
 
         // Dialogue State
-        else if(gp.gameState == gp.dialogueState){
+        else if(gp.gameState == gp.dialogueState || gp.gameState == gp.cutsceneState){
             dialogueState(code);
         }
 
@@ -172,11 +173,21 @@ public class KeyHandler implements KeyListener{
         }
         if (code == KeyEvent.VK_F5){
             switch(gp.currentMap){
-                case 0: gp.tileM.loadMap("/maps/forest_tutorial.txt", 0);
-                case 1: gp.tileM.loadMap("/maps/dungeon_1.txt", 1);
-                case 2: gp.tileM.loadMap("/maps/merchant_house.txt", 2);
+                case 0: gp.tileM.loadMap("/maps/forest_tutorial.txt", 0); break;
+                case 1: gp.tileM.loadMap("/maps/dungeon_1.txt", 1); break;
+                case 2: gp.tileM.loadMap("/maps/merchant_house.txt", 2); break;
+                case 3: gp.tileM.loadMap("/maps/village_1.txt", 3); break;
+                case 4: gp.tileM.loadMap("/maps/village_2.txt", 3); break;
             }
             
+        }
+        if (code == KeyEvent.VK_F4){
+            if (godModeOn == false){
+                godModeOn = true;
+            }
+            else if (godModeOn == true){
+                godModeOn = false;
+            }
         }
     }
 

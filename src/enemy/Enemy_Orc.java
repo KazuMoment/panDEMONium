@@ -4,9 +4,6 @@ import java.util.Random;
 
 import entity.Entity;
 import main.GamePanel;
-import object.Object_Gold;
-import object.Object_Heart;
-import object.Object_ManaCrystal;
 import object.Object_Paddle;
 
 public class Enemy_Orc extends Entity{
@@ -88,7 +85,7 @@ public class Enemy_Orc extends Entity{
             checkStartAggroRange(gp.player, 8, 100);
 
             // Get a random direction
-            getRandomDirection();
+            getRandomDirection(120);
         }
 
         // Check if it will attack

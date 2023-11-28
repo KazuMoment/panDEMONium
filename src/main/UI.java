@@ -85,6 +85,7 @@ public class UI {
         // Play State
         if (gp.gameState == gp.playState){
             drawPlayerHP();
+            drawEnemyHP();
             drawMessage();
         }
 
@@ -140,12 +141,21 @@ public class UI {
         int x = gp.tileSize/2;
         int y = gp.tileSize/2;
         int i = 0;
-
+        int iconSize = 32;
+        int manaStartX = (gp.tileSize/2) - 5;
+        int manaStartY = 0;
+    
         // Draw Max HP
         while (i < gp.player.maxHP/2){
-            g2.drawImage(heart_empty, x, y, null);
+            g2.drawImage(heart_empty, x, y, iconSize, iconSize, null);
             i++;
-            x += gp.tileSize;
+            x += iconSize;
+            manaStartY = y + 32;
+
+            if (i % 8 == 0){
+                x = gp.tileSize/2;
+                y += iconSize;
+            }
         }
 
         // Reset
@@ -155,36 +165,102 @@ public class UI {
 
         // Draw Current HP
         while (i < gp.player.HP){
-            g2.drawImage(heart_half, x, y, null);
+            g2.drawImage(heart_half, x, y, iconSize, iconSize, null);
             i++;
             if (i < gp.player.HP){
-                g2.drawImage(heart_full, x, y, null);
+                g2.drawImage(heart_full, x, y, iconSize, iconSize, null);
             }
             i++;
-            x += gp.tileSize;
+            x += iconSize;
+
+            if (i % 16 == 0){
+                x = gp.tileSize/2;
+                y += iconSize;
+            }
         }
 
         // Draw Max Mana
-        x = gp.tileSize/2 - 5;
-        y = (int) (gp.tileSize * 1.5);
+        x = manaStartX;
+        y = manaStartY;
         i = 0;
         while (i < gp.player.maxMP){
-            g2.drawImage(mana_empty, x, y, null);
+            g2.drawImage(mana_empty, x, y, iconSize, iconSize, null);
             i++;
-            x += 35;
+            x += 25;
+
+            if (i % 10 == 0){
+                x = manaStartX;
+                y += iconSize;
+            }
         }
 
         // Draw Current Mana
-        x = gp.tileSize/2 - 5;
-        y = (int) (gp.tileSize * 1.5);
+        x = manaStartX;
+        y = manaStartY;
         i = 0;
         while (i < gp.player.MP){
-            g2.drawImage(mana_full, x, y, null);
+            g2.drawImage(mana_full, x, y, iconSize, iconSize, null);
             i++;
-            x += 35;
-        }
+            x += 25;
 
+            if (i % 10 == 0){
+                x = manaStartX;
+                y += iconSize;
+            }
+        }
     }
+
+    public void drawEnemyHP(){
+
+        for (int i = 0; i < gp.enemy[1].length; i++){
+
+            Entity enemy = gp.enemy[gp.currentMap][i];
+
+            if (enemy != null && enemy.inCamera() == true){
+
+                if (enemy.hpBarOn == true && enemy.boss == false){
+
+                    double oneScale = (double)gp.tileSize/enemy.maxHP;
+                    double hpBarValue = oneScale * enemy.HP;
+
+                    g2.setColor(new Color(35, 35, 35));
+                    g2.fillRect(enemy.getScreenX() - 1, enemy.getScreenY() - 16, gp.tileSize + 2, 7);
+
+                    g2.setColor(new Color(255, 0, 30));
+                    g2.fillRect(enemy.getScreenX(), enemy.getScreenY() - 15, (int)hpBarValue, 5);
+
+                    enemy.hpBarCounter++;
+
+                    if (enemy.hpBarCounter > 600){
+                        enemy.hpBarCounter = 0;
+                        enemy.hpBarOn = false;
+                    }
+                }
+
+                else if (enemy.boss == true){
+
+                    double oneScale = (double)gp.tileSize * 8/enemy.maxHP;
+                    double hpBarValue = oneScale * enemy.HP;
+
+                    int x  = gp.screenWidth/2 - gp.tileSize * 4;
+                    int y = gp.tileSize * 10;
+
+                    g2.setColor(new Color(35, 35, 35));
+                    g2.fillRect(x - 1, y - 1, gp.tileSize * 8 + 2, 22);
+
+                    g2.setColor(new Color(255, 0, 30));
+                    g2.fillRect(x, y, (int)hpBarValue, 20);
+
+                    g2.setFont(g2.getFont().deriveFont(Font.BOLD, 24f));
+                    g2.setColor(Color.white);
+                    g2.drawString(enemy.name, x + 4, y - 10);
+
+                }
+
+            }
+        }
+    }
+
 
     public void drawMessage(){
 
@@ -312,7 +388,7 @@ public class UI {
                 charIndex = 0;
                 combinedText = "";
 
-                if (gp.gameState == gp.dialogueState){
+                if (gp.gameState == gp.dialogueState || gp.gameState == gp.cutsceneState){
                     npc.dialogueIndex++;
                     gp.keyH.enterPressed = false;
                 }
@@ -325,6 +401,10 @@ public class UI {
             if (gp.gameState == gp.dialogueState){
                 gp.gameState = gp.playState;
             }
+            if (gp.gameState == gp.cutsceneState){
+                gp.csManager.scenePhase++;
+            }
+
         }
 
         for (String line : currentDialogue.split("\n")){
