@@ -57,12 +57,12 @@ public class Entity {
     public boolean pickedQuestObject = false;
     public boolean doneQuest1 = false;
     public boolean doneQuest2 = false;
-    public boolean doneQuest3 = false;
-    public boolean receivedReward1 = false;
+    public boolean receivedReward = false;
     public boolean goalReached = false;
     boolean unmovable = true;
     public boolean rage = false;
     public boolean sleep = false;
+    public boolean standby = false;
     public boolean drawing = true;
 
     
@@ -368,17 +368,19 @@ public class Entity {
                         case "right": worldX += speed; break;
                     }
                 }
-                spriteCounter++;
-                if (spriteCounter > 24){
-                    if (spriteNumber == 1){
-                        spriteNumber = 2;
+
+                if (speed > 0){
+                    spriteCounter++;
+                    if (spriteCounter > 24){
+                        if (spriteNumber == 1){
+                            spriteNumber = 2;
+                        }
+                        else if (spriteNumber == 2){
+                            spriteNumber = 1;
+                        }
+                        spriteCounter = 0;
                     }
-                    else if (spriteNumber == 2){
-                        spriteNumber = 1;
-                    }
-                    spriteCounter = 0;
                 }
-                
             }
 
             if (invulnerable == true){

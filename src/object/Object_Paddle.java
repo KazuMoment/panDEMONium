@@ -15,7 +15,7 @@ public class Object_Paddle extends Entity{
 		name = objectName;
 		price = 23;
 		down1 = setup("/objects/paddle",gp.tileSize,gp.tileSize);
-		description = "[" + name + "]\nA paddle, a fisherman once used.\nYou should give it to him.";
+		description = "[" + name + "]\nPiyaye's paddle.\nYou should give it to him.";
 	
 		setDialogue();
 	}

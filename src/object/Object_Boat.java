@@ -7,14 +7,14 @@ import main.GamePanel;
 public class Object_Boat extends Entity {
 
     GamePanel gp;
-	public static final String objName = "Boat";
+	public static final String objectName = "Boat";
 	
 	public Object_Boat(GamePanel gp){
 
 		super(gp);
 		this.gp = gp;
 		type = type_obstacle;
-		name = objName;
+		name = objectName;
 		price = 23;
 		image = setup("/objects/boat",gp.tileSize,gp.tileSize);
 		image2 = setup("/objects/boat1",gp.tileSize,gp.tileSize);
@@ -47,6 +47,8 @@ public class Object_Boat extends Entity {
 					break;
 				} 
 				else if (gp.npc[gp.currentMap][i].doneQuest1 == true){
+					gp.playSoundEffect(4);
+					opened = true;
 					down1 = image2;
 					collision = false;
 					startDialogue(this, 1);

@@ -88,19 +88,27 @@ public class NPC_Reul extends Entity{
             searchPath(getGoalColumn(gp.player), getGoalRow(gp.player));
             if (gp.collisionChecker.checkPlayer(this) == true){
                 this.speak();
+                standby = true;
             } 
         }
 
         else if (gp.obj[0][0] == null && pickedQuestObject == false){
+            goalReached = false;
+            standby = false;
+            speed = defaultSpeed;
             dialogueSet = 1;
             searchPath(getGoalColumn(gp.player), getGoalRow(gp.player));
             if (gp.collisionChecker.checkPlayer(this) == true){
                 this.speak();
                 pickedQuestObject = true;
+                standby = true;
             }      
         }
 
         else if (gp.iTile[0][0].HP == 0 && doneQuest1 == false){
+            goalReached = false;
+            standby = false;
+            speed = defaultSpeed;
             dialogueSet = 2;
             startDialogue(this, dialogueSet);
             doneQuest1 = true;
@@ -112,6 +120,10 @@ public class NPC_Reul extends Entity{
             int goalRow = 43;
 
             searchPath(goalColumn, goalRow);
+
+            if (goalReached == true){
+                standby = true;
+            }
             
             boolean allSlimesKilled = true;
 
@@ -123,15 +135,19 @@ public class NPC_Reul extends Entity{
 
             if (allSlimesKilled == true){
                 doneQuest2 = true;
+                standby = false;
+                sleep = true;
             }
         }
 
-        if (sleep == true){
+        if (standby == true){
             if (pickedQuestObject == true){
                 direction = "left";
+                speed = 0;
             }
             else{
                 direction = "right";
+                speed = 0;
             }
         }
         
@@ -150,16 +166,15 @@ public class NPC_Reul extends Entity{
         if (doneQuest2 == true){
             dialogueSet = 3;
             dialogueSet++;
-            if (receivedReward1 == false){
+            if (receivedReward == false){
                     if (gp.player.canObtainItem(reward) == false){
                         startDialogue(this, 6);
                     }
                     else{
                         gp.playSoundEffect(2);
                         startDialogue(this, 5);
-                        receivedReward1 = true;
+                        receivedReward = true;
                     }
-                    
                 }
             else if (dialogue[dialogueSet][0] == null){
                 dialogueSet--;

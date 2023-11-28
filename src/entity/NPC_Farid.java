@@ -8,12 +8,14 @@ import object.Object_Mana_Potion_Small;
 
 public class NPC_Farid extends Entity {
 
+    public static final String npcName = "Farid";
+
     public NPC_Farid(GamePanel gp){
         super(gp);
 
         direction = "down";
         speed = 1;
-
+        name = npcName;
         solidArea = new Rectangle(8, 16, 32, 32);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;

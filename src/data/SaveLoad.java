@@ -51,6 +51,7 @@ public class SaveLoad {
             ds.mapObjectWorldY = new int[gp.maxMap][gp.obj[1].length];
             ds.mapObjectLootName = new String[gp.maxMap][gp.obj[1].length];
             ds.mapObjectOpened = new boolean[gp.maxMap][gp.obj[1].length];
+            ds.mapObjectCollision = new boolean[gp.maxMap][gp.obj[1].length];
 
             for (int mapNum = 0; mapNum < gp.maxMap; mapNum++){
                 for (int i = 0; i < gp.obj[1].length; i++){
@@ -66,11 +67,48 @@ public class SaveLoad {
                             ds.mapObjectLootName[mapNum][i] = gp.obj[mapNum][i].loot.name;
                         }
                         ds.mapObjectOpened[mapNum][i] = gp.obj[mapNum][i].opened;
+                        ds.mapObjectCollision[mapNum][i] = gp.obj[mapNum][i].collision;
                     }
 
                 }
             }
 
+            // NPCs on Map
+            ds.mapNPCNames = new String[gp.maxMap][gp.npc[1].length];
+            ds.mapNPCWorldX = new int[gp.maxMap][gp.npc[1].length];
+            ds.mapNPCWorldY = new int[gp.maxMap][gp.npc[1].length];
+            ds.mapNPCRewardName = new String[gp.maxMap][gp.npc[1].length];
+            ds.mapNPCDoneQuest1 = new boolean[gp.maxMap][gp.npc[1].length];
+            ds.mapNPCDoneQuest2 = new boolean[gp.maxMap][gp.npc[1].length];;
+            ds.mapNPCReceivedReward = new boolean [gp.maxMap][gp.npc[1].length];
+            ds.mapNPCPickedQuestObject = new boolean[gp.maxMap][gp.npc[1].length];
+            ds.mapNPCStandby = new boolean[gp.maxMap][gp.npc[1].length];
+            ds.mapNPCSleep = new boolean[gp.maxMap][gp.npc[1].length];
+
+            for (int mapNum = 0; mapNum < gp.maxMap; mapNum++){
+                for (int i = 0; i < gp.npc[1].length; i++){
+
+                    if (gp.npc[mapNum][i] == null){
+                        ds.mapNPCNames[mapNum][i] = "NA";
+                    }
+                    else{
+                        ds.mapNPCNames[mapNum][i] = gp.npc[mapNum][i].name;
+                        ds.mapNPCWorldX[mapNum][i] = gp.npc[mapNum][i].worldX;
+                        ds.mapNPCWorldY[mapNum][i] = gp.npc[mapNum][i].worldY;
+                        if (gp.npc[mapNum][i].reward != null){
+                            ds.mapNPCRewardName[mapNum][i] = gp.npc[mapNum][i].reward.name;
+                        }
+                        ds.mapNPCDoneQuest1[mapNum][i] = gp.npc[mapNum][i].doneQuest1;
+                        ds.mapNPCDoneQuest2[mapNum][i] = gp.npc[mapNum][i].doneQuest2;
+                        ds.mapNPCReceivedReward[mapNum][i] = gp.npc[mapNum][i].receivedReward;
+                        ds.mapNPCPickedQuestObject[mapNum][i] = gp.npc[mapNum][i].pickedQuestObject;
+                        ds.mapNPCStandby[mapNum][i] = gp.npc[mapNum][i].standby;
+                        ds.mapNPCSleep[mapNum][i] = gp.npc[mapNum][i].sleep;
+                    }
+
+                }
+            }
+        
             // Write DataStorage object
             oos.writeObject(ds);
 
@@ -127,13 +165,38 @@ public class SaveLoad {
                             gp.obj[mapNum][i].setLoot(gp.eGenerator.getObject(ds.mapObjectLootName[mapNum][i]));   
                         }
                         gp.obj[mapNum][i].opened = ds.mapObjectOpened[mapNum][i];
+                        gp.obj[mapNum][i].collision = ds.mapObjectCollision[mapNum][i];
                         if (gp.obj[mapNum][i].opened == true){
                             gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image2;
                         }
                     }
-
                 }
             }
+
+            // NPCs on Map
+            for (int mapNum = 0; mapNum < gp.maxMap; mapNum++){
+                for (int i = 0; i < gp.npc[1].length; i++){
+
+                    if (ds.mapNPCNames[mapNum][i].equals("NA")){
+                        gp.npc[mapNum][i] = null;
+                    }
+                    else{
+                        gp.npc[mapNum][i].worldX = ds.mapNPCWorldX[mapNum][i];
+                        gp.npc[mapNum][i].worldY = ds.mapNPCWorldY[mapNum][i];
+                        if (ds.mapNPCRewardName[mapNum][i] != null){
+                            gp.npc[mapNum][i].setReward(gp.eGenerator.getObject(ds.mapNPCRewardName[mapNum][i]));   
+                        }
+                        gp.npc[mapNum][i].doneQuest1 = ds.mapNPCDoneQuest1[mapNum][i];
+                        gp.npc[mapNum][i].doneQuest2 = ds.mapNPCDoneQuest2[mapNum][i];
+                        gp.npc[mapNum][i].receivedReward = ds.mapNPCReceivedReward[mapNum][i];
+                        gp.npc[mapNum][i].pickedQuestObject = ds.mapNPCPickedQuestObject[mapNum][i];
+                        gp.npc[mapNum][i].standby = ds.mapNPCStandby[mapNum][i];
+                        gp.npc[mapNum][i].sleep = ds.mapNPCSleep[mapNum][i];
+                    }
+                }
+            }
+
+
 
         } catch (Exception e) {
             System.out.println("Load Exception!");

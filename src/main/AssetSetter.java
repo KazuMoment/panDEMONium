@@ -1,13 +1,21 @@
 package main;
 
+import enemy.Enemy_DemonLord;
 import enemy.Enemy_GreenSlime;
 import enemy.Enemy_Monk;
 import enemy.Enemy_Orc;
 import enemy.Enemy_RockSlime;
+import entity.NPC_BJ;
+import entity.NPC_Cally;
 import entity.NPC_Farid;
+import entity.NPC_Fischer;
+import entity.NPC_Hal;
+import entity.NPC_Holly;
+import entity.NPC_JB;
 import entity.NPC_Kane;
 import entity.NPC_Piyaye;
 import entity.NPC_Reul;
+import entity.NPC_Wally;
 import object.Object_Axe_Normal;
 import object.Object_Boat;
 import object.Object_Bonfire;
@@ -20,9 +28,7 @@ import object.Object_Lantern;
 import object.Object_Lever;
 import object.Object_Mana_Potion_Small;
 import object.Object_Shield_Tinvaak;
-import object.Object_Shield_Victoria;
 import object.Object_Shield_Wood;
-import object.Object_Slimeball;
 import object.Object_Sword_Tinvaak;
 import object.Object_Tent;
 import tile_interactive.IT_DryTree;
@@ -146,8 +152,7 @@ public class AssetSetter {
 		gp.obj[mapNumber][i].worldY = gp.tileSize * 4;
 		i++;
 
-		gp.obj[mapNumber][i] = new Object_Chest(gp);
-		gp.obj[mapNumber][i].setLoot(new Object_Health_Potion_Small(gp));
+		gp.obj[mapNumber][i] = new Object_Lantern(gp);
 		gp.obj[mapNumber][i].worldX = gp.tileSize * 14;
 		gp.obj[mapNumber][i].worldY = gp.tileSize * 13;
 		i++;
@@ -173,21 +178,21 @@ public class AssetSetter {
         int mapNumber = 0;
         int i = 0;
 
-        gp.npc[mapNumber][i] = new NPC_Reul(gp);
-        gp.npc[mapNumber][i].worldX = gp.tileSize * 25;
-        gp.npc[mapNumber][i].worldY = gp.tileSize * 26;
-		gp.npc[mapNumber][i].setReward(new Object_Health_Potion_Small(gp));
-        i++;
+        // gp.npc[mapNumber][i] = new NPC_Reul(gp);
+        // gp.npc[mapNumber][i].worldX = gp.tileSize * 25;
+        // gp.npc[mapNumber][i].worldY = gp.tileSize * 26;
+		// gp.npc[mapNumber][i].setReward(new Object_Health_Potion_Small(gp));
+        // i++;
 
 		gp.npc[mapNumber][i] = new NPC_Piyaye(gp);
         gp.npc[mapNumber][i].worldX = gp.tileSize * 10;
         gp.npc[mapNumber][i].worldY = gp.tileSize * 12;
         i++;
 
-        // gp.npc[mapNumber][i] = new NPC_Kane(gp);
-        // gp.npc[mapNumber][i].worldX = gp.tileSize  *  19;
-        // gp.npc[mapNumber][i].worldY = gp.tileSize  *  21;
-        // i++;
+        gp.npc[mapNumber][i] = new NPC_Kane(gp);
+        gp.npc[mapNumber][i].worldX = gp.tileSize  *  23;
+        gp.npc[mapNumber][i].worldY = gp.tileSize  *  27;
+        i++;
 
        
         mapNumber = 2;
@@ -195,6 +200,51 @@ public class AssetSetter {
         gp.npc[mapNumber][i] = new NPC_Farid(gp);
         gp.npc[mapNumber][i].worldX = gp.tileSize * 25;
         gp.npc[mapNumber][i].worldY = gp.tileSize * 24;
+		i++;
+
+		mapNumber = 3;
+		i=0;
+		gp.npc[mapNumber][i] = new NPC_Cally(gp);
+		gp.npc[mapNumber][i].worldX = gp.tileSize*32;
+		gp.npc[mapNumber][i].worldY = gp.tileSize*37;
+		i++;
+		
+		mapNumber = 4;
+		i = 0;
+		gp.npc[mapNumber][i] = new NPC_Fischer(gp);
+		gp.npc[mapNumber][i].worldX = gp.tileSize*23;
+		gp.npc[mapNumber][i].worldY = gp.tileSize*26;
+		i++;
+		
+		mapNumber = 5;
+		i = 0;
+		gp.npc[mapNumber][i] = new NPC_Holly(gp);
+		gp.npc[mapNumber][i].worldX = gp.tileSize*30;
+		gp.npc[mapNumber][i].worldY = gp.tileSize*28;
+		i++;
+		
+		mapNumber = 6;
+		i = 0;
+		gp.npc[mapNumber][i] = new NPC_Hal(gp);
+		gp.npc[mapNumber][i].worldX = gp.tileSize*30;
+		gp.npc[mapNumber][i].worldY = gp.tileSize*28;
+		i++;
+
+		gp.npc[mapNumber][i] = new NPC_JB(gp);
+		gp.npc[mapNumber][i].worldX = gp.tileSize*20;
+		gp.npc[mapNumber][i].worldY = gp.tileSize*20;
+		i++;
+		
+		mapNumber = 7;
+		i = 0;
+		gp.npc[mapNumber][i] = new NPC_Wally(gp);
+		gp.npc[mapNumber][i].worldX = gp.tileSize*30;
+		gp.npc[mapNumber][i].worldY = gp.tileSize*28;
+		i++;
+		
+		gp.npc[mapNumber][i] = new NPC_BJ(gp);
+		gp.npc[mapNumber][i].worldX = gp.tileSize*20;
+		gp.npc[mapNumber][i].worldY = gp.tileSize*20;
 		i++;
 
 
@@ -231,6 +281,11 @@ public class AssetSetter {
 		i++;
 
 		gp.enemy[mapNumber][i] = new Enemy_Orc(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 28;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 16;
+		i++;
+
+		gp.enemy[mapNumber][i] = new Enemy_DemonLord(gp);
 		gp.enemy[mapNumber][i].worldX = gp.tileSize * 28;
 		gp.enemy[mapNumber][i].worldY = gp.tileSize * 16;
 		i++;

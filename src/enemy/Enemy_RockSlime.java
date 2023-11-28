@@ -8,7 +8,6 @@ import object.Object_Gold;
 import object.Object_Heart;
 import object.Object_Lavaball;
 import object.Object_ManaCrystal;
-import object.Object_Slimeball;
 
 public class Enemy_RockSlime extends Entity{
 

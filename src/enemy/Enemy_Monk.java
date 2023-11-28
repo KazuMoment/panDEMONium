@@ -27,7 +27,7 @@ public class Enemy_Monk extends Entity {
 		speed = defaultSpeed;
 		maxHP = 50;
 		HP = maxHP;
-		attack = 6;
+		attack = 4;
 		defense = 3;
 		EXP = 50;
 		knockbackPower = 8;

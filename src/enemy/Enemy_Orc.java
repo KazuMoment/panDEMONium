@@ -1,7 +1,5 @@
 package enemy;
 
-import java.util.Random;
-
 import entity.Entity;
 import main.GamePanel;
 import object.Object_Paddle;

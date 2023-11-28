@@ -113,8 +113,14 @@ public class GamePanel extends JPanel implements Runnable{
     public final int tutorial_forest = 100;
     public final int tinvaak_village = 101;
     public final int tinvaak_dungeon = 102;
+    public final int tinvaak_townhall = 103;
+    public final int tinvaak_house1 = 104;
+    public final int tinvaak_house2 = 105;
+    public final int tinvaak_house3 = 106;
+    
     public final int merchant_tent = 103;
     public final int victoria_town = 104;
+
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -410,7 +416,7 @@ public class GamePanel extends JPanel implements Runnable{
             switch(currentLevel){
                 case tutorial_forest: playMusic(22); break;
                 case tinvaak_village: playMusic(20); break;
-                case tinvaak_dungeon: playMusic(21); break;
+                case tinvaak_dungeon: playMusic(25); break;
                 case merchant_tent: playMusic(23); break;
                 case victoria_town: playMusic(20); break;
             }

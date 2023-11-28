@@ -29,6 +29,20 @@ public class DataStorage implements Serializable{
     int mapObjectWorldY[][];
     String mapObjectLootName[][];
     boolean mapObjectOpened[][];
+    boolean mapObjectCollision[][];
+
+    // NPC on Map
+    String mapNPCNames[][];
+    int mapNPCWorldX[][];
+    int mapNPCWorldY[][];
+    String mapNPCRewardName[][];
+    boolean mapNPCDoneQuest1[][];
+    boolean mapNPCDoneQuest2[][];
+    boolean mapNPCReceivedReward[][];
+    boolean mapNPCPickedQuestObject[][];
+    boolean mapNPCStandby[][];
+    boolean mapNPCSleep[][];
+
 
 
     

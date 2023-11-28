@@ -2,8 +2,6 @@ package main;
 
 import data.Progress;
 import entity.Entity;
-import entity.NPC_Piyaye;
-import entity.NPC_Reul;
 
 public class EventHandler {
 
@@ -67,14 +65,38 @@ public class EventHandler {
         }
 
         if (canTriggerEvent == true){
+
+            // Areas
+
+            // Tutorial Forest
             if (hit(0, 11, 32, "up") == true){teleport(1, 43, 41, gp.dungeon, gp.tinvaak_dungeon);} // dungeon 
             else if (hit(1, 45, 42, "right") == true){teleport(0, 11, 32, gp.outdoor, gp.tutorial_forest);} // back to forest 
             else if (hit(0, 40, 12, "up") == true){teleport(2, 25, 30, gp.outdoor, gp.merchant_tent);} // merchant tent 
-            else if (hit (2, 25, 26, "up") == true){speak(gp.npc[2][0]);} // talk to merchant interacting with table
             else if (hit(2, 25, 30, "down") == true){teleport(0, 40, 12, gp.outdoor, gp.tutorial_forest);} // back to forest 
+            
+            // Tinvaak Village
             else if (hit(0, 34, 39, "down") == true){teleport(3, 31, 42, gp.outdoor, gp.tinvaak_village);} // tinvaak village
             else if (hit(3, 31, 42, "down") == true){teleport(0, 34, 38, gp.outdoor, gp.tutorial_forest);} // back to forest 
+            else if (hit(3, 15, 21, "up") == true){teleport(4, 23, 29, gp.indoor, gp.tinvaak_townhall);} // tinvaak town hall
+            else if (hit (4, 23, 30, "down") == true){teleport(3, 15, 21, gp.outdoor, gp.tinvaak_village);} // village 1
+            else if (hit (3, 19, 32, "any") == true){teleport(5, 30, 31, gp.indoor, gp.tinvaak_house1);} // house 1
+            else if (hit (5, 30, 32, "any") == true){teleport(3, 19, 33, gp.outdoor, gp.tinvaak_village);} // to village 1
+            else if (hit (3, 12, 34, "any") == true){teleport(6, 30, 31, gp.indoor, gp.tinvaak_house2);} // to house 2
+			else if (hit (6, 30, 32, "any") == true){teleport(3, 12, 35, gp.outdoor, gp.tinvaak_village);} // to village 1
+			else if (hit (3, 22, 37,"any") == true){teleport(7, 30, 31, gp.indoor, gp.tinvaak_house3);} // to house 3
+			else if (hit (7, 30, 32,"any") == true){teleport(3, 22, 38, gp.outdoor, gp.tinvaak_village);} // to village 1
+
+
+            // Cutscenes
             else if (hit(1, 35, 22, "any") == true){demonMonk();} // Devil Monk Cutscene
+
+            // Miscellaneous
+            else if (hit (2, 25, 26, "up") == true){speak(gp.npc[gp.currentMap][0]);} // talk to merchant interacting with table
+            else if (hit (4, 23, 28,"up") == true){speak(gp.npc[gp.currentMap][0]);} // talk to the mayor 
+            else if (hit (5, 30, 30,"up") == true){speak(gp.npc[gp.currentMap][0]);} // speak to tinvaak homeowner 1
+            else if (hit (6, 30, 30,"up") == true){speak(gp.npc[gp.currentMap][0]);} // speak to homeowner 2
+            else if (hit (7, 30, 30,"up") == true){speak(gp.npc[gp.currentMap][0]);}	//speak to homeowner 3
+
         }
     
 

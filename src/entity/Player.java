@@ -12,8 +12,6 @@ import object.Object_Lantern;
 import object.Object_Paddle;
 import object.Object_Fireball;
 import object.Object_Health_Potion_Small;
-import object.Object_Shield_Tinvaak;
-import object.Object_Sword_Tinvaak;
 
 
 public class Player extends Entity{
