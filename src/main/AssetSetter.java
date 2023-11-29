@@ -178,11 +178,11 @@ public class AssetSetter {
         int mapNumber = 0;
         int i = 0;
 
-        // gp.npc[mapNumber][i] = new NPC_Reul(gp);
-        // gp.npc[mapNumber][i].worldX = gp.tileSize * 25;
-        // gp.npc[mapNumber][i].worldY = gp.tileSize * 26;
-		// gp.npc[mapNumber][i].setReward(new Object_Health_Potion_Small(gp));
-        // i++;
+        gp.npc[mapNumber][i] = new NPC_Reul(gp);
+        gp.npc[mapNumber][i].worldX = gp.tileSize * 25;
+        gp.npc[mapNumber][i].worldY = gp.tileSize * 26;
+		gp.npc[mapNumber][i].setReward(new Object_Health_Potion_Small(gp));
+        i++;
 
 		gp.npc[mapNumber][i] = new NPC_Piyaye(gp);
         gp.npc[mapNumber][i].worldX = gp.tileSize * 10;
@@ -205,8 +205,8 @@ public class AssetSetter {
 		mapNumber = 3;
 		i=0;
 		gp.npc[mapNumber][i] = new NPC_Cally(gp);
-		gp.npc[mapNumber][i].worldX = gp.tileSize*32;
-		gp.npc[mapNumber][i].worldY = gp.tileSize*37;
+		gp.npc[mapNumber][i].worldX = gp.tileSize*30;
+		gp.npc[mapNumber][i].worldY = gp.tileSize*36;
 		i++;
 		
 		mapNumber = 4;

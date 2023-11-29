@@ -50,26 +50,26 @@ public class Enemy_DemonLord extends Entity {
 	
 	public void getImage(){
 		int i = 3;
-		up1 = setup("/enemy/demon_knight", gp.tileSize*i, gp.tileSize*i);
-		up2 = setup("/enemy/demon_knight", gp.tileSize*i, gp.tileSize*i);
-		down1 = setup("/enemy/demon_knight", gp.tileSize*i, gp.tileSize*i);
-		down2 = setup("/enemy/demon_knight", gp.tileSize*i, gp.tileSize*i);
-		left1 = setup("/enemy/demon_knight", gp.tileSize*i, gp.tileSize*i);
-		left2 = setup("/enemy/demon_knight", gp.tileSize*i, gp.tileSize*i);
-		right1 = setup("/enemy/demon_knight", gp.tileSize*i, gp.tileSize*i);
-		right2 = setup("/enemy/demon_knight", gp.tileSize*i, gp.tileSize*i);
+		up1 = setup("/enemy/demonlord_up_1", gp.tileSize*i, gp.tileSize*i);
+		up2 = setup("/enemy/demonlord_up_2", gp.tileSize*i, gp.tileSize*i);
+		down1 = setup("/enemy/demonlord_down_1", gp.tileSize*i, gp.tileSize*i);
+		down2 = setup("/enemy/demonlord_down_2", gp.tileSize*i, gp.tileSize*i);
+		left1 = setup("/enemy/demonlord_left_1", gp.tileSize*i, gp.tileSize*i);
+		left2 = setup("/enemy/demonlord_left_2", gp.tileSize*i, gp.tileSize*i);
+		right1 = setup("/enemy/demonlord_right_1", gp.tileSize*i, gp.tileSize*i);
+		right2 = setup("/enemy/demonlord_right_2", gp.tileSize*i, gp.tileSize*i);
 	}
 
 	public void getAttackImage(){
 		int i = 3;
-		attackUp1 = setup("/enemy/demon_knight", gp.tileSize*i, gp.tileSize*i*2);
-		attackUp2 = setup("/enemy/demon_knight", gp.tileSize*i, gp.tileSize*i*2);
-		attackDown1 = setup("/enemy/demon_knight", gp.tileSize*i, gp.tileSize*i*2);
-		attackDown2 = setup("/enemy/demon_knight", gp.tileSize*i, gp.tileSize*i*2);
-		attackLeft1 = setup("/enemy/demon_knight", gp.tileSize*i*2, gp.tileSize*i);
-		attackLeft2 = setup("/enemy/demon_knight", gp.tileSize*i*2, gp.tileSize*i);
-		attackRight1 = setup("/enemy/demon_knight", gp.tileSize*i*2, gp.tileSize*i);
-		attackRight2 = setup("/enemy/demon_knight", gp.tileSize*i*2, gp.tileSize*i);
+		attackUp1 = setup("/enemy/demonlord_attack_up_1", gp.tileSize*i, gp.tileSize*i*2);
+		attackUp2 = setup("/enemy/demonlord_attack_up_2", gp.tileSize*i, gp.tileSize*i*2);
+		attackDown1 = setup("/enemy/demonlord_attack_down_1", gp.tileSize*i, gp.tileSize*i*2);
+		attackDown2 = setup("/enemy/demonlord_attack_down_2", gp.tileSize*i, gp.tileSize*i*2);
+		attackLeft1 = setup("/enemy/demonlord_attack_left_1", gp.tileSize*i*2, gp.tileSize*i);
+		attackLeft2 = setup("/enemy/demonlord_attack_left_2", gp.tileSize*i*2, gp.tileSize*i);
+		attackRight1 = setup("/enemy/demonlord_attack_right_1", gp.tileSize*i*2, gp.tileSize*i);
+		attackRight2 = setup("/enemy/demonlord_attack_right_2", gp.tileSize*i*2, gp.tileSize*i);
 	}
 
 	public void setDialogue(){

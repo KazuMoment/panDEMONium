@@ -16,6 +16,7 @@ public class NPC_Holly extends Entity {
         solidArea = new Rectangle(8,16,32,32);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+        dialogueSet = -1;
         
         getImage();
         setDialogue();

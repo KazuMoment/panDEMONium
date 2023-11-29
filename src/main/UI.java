@@ -28,7 +28,7 @@ public class UI {
     public boolean gameFinished = false;
     public String currentDialogue = " ";
     public int commandNumber = 0;
-    public int titleScreenState = 0; //0 is the first screen
+    public int titleScreenState = 0; // 0 is the first screen
     public int playerSlotColumn = 0;
     public int playerSlotRow = 0;
     public int npcSlotColumn = 0;

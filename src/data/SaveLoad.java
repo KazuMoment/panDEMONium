@@ -181,6 +181,7 @@ public class SaveLoad {
                         gp.npc[mapNum][i] = null;
                     }
                     else{
+                        gp.npc[mapNum][i] = gp.eGenerator.getNPC(ds.mapNPCNames[mapNum][i]);
                         gp.npc[mapNum][i].worldX = ds.mapNPCWorldX[mapNum][i];
                         gp.npc[mapNum][i].worldY = ds.mapNPCWorldY[mapNum][i];
                         if (ds.mapNPCRewardName[mapNum][i] != null){

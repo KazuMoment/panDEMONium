@@ -17,6 +17,7 @@ public class NPC_JB extends Entity {
         solidArea = new Rectangle(8,16,32,32);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+        dialogueSet = -1;
 
         
         getImage();

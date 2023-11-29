@@ -47,17 +47,21 @@ public class NPC_Cally extends Entity {
 	}
 
 	public void setMovement(){
-		int goalCol = 16;
-		int goalRow = 22;
-
-		if (onPath == true){
-			searchPath(goalCol, goalRow);
+		if (introDone == false){
+			searchPath(getGoalColumn(gp.player), getGoalRow(gp.player));
+			if (gp.collisionChecker.checkPlayer(this) == true){
+				this.speak();
+			} 
 		}
+		else { 
+			goalReached = false;
+			int goalCol = 15;
+			int goalRow = 22;
+			searchPath(goalCol, goalRow);
 
-		else {
-			if (standby == true){
+			if (goalReached == true){
 				direction = "down";
-				speed = 0;
+				sleep = true;
 			}
 		}
 	}
@@ -65,9 +69,6 @@ public class NPC_Cally extends Entity {
 	public void speak(){
 		facePlayer();
 		startDialogue(this, dialogueSet);
-		onPath = true;
-		standby = false;
-		speed = defaultSpeed;
 		
 		if (introDone == true) {
 			dialogueSet = 1;
