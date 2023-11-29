@@ -97,6 +97,9 @@ public class KeyHandler implements KeyListener{
                 }
                 if (code == KeyEvent.VK_ENTER){
                     if (gp.ui.commandNumber == 0){
+                        gp.toSQL.SessionID = (gp.toSQL.getLastSessionID() + 1);
+                        gp.playerTime.resetTimer();
+                        gp.playerTime.startTimer();
                         gp.gameState = gp.playState;
                         gp.checkMusic();
                     }
