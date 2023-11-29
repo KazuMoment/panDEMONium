@@ -23,6 +23,8 @@ import tile.Map;
 import tile.TileManager;
 import tile_interactive.InteractiveTile;
 
+import data.PlayerTime;
+
 public class GamePanel extends JPanel implements Runnable{
     
     // Screen Settings
@@ -55,6 +57,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     // System
     public JDBC toSQL = new JDBC();
+    public PlayerTime playerTime = new PlayerTime();
     public TileManager tileM = new TileManager(this); 
     public KeyHandler keyH = new KeyHandler(this);
     public SaveLoad saveLoad = new SaveLoad(this);
