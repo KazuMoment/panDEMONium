@@ -86,12 +86,12 @@ public class KeyHandler implements KeyListener{
             if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP){
                 gp.ui.commandNumber--;
                 if (gp.ui.commandNumber < 0){
-                    gp.ui.commandNumber = 2;
+                    gp.ui.commandNumber = 3;
                 }
                 }
                 if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN){
                     gp.ui.commandNumber++;
-                    if (gp.ui.commandNumber > 2){
+                    if (gp.ui.commandNumber > 3){
                         gp.ui.commandNumber = 0;
                     }
                 }
@@ -109,10 +109,14 @@ public class KeyHandler implements KeyListener{
                         gp.checkMusic();
                     }
                     if (gp.ui.commandNumber == 2){
-                        System.exit(0);
+                        gp.ui.titleScreenState = 1;
+                    }
+                    if (gp.ui.commandNumber == 3){
+                         System.exit(0);
                     }
                 } 
-            }
+        }
+
     }
 
     public void playState(int code){
