@@ -2,9 +2,6 @@ package main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Timer;
-
-import data.PlayerTime;
 
 public class KeyHandler implements KeyListener{
 
@@ -14,6 +11,7 @@ public class KeyHandler implements KeyListener{
 
     //Debug 
     boolean showDebugMenu = false;
+    public boolean godModeOn = false;
 
     public KeyHandler(GamePanel gp){
         this.gp = gp;
@@ -99,9 +97,6 @@ public class KeyHandler implements KeyListener{
                 }
                 if (code == KeyEvent.VK_ENTER){
                     if (gp.ui.commandNumber == 0){
-                        gp.toSQL.SessionID = (gp.toSQL.getLastSessionID() + 1);
-                        gp.playerTime.resetTimer();
-                        gp.playerTime.startTimer();
                         gp.gameState = gp.playState;
                         gp.checkMusic();
                     }

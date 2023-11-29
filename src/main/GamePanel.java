@@ -15,7 +15,6 @@ import java.util.Comparator;
 import javax.swing.JPanel;
 
 import ai.Pathfinder;
-import data.PlayerTime;
 import data.SaveLoad;
 import entity.Entity;
 import entity.Player;
@@ -56,7 +55,6 @@ public class GamePanel extends JPanel implements Runnable{
 
     // System
     public JDBC toSQL = new JDBC();
-    public PlayerTime playerTime = new PlayerTime();
     public TileManager tileM = new TileManager(this); 
     public KeyHandler keyH = new KeyHandler(this);
     public SaveLoad saveLoad = new SaveLoad(this);
@@ -69,6 +67,7 @@ public class GamePanel extends JPanel implements Runnable{
     Config config = new Config(this);
     public Pathfinder pFinder = new Pathfinder(this);
     EnvironmentManager eManager = new EnvironmentManager(this);
+    public CutsceneManager csManager = new CutsceneManager(this);
     Map map = new Map(this);
     
     public EntityGenerator eGenerator = new EntityGenerator(this);
@@ -98,6 +97,10 @@ public class GamePanel extends JPanel implements Runnable{
     public final int sleepState = 9;
     public final int mapState = 10;
     public final int saveState = 11;
+    public final int cutsceneState = 12;
+
+    // Others 
+    public boolean bossBattleOn = false;
 
     // Area
     public int currentArea;
@@ -112,8 +115,12 @@ public class GamePanel extends JPanel implements Runnable{
     public final int tutorial_forest = 100;
     public final int tinvaak_village = 101;
     public final int tinvaak_dungeon = 102;
-    public final int merchant_tent = 103;
-    public final int victoria_town = 104;
+    public final int tinvaak_townhall = 103;
+    public final int tinvaak_house1 = 104;
+    public final int tinvaak_house2 = 105;
+    public final int tinvaak_house3 = 106;
+    public final int merchant_tent = 107;
+    public final int victoria_town = 108;
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
