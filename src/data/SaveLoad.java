@@ -113,13 +113,26 @@ public class SaveLoad {
             oos.writeObject(ds);
 
             //Update and Insert to Database
+            String weaponName;
+            String shieldName;
+            try {
+                shieldName = gp.player.currentShield.name;
+            } catch (Exception e) {
+                shieldName = "None";
+            }
+            try {
+                weaponName = gp.player.currentWeapon.name;
+            } catch (Exception e) {
+                weaponName = "None";
+            }
+            //Update and Insert to Database
             int lastSessionID = gp.toSQL.getLastSessionID();
             System.out.println("last sessionID = " + lastSessionID);
             if (gp.toSQL.SessionID == lastSessionID){
                 System.out.println("updating");
                 gp.toSQL.toDatabase("update playerdata set level = " + ds.level + ", maxhp = " + ds.maxHP + ", hp = " + ds.HP + ", maxmana = " +
                                     ds.maxMP + ", mana = " + ds.MP + ", strength = " + ds.strength + ", dexterity = " + ds.dexterity + ", gold = " + 
-                                    ds.gold + ", weapon = \"" + gp.player.currentWeapon + "\", shield = \"" + gp.player.currentShield + "\", playtime = \"" + 
+                                    ds.gold + ", weapon = \"" + weaponName + "\", shield = \"" + shieldName + "\", playtime = \"" + 
                                     gp.playerTime.formatDuration(gp.playerTime.seconds) + "\" where sessionID = " + gp.toSQL.SessionID);
                 gp.playerTime.saveTimer();
                 System.out.println(gp.playerTime.formatDuration(gp.playerTime.seconds));
@@ -128,7 +141,7 @@ public class SaveLoad {
                 System.out.println("new entry");
                 gp.toSQL.toDatabase("insert into playerdata values(" + (lastSessionID + 1) + ", \" weaptest\"," + ds.level + "," + ds.maxHP + 
                             "," + ds.HP + "," + ds.maxMP + "," + ds.MP + "," + ds.strength + "," + 
-                            ds.dexterity + "," + gp.player.gold + ",\"" + gp.player.currentWeapon + "\",\"" + gp.player.currentShield + "\",\"" + 
+                            ds.dexterity + "," + gp.player.gold + ",\"" + weaponName + "\",\"" + shieldName + "\",\"" + 
                             gp.playerTime.formatDuration(gp.playerTime.seconds) + "\")");
                 gp.playerTime.saveTimer();
                 System.out.println(gp.playerTime.formatDuration(gp.playerTime.seconds));
