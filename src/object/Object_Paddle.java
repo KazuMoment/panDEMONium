@@ -35,10 +35,7 @@ public class Object_Paddle extends Entity{
 			startDialogue(this, 0);
 			questOver();
 			gp.playSoundEffect(4);
-			int index = gp.player.searchItemInInventory(Object_Paddle.objectName);
-			if (index != 999){
-				gp.player.inventory.remove(index);
-			}
+		
 			return true;
 		}
 

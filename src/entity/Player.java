@@ -544,8 +544,9 @@ public class Player extends Entity{
     
 
     public void checkLevelUp(){
-        if (EXP >= nextLevelEXP){
+        while (EXP >= nextLevelEXP){
             level++;
+            EXP -= nextLevelEXP;
             nextLevelEXP *= 1.5;
             maxHP += 2;
             maxMP += 1;
@@ -558,7 +559,6 @@ public class Player extends Entity{
             gp.playSoundEffect(9);
             setDialogue();
             startDialogue(this, 0);
-            gp.player.EXP = 0;
         }
     }
 
