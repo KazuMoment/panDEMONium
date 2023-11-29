@@ -6,6 +6,7 @@ import enemy.Enemy_Monk;
 import enemy.Enemy_Necromancer;
 import enemy.Enemy_Orc;
 import enemy.Enemy_RockSlime;
+import enemy.Enemy_Skeleton;
 import entity.NPC_BJ;
 import entity.NPC_Cally;
 import entity.NPC_Farid;
@@ -190,10 +191,6 @@ public class AssetSetter {
         gp.npc[mapNumber][i].worldY = gp.tileSize * 12;
         i++;
 
-        gp.npc[mapNumber][i] = new NPC_Kane(gp);
-        gp.npc[mapNumber][i].worldX = gp.tileSize  *  23;
-        gp.npc[mapNumber][i].worldY = gp.tileSize  *  27;
-        i++;
 
        
         mapNumber = 2;
@@ -286,11 +283,6 @@ public class AssetSetter {
 		gp.enemy[mapNumber][i].worldY = gp.tileSize * 16;
 		i++;
 
-		gp.enemy[mapNumber][i] = new Enemy_DemonLord(gp);
-		gp.enemy[mapNumber][i].worldX = gp.tileSize * 28;
-		gp.enemy[mapNumber][i].worldY = gp.tileSize * 16;
-		i++;
-
 		mapNumber = 1;
 		i = 0;
 		
@@ -307,6 +299,51 @@ public class AssetSetter {
 		gp.enemy[mapNumber][i] = new Enemy_RockSlime(gp);
 		gp.enemy[mapNumber][i].worldX = gp.tileSize * 25;
 		gp.enemy[mapNumber][i].worldY = gp.tileSize * 40;
+		i++;
+
+		gp.enemy[mapNumber][i] = new Enemy_RockSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 11;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 32;
+		i++;
+
+		gp.enemy[mapNumber][i] = new Enemy_RockSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 14;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 32;
+		i++;
+
+		gp.enemy[mapNumber][i] = new Enemy_RockSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 13;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 29;
+		i++;
+
+		gp.enemy[mapNumber][i] = new Enemy_RockSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 25;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 40;
+		i++;
+
+		gp.enemy[mapNumber][i] = new Enemy_RockSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 13;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 23;
+		i++;
+
+		gp.enemy[mapNumber][i] = new Enemy_RockSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 14;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 14;
+		i++;
+
+		gp.enemy[mapNumber][i] = new Enemy_RockSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 9;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 9;
+		i++;
+
+		gp.enemy[mapNumber][i] = new Enemy_RockSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 29;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 11;
+		i++;
+
+		gp.enemy[mapNumber][i] = new Enemy_RockSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 33;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 11;
 		i++;
 
 		gp.enemy[mapNumber][i] = new Enemy_Monk(gp);

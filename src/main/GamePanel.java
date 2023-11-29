@@ -72,7 +72,6 @@ public class GamePanel extends JPanel implements Runnable{
     EnvironmentManager eManager = new EnvironmentManager(this);
     public CutsceneManager csManager = new CutsceneManager(this);
     Map map = new Map(this);
-    
     public EntityGenerator eGenerator = new EntityGenerator(this);
     Thread gameThread; 
    
@@ -80,7 +79,7 @@ public class GamePanel extends JPanel implements Runnable{
     public Player player = new Player(this, keyH);
     public Entity obj[][] = new Entity [maxMap][20];
     public Entity npc[][] = new Entity[maxMap][10];
-    public Entity enemy[][] = new Entity[maxMap][20];
+    public Entity enemy[][] = new Entity[maxMap][200];
     public InteractiveTile iTile[][] = new InteractiveTile[maxMap][50];
     public Entity projectile[][]  = new Entity[maxMap][20];
     public ArrayList<Entity> particleList = new ArrayList<>();
@@ -123,7 +122,12 @@ public class GamePanel extends JPanel implements Runnable{
     public final int tinvaak_house2 = 105;
     public final int tinvaak_house3 = 106;
     public final int merchant_tent = 107;
-    public final int victoria_town = 108;
+    public final int vorlorn_village = 108;
+    public final int vorlorn_house1 = 109;
+    public final int vorlorn_house2 = 110;
+    public final int vorlorn_house3 = 111;
+    public final int vorlorn_townhall = 112;
+    public final int vorlorn_dungeon = 113;
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -135,9 +139,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void setupGame(){
 
-        currentMap = 9;
-
-        aSetter.setObject();
+        aSetter.setObject();    
         aSetter.setNPC();
         aSetter.setEnemy();
         aSetter.setInteractiveTile();
@@ -158,6 +160,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void resetGame(boolean restart){
 
+        removeTempEntity();
         player.setDefaultPosition();
         player.restoreStatus();
         player.resetCounter();
@@ -365,6 +368,9 @@ public class GamePanel extends JPanel implements Runnable{
                 // Minimap
                 map.drawMiniMap(g2);
 
+                // Cutscene
+                csManager.draw(g2);
+
                 // Draw UI
                 ui.draw(g2);
                 
@@ -411,10 +417,18 @@ public class GamePanel extends JPanel implements Runnable{
             stopMusic();
             switch(currentLevel){
                 case tutorial_forest: playMusic(22); break;
-                case tinvaak_village: playMusic(20); break;
-                case tinvaak_dungeon: playMusic(21); break;
+                case tinvaak_village: 
+                case tinvaak_house1:
+                case tinvaak_house2:
+                case tinvaak_house3:
+                case tinvaak_townhall: playMusic(26); break;
+                case tinvaak_dungeon: playMusic(25); break;
                 case merchant_tent: playMusic(23); break;
-                case victoria_town: playMusic(20); break;
+                case vorlorn_village:
+                case vorlorn_house1:
+                case vorlorn_house2: 
+                case vorlorn_house3:
+                case vorlorn_townhall: playMusic(26); break;
             }
         }
 
@@ -426,6 +440,27 @@ public class GamePanel extends JPanel implements Runnable{
             }
             currentArea = nextArea; 
             aSetter.setEnemy();
+        }
+
+        public void removeTempEntity(){
+            // Remove Objects
+            for (int mapNum = 0; mapNum < maxMap; mapNum++){
+                for (int i = 0; i < obj[1].length; i++){
+                    if (obj[mapNum][i] != null && obj[mapNum][i].temp == true){
+                        obj[mapNum][i] = null;
+                    }
+                }
+            }
+
+            // Remove Enemies
+            for (int mapNum = 0; mapNum < maxMap; mapNum++){
+                for (int i = 0; i < enemy[1].length; i++){
+                    if (enemy[mapNum][i] != null && enemy[mapNum][i].temp == true){
+                        enemy[mapNum][i] = null;
+                    }
+                }
+            }
+
         }
 
 }

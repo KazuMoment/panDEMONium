@@ -106,6 +106,7 @@ public class Player extends Entity{
         guarding = false;
         knockback = false;
         lightUpdated = true;
+        gp.bossBattleOn = false;
     }
 
     public void setItems(){

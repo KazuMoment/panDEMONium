@@ -1,5 +1,7 @@
 package enemy;
 
+import java.util.Random;
+
 import entity.Entity;
 import main.GamePanel;
 import object.Object_Heart;
@@ -36,7 +38,6 @@ public class Enemy_Necromancer extends Entity{
         getImage();
     }
 
-
     public void getImage(){
     	
     	int i = 2;
@@ -67,6 +68,7 @@ public class Enemy_Necromancer extends Entity{
 
         if (getTileDistance(gp.player) > 3 && getTileDistance(gp.player) < 10){
             shootRate(200, 30);
+            summon(this, 400, 30);
         }
 
 		else {
@@ -98,6 +100,21 @@ public class Enemy_Necromancer extends Entity{
 
     public void dropItem(){
         
+    }
+
+    public void summon(Entity user, int rate, int summonInterval){
+        int i = new Random().nextInt(rate);
+        if (i == 0 && summonCounter == summonInterval){
+             for (int ii = 0; ii < gp.enemy[1].length; ii++){
+                    if (gp.enemy[gp.currentMap][ii] == null){
+                        gp.enemy[gp.currentMap][ii] = new Enemy_Skeleton(gp);
+                        gp.enemy[gp.currentMap][ii].worldX = user.worldX + gp.tileSize*3;
+                        gp.enemy[gp.currentMap][ii].worldY = user.worldY - gp.tileSize*2;;
+                        gp.enemy[gp.currentMap][ii].temp = true;
+                        break;
+                    }
+                }
+        }
     }
     
 }

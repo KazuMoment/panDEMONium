@@ -34,6 +34,7 @@ public class CutsceneManager {
         if (scenePhase == 0){
 
             gp.bossBattleOn = true;
+            gp.stopMusic();
 
             // Shut Iron Door
             for (int i = 0; i < gp.obj[1].length; i++){
@@ -125,7 +126,6 @@ public class CutsceneManager {
             gp.gameState = gp.playState;
 
             // Change Music
-            gp.stopMusic();
             gp.playMusic(20);
         }
 

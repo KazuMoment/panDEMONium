@@ -237,7 +237,7 @@ public class UI {
                     }
                 }
 
-                else if (enemy.boss == true){
+                else if (enemy.boss == true && gp.bossBattleOn == true){
 
                     double oneScale = (double)gp.tileSize * 8/enemy.maxHP;
                     double hpBarValue = oneScale * enemy.HP;

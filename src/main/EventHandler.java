@@ -69,9 +69,7 @@ public class EventHandler {
             // Areas
 
             // Tutorial Forest
-            if (hit(0, 11, 32, "up") == true){teleport(1, 43, 41, gp.dungeon, gp.tinvaak_dungeon);} // dungeon 
-            else if (hit(1, 45, 42, "right") == true){teleport(0, 11, 32, gp.outdoor, gp.tutorial_forest);} // back to forest 
-            else if (hit(0, 40, 12, "up") == true){teleport(2, 25, 30, gp.outdoor, gp.merchant_tent);} // merchant tent 
+            if (hit(0, 40, 12, "up") == true){teleport(2, 25, 30, gp.outdoor, gp.merchant_tent);} // merchant tent 
             else if (hit(2, 25, 30, "down") == true){teleport(0, 40, 12, gp.outdoor, gp.tutorial_forest);} // back to forest 
             
             // Tinvaak Village
@@ -85,10 +83,26 @@ public class EventHandler {
 			else if (hit (6, 30, 32, "any") == true){teleport(3, 12, 35, gp.outdoor, gp.tinvaak_village);} // to village 1
 			else if (hit (3, 22, 37,"any") == true){teleport(7, 30, 31, gp.indoor, gp.tinvaak_house3);} // to house 3
 			else if (hit (7, 30, 32,"any") == true){teleport(3, 22, 38, gp.outdoor, gp.tinvaak_village);} // to village 1
+            else if (hit(3, 45, 6, "any") == true){teleport(1, 43, 41, gp.dungeon, gp.tinvaak_dungeon);} // dungeon 
+            else if (hit(1, 45, 42, "right") == true){teleport(3, 45, 7, gp.outdoor, gp.tinvaak_village);} // back to village 1
+            
+            // Vorlorn Village
+            else if (hit(3, 20, 7, "any") == true){teleport(9, 31, 40, gp.dungeon, gp.vorlorn_dungeon);} // dungeon 
+            else if (hit(9, 31, 40, "any") == true){teleport(3, 20, 7, gp.outdoor, gp.vorlorn_village);} // back to village 
+            else if (hit(3, 38, 8, "any") == true){teleport(2, 25, 31, gp.indoor, gp.merchant_tent);} // merchant tent 
+            else if (hit(2, 25, 31, "any") == true){teleport(3, 38, 8, gp.outdoor, gp.vorlorn_village);} // back to village 
+            else if (hit(3, 27, 28, "up") == true){teleport(4, 23, 30, gp.indoor, gp.vorlorn_townhall);} // mayor office
+            else if (hit(4, 23, 30, "down") == true){teleport(3, 27, 28, gp.outdoor, gp.vorlorn_village);} // back to village
+            else if (hit(3, 18, 34, "up") == true){teleport(5, 30, 32, gp.indoor, gp.vorlorn_house1);} // house1
+            else if (hit(5, 30, 32, "down") == true){teleport(3, 18, 34, gp.outdoor, gp.vorlorn_village);} // back to village
+            else if (hit(3, 26, 33, "up") == true){teleport(6, 30, 32, gp.indoor, gp.vorlorn_house2);} // house2
+            else if (hit(6, 30, 32, "down") == true){teleport(3, 26, 33, gp.outdoor, gp.vorlorn_village);} // back to village
+            else if (hit(3, 34, 32, "up") == true){teleport(7, 30, 32, gp.indoor, gp.vorlorn_house3);} // house3
+            else if (hit(7, 30, 32, "down") == true){teleport(3, 34, 32, gp.outdoor, gp.vorlorn_village);} // back to village
 
 
             // Cutscenes
-            else if (hit(1, 35, 22, "any") == true){demonMonk();} // Devil Monk Cutscene
+            else if (hit(1, 35, 22, "any") == true){demonMonk();} // Demon Monk Cutscene
 
             // Miscellaneous
             else if (hit (2, 25, 26, "up") == true){speak(gp.npc[gp.currentMap][0]);} // talk to merchant interacting with table

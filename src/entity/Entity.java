@@ -73,6 +73,7 @@ public class Entity {
     int dyingCounter = 0;
     public int hpBarCounter = 0;
     public int shootCounter = 0;
+    public int summonCounter = 0;
     int knockbackCounter = 0;
     public int guardCounter = 0;
     public int parriedCounter = 0;
@@ -395,6 +396,10 @@ public class Entity {
                 shootCounter++;
             }
 
+            if (summonCounter < 30){
+                summonCounter++;
+            }
+
             if (parried == true){
                 parriedCounter++;
                 if (parriedCounter > 120){
@@ -626,6 +631,8 @@ public class Entity {
                 shootCounter = 0;
             }
     }
+
+   
 
     public void checkStartAggroRange(Entity target, int distance, int rate){
         if (getTileDistance(target) < distance){

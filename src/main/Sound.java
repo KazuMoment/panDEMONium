@@ -42,7 +42,8 @@ public class Sound {
         soundURL[22] = getClass().getResource("/sound/Tutorial Forest - panDEMONium.wav");   
         soundURL[23] = getClass().getResource("/sound/Hyrule Castle Town - The Legend of Zelda Twilight Princess.wav"); 
         soundURL[24] = getClass().getResource("/sound/open wall.wav");   
-        soundURL[25] = getClass().getResource("/sound/Tinvaak Dungeon - panDEMONium.wav");   
+        soundURL[25] = getClass().getResource("/sound/Tinvaak Dungeon - panDEMONium.wav");  
+        soundURL[26] = getClass().getResource("/sound/Tinvaak Village - panDEMONium.wav"); 
 
     }
 
