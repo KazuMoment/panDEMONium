@@ -135,6 +135,8 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void setupGame(){
 
+        currentMap = 9;
+
         aSetter.setObject();
         aSetter.setNPC();
         aSetter.setEnemy();

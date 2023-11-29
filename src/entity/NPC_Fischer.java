@@ -80,4 +80,5 @@ public class NPC_Fischer extends Entity {
             doneQuest1 = true;
         }
     }
+
 }

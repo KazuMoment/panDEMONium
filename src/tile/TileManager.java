@@ -72,7 +72,8 @@ public class TileManager {
         loadMap("/maps/house1.txt", 5);
         loadMap("/maps/house2.txt", 6);
         loadMap("/maps/house3.txt", 7);
-        loadMap("/maps/vilalge_2.txt", 8);
+        loadMap("/maps/village_2.txt", 8);
+        loadMap("/maps/dungeon_2.txt", 9);
         
     }
 

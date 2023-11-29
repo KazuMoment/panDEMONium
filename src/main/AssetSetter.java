@@ -3,6 +3,7 @@ package main;
 import enemy.Enemy_DemonLord;
 import enemy.Enemy_GreenSlime;
 import enemy.Enemy_Monk;
+import enemy.Enemy_Necromancer;
 import enemy.Enemy_Orc;
 import enemy.Enemy_RockSlime;
 import entity.NPC_BJ;
@@ -311,6 +312,14 @@ public class AssetSetter {
 		gp.enemy[mapNumber][i] = new Enemy_Monk(gp);
 		gp.enemy[mapNumber][i].worldX = gp.tileSize * 29;
 		gp.enemy[mapNumber][i].worldY = gp.tileSize * 27;
+		i++;
+
+		mapNumber = 9;
+		i = 0; 
+
+		gp.enemy[mapNumber][i] = new Enemy_Necromancer(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 36;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 22;
 		i++;
 
     }
