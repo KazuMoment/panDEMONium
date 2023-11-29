@@ -57,4 +57,31 @@ public class JDBC {
             return -1;
         }
     }
+    public String getValue(int columnIndex){
+        String url = "jdbc:mysql://localhost:3306/panDEMONium";
+        String username = "root";
+        String password = "";
+        String i;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection connection = DriverManager.getConnection(url, username, password);
+            
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery("select * from playerdata");
+
+            if (resultSet.next()) {
+                i = resultSet.getString(columnIndex);
+                return i;
+            }
+            else{
+                return "null";
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return "null";
+        }
+    }
 }
