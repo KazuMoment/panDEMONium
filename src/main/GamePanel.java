@@ -15,6 +15,7 @@ import java.util.Comparator;
 import javax.swing.JPanel;
 
 import ai.Pathfinder;
+import data.PlayerTime;
 import data.SaveLoad;
 import entity.Entity;
 import entity.Player;
@@ -54,8 +55,11 @@ public class GamePanel extends JPanel implements Runnable{
     int FPS = 60; 
 
     // System
+    public JDBC toSQL = new JDBC();
+    public PlayerTime playerTime = new PlayerTime();
     public TileManager tileM = new TileManager(this); 
     public KeyHandler keyH = new KeyHandler(this);
+    public SaveLoad saveLoad = new SaveLoad(this);
     Sound music = new Sound();
     Sound soundEffect = new Sound();
     public CollisionChecker collisionChecker = new CollisionChecker(this);
@@ -66,9 +70,8 @@ public class GamePanel extends JPanel implements Runnable{
     public Pathfinder pFinder = new Pathfinder(this);
     EnvironmentManager eManager = new EnvironmentManager(this);
     Map map = new Map(this);
-    public SaveLoad saveLoad = new SaveLoad(this);
+    
     public EntityGenerator eGenerator = new EntityGenerator(this);
-    public CutsceneManager csManager = new CutsceneManager(this);
     Thread gameThread; 
    
     // Entity and Object
@@ -95,10 +98,6 @@ public class GamePanel extends JPanel implements Runnable{
     public final int sleepState = 9;
     public final int mapState = 10;
     public final int saveState = 11;
-    public final int cutsceneState = 12;
-
-    // Others
-    public boolean bossBattleOn = false;
 
     // Area
     public int currentArea;
@@ -113,14 +112,8 @@ public class GamePanel extends JPanel implements Runnable{
     public final int tutorial_forest = 100;
     public final int tinvaak_village = 101;
     public final int tinvaak_dungeon = 102;
-    public final int tinvaak_townhall = 103;
-    public final int tinvaak_house1 = 104;
-    public final int tinvaak_house2 = 105;
-    public final int tinvaak_house3 = 106;
-    
     public final int merchant_tent = 103;
     public final int victoria_town = 104;
-
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -153,8 +146,6 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void resetGame(boolean restart){
 
-        removeTempEntity();
-        bossBattleOn = false;
         player.setDefaultPosition();
         player.restoreStatus();
         player.resetCounter();
@@ -220,7 +211,7 @@ public class GamePanel extends JPanel implements Runnable{
         public void update(){
 
             if (gameState == playState){
-
+                //timer start
                 // Player
                 player.update();
 
@@ -362,18 +353,12 @@ public class GamePanel extends JPanel implements Runnable{
                 // Minimap
                 map.drawMiniMap(g2);
 
-                // Cutscene
-                csManager.draw(g2);
-
                 // Draw UI
                 ui.draw(g2);
                 
             }
 
             if (keyH.showDebugMenu ==  true){
-                // long drawEnd = System.nanoTime();
-                // long passed = drawEnd - drawStart;
-
                 g2.setFont(new Font ("Arial", Font.PLAIN, 20));
                 g2.setColor(Color.white);
                 int x = 10;
@@ -384,7 +369,6 @@ public class GamePanel extends JPanel implements Runnable{
                 g2.drawString("WorldY: " + player.worldY, x, y); y += lineHeight;
                 g2.drawString("Column: " + (player.worldX + player.solidArea.x)/tileSize, x, y); y += lineHeight;
                 g2.drawString("Row: " + (player.worldY + player.solidArea.y)/tileSize, x, y); y += lineHeight;
-                g2.drawString("God Mode:" + keyH.godModeOn, x, y);
             } 
 
         }
@@ -416,7 +400,7 @@ public class GamePanel extends JPanel implements Runnable{
             switch(currentLevel){
                 case tutorial_forest: playMusic(22); break;
                 case tinvaak_village: playMusic(20); break;
-                case tinvaak_dungeon: playMusic(25); break;
+                case tinvaak_dungeon: playMusic(21); break;
                 case merchant_tent: playMusic(23); break;
                 case victoria_town: playMusic(20); break;
             }
@@ -430,16 +414,6 @@ public class GamePanel extends JPanel implements Runnable{
             }
             currentArea = nextArea; 
             aSetter.setEnemy();
-        }
-
-        public void removeTempEntity(){
-            for (int mapNumber = 0; mapNumber < maxMap; mapNumber++){
-                for (int i = 0; i < obj[1].length; i++){
-                    if (obj[mapNumber][i] != null && obj[mapNumber][i].temp == true){
-                        obj[mapNumber][i] = null;
-                    }
-                }
-            }
         }
 
 }
