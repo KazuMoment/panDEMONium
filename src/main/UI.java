@@ -38,6 +38,20 @@ public class UI {
     public Entity npc;
     int charIndex = 0;
     String combinedText = ""; 
+    boolean recordCounter = true;
+
+    String sessionID;
+    String level;
+    String maxHP;
+    String hp;
+    String maxMana;
+    String mana;
+    String strength;
+    String dexterity;
+    String player_gold;
+    String weapon;
+    String shield;
+    String playtime;
 
     public UI(GamePanel gp){
         this.gp = gp;
@@ -290,11 +304,11 @@ public class UI {
         }
 
     }
-
+    
     public void drawTitleScreen(){
-
+    
         if (titleScreenState == 0){
-        
+            
             g2.setColor(new Color(0, 0, 0));
             g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
@@ -336,16 +350,160 @@ public class UI {
             if (commandNumber == 1){
                 g2.drawString(">", x - gp.tileSize, y);
             }
-
-            text = "QUIT";
+            text = "RECORDS";
             x = getXforCenteredText(text);
             y += gp.tileSize;
             g2.drawString(text, x, y);
             if (commandNumber == 2){
                 g2.drawString(">", x - gp.tileSize, y);
             }
+            text = "QUIT";
+            x = getXforCenteredText(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if (commandNumber == 3){
+                g2.drawString(">", x - gp.tileSize, y);
+            }
+
+            
+        }
+        else if (titleScreenState == 1){
+            g2.setColor(new Color(0, 0, 0));
+            g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+            g2.setColor(Color.white);
+            g2.setFont(g2.getFont().deriveFont(80F));
+
+            String text = "Records";
+            int  x = getXforCenteredText(text);
+            int y = gp.tileSize * 2;
+            g2.drawString(text, x, y);
+            drawRecordsScreen();
+
         }
  
+    }
+    public void drawRecordsScreen(){
+        if(recordCounter){
+            //RecordScreen Placeholder
+            sessionID = gp.toSQL.getValue(1);
+            level = gp.toSQL.getValue(3);
+            maxHP = gp.toSQL.getValue(4);
+            hp = gp.toSQL.getValue(5);
+            maxMana = gp.toSQL.getValue(6);
+            mana = gp.toSQL.getValue(7);
+            strength = gp.toSQL.getValue(8);
+            dexterity = gp.toSQL.getValue(9);
+            player_gold = gp.toSQL.getValue(10);
+            weapon = gp.toSQL.getValue(11);
+            shield = gp.toSQL.getValue(12);
+            playtime = gp.toSQL.getValue(13);
+            recordCounter = false;
+        }
+
+        // Create a frame using drawSubWindow()
+        final int frameX = gp.tileSize * 2;
+        final int frameY = gp.tileSize * 3;
+        final int frameWidth = gp.tileSize * 15;
+        final int frameHeight = gp.tileSize * 5;
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+        
+        // Text
+        g2.setColor(Color.white);
+        g2.setFont(g2.getFont().deriveFont(32f));
+
+        int textX = frameX + 20;
+        int textY = frameY + gp.tileSize;
+        final int lineHeight = 35;
+        
+        // Parameter names
+        g2.drawString("SessionID", textX, textY);
+        textY += lineHeight;
+        g2.drawString("Level", textX, textY);
+        textY += lineHeight;
+        g2.drawString("HP", textX, textY);
+        textY += lineHeight;
+        g2.drawString("Mana", textX, textY);
+        textY += lineHeight;
+        g2.drawString("Strength", textX, textY);
+        textY += lineHeight;
+        textX += 300;
+        textY = frameY + gp.tileSize;;
+        g2.drawString("Dexterity", textX, textY);
+        textY += lineHeight;
+        
+        g2.drawString("Gold", textX, textY); // Images are drawn next so spacing is compensated
+        textY += lineHeight;
+        g2.drawString("Weapon", textX, textY);
+        textY += lineHeight;
+        g2.drawString("Shield", textX, textY);
+        textY += lineHeight;
+        g2.drawString("Play Time", textX, textY);
+
+        // Display Parameter Values
+        int tailX = (frameX + frameWidth) - 500;
+        
+        // Reset textY first before starting
+        textY = frameY + gp.tileSize;
+        String value;
+
+        value = sessionID;
+        textX = getXforAlignRight(value, tailX);
+        g2.drawString(value, textX, textY);
+        textY += lineHeight;
+
+        value = level;
+        textX = getXforAlignRight(value, tailX);
+        g2.drawString(value, textX, textY);
+        textY += lineHeight;
+        
+        value = maxHP + "/" + hp;
+        textX = getXforAlignRight(value, tailX);
+        g2.drawString(value, textX, textY);
+        textY += lineHeight;
+        
+        value = maxMana + "/" + mana;
+        textX = getXforAlignRight(value, tailX);
+        g2.drawString(value, textX, textY);
+        textY += lineHeight;
+
+        value = strength;
+        textX = getXforAlignRight(value, tailX);
+        g2.drawString(value, textX, textY);
+        tailX = (frameX + frameWidth) - 50;
+        textY = frameY + gp.tileSize;
+
+        value = dexterity;
+        textX = getXforAlignRight(value, tailX);
+        g2.drawString(value, textX, textY);
+        textY += lineHeight;
+        
+        value = player_gold;
+        textX = getXforAlignRight(value, tailX);
+        g2.drawString(value, textX, textY);
+        textY += lineHeight;
+
+        value = weapon;
+        textX = getXforAlignRight(value, tailX);
+        g2.drawString(value, textX, textY);
+        textY += lineHeight;
+
+        value = shield;
+        textX = getXforAlignRight(value, tailX);
+        g2.drawString(value, textX, textY);
+        textY += lineHeight;
+
+        value = playtime;
+        textX = getXforAlignRight(value, tailX);
+        g2.drawString(value, textX, textY);
+        textY += lineHeight;
+
+        if(gp.player.currentWeapon != null && gp.player.currentShield != null){
+            g2.drawImage(gp.player.currentWeapon.down1, tailX - gp.tileSize, textY - 24, null);
+            textY += gp.tileSize;
+
+            g2.drawImage(gp.player.currentShield.down1, tailX - gp.tileSize, textY - 24, null);
+            textY += gp.tileSize;
+        }
     }
 
     public void drawPauseScreen(){
