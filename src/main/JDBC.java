@@ -11,6 +11,7 @@ public class JDBC {
         String url = "jdbc:mysql://localhost:3306/panDEMONium";
         String username = "root";
         String password = "";
+        public int SessionID;
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
