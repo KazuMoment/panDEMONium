@@ -2,6 +2,9 @@ package main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Timer;
+
+import data.PlayerTime;
 
 public class KeyHandler implements KeyListener{
 
@@ -10,8 +13,7 @@ public class KeyHandler implements KeyListener{
     public boolean upPressed, downPressed, leftPressed, rightPressed, shiftPressed, enterPressed, ePressed, shootPressed, spacePressed;
 
     //Debug 
-    public boolean showDebugMenu = false;
-    public boolean godModeOn = false;
+    boolean showDebugMenu = false;
 
     public KeyHandler(GamePanel gp){
         this.gp = gp;
@@ -44,7 +46,7 @@ public class KeyHandler implements KeyListener{
         }
 
         // Dialogue State
-        else if(gp.gameState == gp.dialogueState || gp.gameState == gp.cutsceneState){
+        else if(gp.gameState == gp.dialogueState){
             dialogueState(code);
         }
 
@@ -97,6 +99,9 @@ public class KeyHandler implements KeyListener{
                 }
                 if (code == KeyEvent.VK_ENTER){
                     if (gp.ui.commandNumber == 0){
+                        gp.toSQL.SessionID = (gp.toSQL.getLastSessionID() + 1);
+                        gp.playerTime.resetTimer();
+                        gp.playerTime.startTimer();
                         gp.gameState = gp.playState;
                         gp.checkMusic();
                     }
@@ -173,21 +178,11 @@ public class KeyHandler implements KeyListener{
         }
         if (code == KeyEvent.VK_F5){
             switch(gp.currentMap){
-                case 0: gp.tileM.loadMap("/maps/forest_tutorial.txt", 0); break;
-                case 1: gp.tileM.loadMap("/maps/dungeon_1.txt", 1); break;
-                case 2: gp.tileM.loadMap("/maps/merchant_house.txt", 2); break;
-                case 3: gp.tileM.loadMap("/maps/village_1.txt", 3); break;
-                case 4: gp.tileM.loadMap("/maps/village_2.txt", 3); break;
+                case 0: gp.tileM.loadMap("/maps/forest_tutorial.txt", 0);
+                case 1: gp.tileM.loadMap("/maps/dungeon_1.txt", 1);
+                case 2: gp.tileM.loadMap("/maps/merchant_house.txt", 2);
             }
             
-        }
-        if (code == KeyEvent.VK_F4){
-            if (godModeOn == false){
-                godModeOn = true;
-            }
-            else if (godModeOn == true){
-                godModeOn = false;
-            }
         }
     }
 
