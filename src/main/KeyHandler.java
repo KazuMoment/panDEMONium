@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener{
 
     GamePanel gp;
+    int delayCounter;
 
     public boolean upPressed, downPressed, leftPressed, rightPressed, shiftPressed, enterPressed, ePressed, shootPressed, spacePressed;
 
@@ -115,6 +116,33 @@ public class KeyHandler implements KeyListener{
                          System.exit(0);
                     }
                 } 
+        }
+        else if (gp.ui.titleScreenState == 1){
+            if (gp.ui.recordCounter == false){
+                if (code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT){
+                    gp.ui.commandNumber--;
+                    gp.ui.currentSessionID--;
+                    System.out.println("prnting");
+                    if (gp.ui.currentSessionID < 1){
+                        gp.ui.commandNumber = (gp.toSQL.getLastSessionID() - 1);
+                        gp.ui.currentSessionID = gp.toSQL.getLastSessionID();
+                    }
+                    gp.ui.recordCounter = true;
+                }
+                if (code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT){
+                    gp.ui.commandNumber++;
+                    gp.ui.currentSessionID++;
+                    System.out.println("printign");
+                    if (gp.ui.currentSessionID > gp.toSQL.getLastSessionID()){
+                        gp.ui.commandNumber = 0;
+                        gp.ui.currentSessionID = 1;
+                    }
+                        gp.ui.recordCounter = true;
+                }
+                if (code == KeyEvent.VK_ENTER){
+                    gp.ui.titleScreenState = 0;
+                }
+            } 
         }
 
     }
