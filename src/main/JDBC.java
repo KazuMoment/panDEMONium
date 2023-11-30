@@ -57,7 +57,7 @@ public class JDBC {
             return -1;
         }
     }
-    public String getValue(int columnIndex){
+    public String getValue(int columnIndex, int sessionID){
         String url = "jdbc:mysql://localhost:3306/panDEMONium";
         String username = "root";
         String password = "";
@@ -69,7 +69,7 @@ public class JDBC {
             
             Statement statement = connection.createStatement();
 
-            ResultSet resultSet = statement.executeQuery("select * from playerdata");
+            ResultSet resultSet = statement.executeQuery("select * from playerdata where sessionID = " + sessionID);
 
             if (resultSet.next()) {
                 i = resultSet.getString(columnIndex);
