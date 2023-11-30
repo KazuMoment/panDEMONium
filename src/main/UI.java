@@ -442,14 +442,14 @@ public class UI {
         textY += lineHeight;
         g2.drawString("Shield", textX, textY);
         textY += lineHeight;
-        g2.drawString("Play Time", textX, textY);
+        g2.drawString("Playtime", textX, textY);
         textY += lineHeight * 3;
         textX -= 332;
-        g2.drawString("Next: =>", textX, textY);
+        g2.drawString("Next: >", textX, textY);
         textY += lineHeight;
-        g2.drawString("Prev: <=", textX, textY);
+        g2.drawString("Prev: <", textX, textY);
         textY += lineHeight;
-        g2.drawString("Back to Title Screen: Enter", textX, textY);
+        g2.drawString("Back to Title Screen: ESC", textX, textY);
 
         // Display Parameter Values
         int tailX = (frameX + frameWidth) - 450;

@@ -172,6 +172,7 @@ public class GamePanel extends JPanel implements Runnable{
         
         if (restart == true){
             player.setDefaultValues();
+            aSetter.setNPC();
             aSetter.setObject();
             aSetter.setInteractiveTile();
             eManager.lighting.resetDay(); 

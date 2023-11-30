@@ -113,7 +113,7 @@ public class KeyHandler implements KeyListener{
                         gp.ui.titleScreenState = 1;
                     }
                     if (gp.ui.commandNumber == 3){
-                         System.exit(0);
+                        System.exit(0);
                     }
                 } 
         }
@@ -139,7 +139,7 @@ public class KeyHandler implements KeyListener{
                     }
                         gp.ui.recordCounter = true;
                 }
-                if (code == KeyEvent.VK_ENTER){
+                if (code == KeyEvent.VK_ESCAPE){
                     gp.ui.titleScreenState = 0;
                 }
             } 
