@@ -10,6 +10,7 @@ import main.KeyHandler;
 import object.Object_Key;
 import object.Object_Lantern;
 import object.Object_Paddle;
+import object.Object_Sword_Vorlorn;
 import object.Object_Fireball;
 import object.Object_Health_Potion_Small;
 
@@ -208,6 +209,17 @@ public class Player extends Entity{
                 attackLeft2 = setup("/player/player_girl_attack_axe_left2", gp.tileSize * 2, gp.tileSize);
                 attackRight1 = setup("/player/player_girl_attack_axe_right1", gp.tileSize * 2, gp.tileSize);
                 attackRight2 = setup("/player/player_girl_attack_axe_right2", gp.tileSize * 2, gp.tileSize);
+            }
+
+            if (currentWeapon.name == "Vorlorn Sword"){
+                attackUp1 = setup("/player/player_attack_vorlorn_up_1", gp.tileSize, gp.tileSize * 2);
+                attackUp2 = setup("/player/player_attack_vorlorn_up_2", gp.tileSize, gp.tileSize* 2);
+                attackDown1 = setup("/player/player_attack_vorlorn_down_1", gp.tileSize, gp.tileSize * 2);
+                attackDown2 = setup("/player/player_attack_vorlorn_down_2", gp.tileSize, gp.tileSize * 2);
+                attackLeft1 = setup("/player/player_attack_vorlorn_left_1", gp.tileSize * 2, gp.tileSize);
+                attackLeft2 = setup("/player/player_attack_vorlorn_left_2", gp.tileSize * 2, gp.tileSize);
+                attackRight1 = setup("/player/player_attack_vorlorn_right_1", gp.tileSize * 2, gp.tileSize);
+                attackRight2 = setup("/player/player_attack_vorlorn_right_2", gp.tileSize * 2, gp.tileSize);
             }
 
         }   
@@ -473,7 +485,14 @@ public class Player extends Entity{
         if (i != 999){
             if (invulnerable == false && gp.enemy[gp.currentMap][i].dying == false){
                 gp.playSoundEffect(7);
-                int damage = gp.enemy[gp.currentMap][i].attack - gp.player.defense;
+                int damage; 
+                if (gp.enemy[gp.currentMap][i].attack >= defense) {
+                    damage = gp.enemy[gp.currentMap][i].attack - defense;
+                } 
+                else {
+                    damage = gp.enemy[gp.currentMap][i].attack / defense;
+                }
+                
                 if (damage < 1){
                     damage = 1;
                 }
@@ -496,7 +515,13 @@ public class Player extends Entity{
                     attack *= 3;
                 }
 
-                int damage = attack - gp.enemy[gp.currentMap][i].defense;
+                int damage;
+                if (attack >= gp.enemy[gp.currentMap][i].defense) {
+                    damage = attack - gp.enemy[gp.currentMap][i].defense;
+                } 
+                else {
+                    damage = attack / gp.enemy[gp.currentMap][i].defense;
+                }
                 if (damage < 0){
                     damage = 0;
                 }

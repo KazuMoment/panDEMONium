@@ -5,7 +5,7 @@ import java.util.Random;
 import entity.Entity;
 import main.GamePanel;
 import object.Object_Heart;
-import object.Object_PurpleHaze;
+import object.Object_Purple_Haze;
 
 public class Enemy_Necromancer extends Entity{
 
@@ -21,12 +21,13 @@ public class Enemy_Necromancer extends Entity{
         name = enemyName;
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxHP = 15;
+        maxHP = 40;
         HP = maxHP;
         attack = 4; 
-        defense = 0;
+        defense = 4;
+        knockbackPower = 1;
         EXP = 20;
-        projectile = new Object_PurpleHaze(gp);
+        projectile = new Object_Purple_Haze(gp);
 
         solidArea.x = 4;
         solidArea.y = 12;

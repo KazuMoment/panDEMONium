@@ -12,7 +12,7 @@ public class Object_Axe_Normal extends Entity{
         type = type_axe;
         name = objectName;
         down1 = setup("/objects/axe", gp.tileSize, gp.tileSize);
-        attackValue = 2;
+        attackValue = 1;
         attackArea.width = 30;
         attackArea.height = 30; 
         description = "[" + name + "]\nJust a normal axe.\nIt's not a woodcutter's, though.";

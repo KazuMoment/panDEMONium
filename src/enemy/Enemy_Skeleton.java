@@ -24,7 +24,7 @@ public class Enemy_Skeleton extends Entity{
         attack = 3; 
         defense = 2;
         EXP = 1;
-        knockbackPower = 6;
+        knockbackPower = 2;
 
         solidArea.x = 4;
         solidArea.y = 4;
@@ -38,32 +38,18 @@ public class Enemy_Skeleton extends Entity{
         motion2_duration = 85;
 
         getImage();
-        getAttackImage();
     }
 
     public void getImage(){
 
-        down1 = setup("/enemy/skeletonlord_down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/enemy/skeletonlord_down_2", gp.tileSize, gp.tileSize);
-        up1 = setup("/enemy/skeletonlord_up_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/enemy/skeletonlord_up_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/enemy/skeletonlord_left_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/enemy/skeletonlord_left_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/enemy/skeletonlord_right_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/enemy/skeletonlord_right_2", gp.tileSize, gp.tileSize);
-
-    }
-
-    public void getAttackImage(){
-
-        attackUp1 = setup("/enemy/skeletonlord_attack_up_1", gp.tileSize, gp.tileSize * 2);
-        attackUp2 = setup("/enemy/skeletonlord_attack_up_2", gp.tileSize, gp.tileSize* 2);
-        attackDown1 = setup("/enemy/skeletonlord_attack_down_1", gp.tileSize, gp.tileSize * 2);
-        attackDown2 = setup("/enemy/skeletonlord_attack_down_2", gp.tileSize, gp.tileSize * 2);
-        attackLeft1 = setup("/enemy/skeletonlord_attack_left_1", gp.tileSize * 2, gp.tileSize);
-        attackLeft2 = setup("/enemy/skeletonlord_attack_left_2", gp.tileSize * 2, gp.tileSize);
-        attackRight1 = setup("/enemy/skeletonlord_attack_right_1", gp.tileSize * 2, gp.tileSize);
-        attackRight2 = setup("/enemy/skeletonlord_attack_right_2", gp.tileSize * 2, gp.tileSize);
+        down1 = setup("/enemy/skeleton_left1", gp.tileSize, gp.tileSize);
+        down2 = setup("/enemy/skeleton_left2", gp.tileSize, gp.tileSize);
+        up1 = setup("/enemy/skeleton_right1", gp.tileSize, gp.tileSize);
+        up2 = setup("/enemy/skeleton_right2", gp.tileSize, gp.tileSize);
+        left1 = setup("/enemy/skeleton_left1", gp.tileSize, gp.tileSize);
+        left2 = setup("/enemy/skeleton_left2", gp.tileSize, gp.tileSize);
+        right1 = setup("/enemy/skeleton_right1", gp.tileSize, gp.tileSize);
+        right2 = setup("/enemy/skeleton_right2", gp.tileSize, gp.tileSize);
 
     }
 

@@ -30,12 +30,15 @@ import object.Object_Lever;
 import object.Object_ManaCrystal;
 import object.Object_Mana_Potion_Small;
 import object.Object_Paddle;
+import object.Object_Purple_Haze;
+import object.Object_Sacred_Rose;
 import object.Object_Seal;
 import object.Object_Shield_Tinvaak;
 import object.Object_Shield_Victoria;
 import object.Object_Shield_Wood;
 import object.Object_Slimeball;
 import object.Object_Sword_Tinvaak;
+import object.Object_Sword_Vorlorn;
 import object.Object_Tent;
 
 public class EntityGenerator {
@@ -52,9 +55,9 @@ public class EntityGenerator {
 
         switch(itemName){
             case Object_Axe_Normal.objectName: obj = new Object_Axe_Normal(gp); break;
-            case Object_Boots.objectName: obj = new Object_Boots(gp); break;
             case Object_Boat.objectName: obj = new Object_Boat(gp); break;
             case Object_Bonfire.objectName: obj = new Object_Bonfire(gp); break;
+            case Object_Boots.objectName: obj = new Object_Boots(gp); break;
             case Object_Chest.objectName: obj = new Object_Chest(gp); break;
             case Object_Door.objectName: obj = new Object_Door(gp); break;
             case Object_Fireball.objectName: obj = new Object_Fireball(gp); break;
@@ -66,15 +69,18 @@ public class EntityGenerator {
             case Object_Lantern.objectName: obj = new Object_Lantern(gp); break;
             case Object_Lavaball.objectName: obj = new Object_Lavaball(gp); break;
             case Object_Lever.objectName: obj = new Object_Lever(gp); break;
-            case Object_ManaCrystal.objectName: obj = new Object_ManaCrystal(gp); break;
             case Object_Mana_Potion_Small.objectName: obj = new Object_Mana_Potion_Small(gp); break;
+            case Object_ManaCrystal.objectName: obj = new Object_ManaCrystal(gp); break;
             case Object_Paddle.objectName: obj = new Object_Paddle(gp); break;
+            case Object_Purple_Haze.objectName: obj = new Object_Purple_Haze(gp); break;
+            case Object_Sacred_Rose.objectName: obj = new Object_Sacred_Rose(gp); break;
             case Object_Seal.objectName: obj = new Object_Seal(gp); break;
-            case Object_Sword_Tinvaak.objectName: obj = new Object_Sword_Tinvaak(gp); break;
             case Object_Shield_Tinvaak.objectName: obj = new Object_Shield_Tinvaak(gp); break;
-            case Object_Shield_Victoria.objectName: obj = new Object_Shield_Victoria(gp); break;
+            case Object_Shield_Victoria.objectName: obj = new Object_Shield_Victoria(gp); break;         
             case Object_Shield_Wood.objectName: obj = new Object_Shield_Wood(gp); break;
             case Object_Slimeball.objectName: obj = new Object_Slimeball(gp); break;
+            case Object_Sword_Tinvaak.objectName: obj = new Object_Sword_Tinvaak(gp); break;   
+            case Object_Sword_Vorlorn.objectName: obj = new Object_Sword_Vorlorn(gp); break;
             case Object_Tent.objectName: obj = new Object_Tent(gp); break; 
         }
         return obj;
