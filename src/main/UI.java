@@ -52,6 +52,7 @@ public class UI {
     String weapon;
     String shield;
     String playtime;
+    int delayCounter = 120;
 
     public UI(GamePanel gp){
         this.gp = gp;
