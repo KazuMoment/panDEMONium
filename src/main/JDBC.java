@@ -13,12 +13,6 @@ public class JDBC {
     public int SessionID;
     
     public void createDatabase() throws ClassNotFoundException {
-        // JDBC URL for SQLite (jdbc:sqlite:filename.db)
-        String url = "jdbc:sqlite:mydatabase.db";
-
-        // JDBC variables for opening, closing, and managing connection
-        
-
         try {
             // Register JDBC driver (not needed for SQLite)
             Class.forName("org.sqlite.JDBC");
@@ -54,9 +48,8 @@ public class JDBC {
              Statement statement = connection.createStatement()) {
             Class.forName("org.sqlite.JDBC");
             statement.executeUpdate(query);
-            // You can handle the result set or any other processing here if needed
         } catch (Exception e) {
-            e.printStackTrace(); // Log or handle the exception appropriately
+            e.printStackTrace(); 
         }
     }
     
