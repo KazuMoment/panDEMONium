@@ -378,26 +378,29 @@ public class UI {
             int y = gp.tileSize * 2;
             g2.drawString(text, x, y);
             drawRecordsScreen();
+            
 
         }
  
     }
     public void drawRecordsScreen(){
-        if(recordCounter){
+        delayCounter++;
+        if(recordCounter && delayCounter >120){
             //RecordScreen Placeholder
-            sessionID = gp.toSQL.getValue(1);
-            level = gp.toSQL.getValue(3);
-            maxHP = gp.toSQL.getValue(4);
-            hp = gp.toSQL.getValue(5);
-            maxMana = gp.toSQL.getValue(6);
-            mana = gp.toSQL.getValue(7);
-            strength = gp.toSQL.getValue(8);
-            dexterity = gp.toSQL.getValue(9);
-            player_gold = gp.toSQL.getValue(10);
-            weapon = gp.toSQL.getValue(11);
-            shield = gp.toSQL.getValue(12);
-            playtime = gp.toSQL.getValue(13);
+            sessionID = gp.toSQL.getValue(1, currentSessionID);
+            level = gp.toSQL.getValue(3, currentSessionID);
+            maxHP = gp.toSQL.getValue(4, currentSessionID);
+            hp = gp.toSQL.getValue(5, currentSessionID);
+            maxMana = gp.toSQL.getValue(6, currentSessionID);
+            mana = gp.toSQL.getValue(7, currentSessionID);
+            strength = gp.toSQL.getValue(8, currentSessionID);
+            dexterity = gp.toSQL.getValue(9, currentSessionID);
+            player_gold = gp.toSQL.getValue(10, currentSessionID);
+            weapon = gp.toSQL.getValue(11, currentSessionID);
+            shield = gp.toSQL.getValue(12, currentSessionID);
+            playtime = gp.toSQL.getValue(13, currentSessionID);
             recordCounter = false;
+            delayCounter = 0;
         }
 
         // Create a frame using drawSubWindow()
@@ -411,7 +414,7 @@ public class UI {
         g2.setColor(Color.white);
         g2.setFont(g2.getFont().deriveFont(32f));
 
-        int textX = frameX + 20;
+        int textX = frameX + 50;
         int textY = frameY + gp.tileSize;
         final int lineHeight = 35;
         
@@ -438,9 +441,14 @@ public class UI {
         g2.drawString("Shield", textX, textY);
         textY += lineHeight;
         g2.drawString("Play Time", textX, textY);
+        textY += lineHeight * 3;
+        textX += 250;
+        g2.drawString("Next >>", textX, textY);
+        textX -= 582;
+        g2.drawString("<< Prev", textX, textY);
 
         // Display Parameter Values
-        int tailX = (frameX + frameWidth) - 500;
+        int tailX = (frameX + frameWidth) - 450;
         
         // Reset textY first before starting
         textY = frameY + gp.tileSize;
@@ -496,14 +504,6 @@ public class UI {
         textX = getXforAlignRight(value, tailX);
         g2.drawString(value, textX, textY);
         textY += lineHeight;
-
-        if(gp.player.currentWeapon != null && gp.player.currentShield != null){
-            g2.drawImage(gp.player.currentWeapon.down1, tailX - gp.tileSize, textY - 24, null);
-            textY += gp.tileSize;
-
-            g2.drawImage(gp.player.currentShield.down1, tailX - gp.tileSize, textY - 24, null);
-            textY += gp.tileSize;
-        }
     }
 
     public void drawPauseScreen(){
