@@ -1,11 +1,16 @@
 package enemy;
 
-import java.util.Random;
+
+import data.Progress;
+
+import java.awt.Rectangle;
 
 import entity.Entity;
 import main.GamePanel;
-import object.Object_Heart;
+
 import object.Object_Purple_Haze;
+import object.Object_Sacred_Rose;
+import object.Object_WitheredTree;
 
 public class Enemy_Necromancer extends Entity{
 
@@ -17,31 +22,32 @@ public class Enemy_Necromancer extends Entity{
 
         this.gp = gp;
 
+        boss = true;
+        sleep = true;
         type = type_enemy;
         name = enemyName;
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxHP = 40;
+        maxHP = 500;
         HP = maxHP;
-        attack = 4; 
-        defense = 4;
+        attack = 6; 
+        defense = 7;
         knockbackPower = 1;
-        EXP = 20;
+        EXP = 50;
         projectile = new Object_Purple_Haze(gp);
 
-        solidArea.x = 4;
-        solidArea.y = 12;
-        solidArea.width = 92;
-        solidArea.height = 84;
+        int size = gp.tileSize*3;
+        solidArea = new Rectangle(48, 48, size - 48 * 2, size - 48);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
+        setDialogue();
         getImage();
     }
 
     public void getImage(){
     	
-    	int i = 2;
+    	int i = 3;
 
         down1 = setup("/enemy/necro_down1", gp.tileSize*i, gp.tileSize*i);
         down2 = setup("/enemy/necro_down2", gp.tileSize*i, gp.tileSize*i);
@@ -54,22 +60,39 @@ public class Enemy_Necromancer extends Entity{
 
     }
 
+    public void setDialogue(){
+
+        dialogue[0][0] = "You do not understand what \nI am trying to achieve here.";
+        dialogue[0][1] = "You saw them, haven't you?";
+        dialogue[0][2] = "The dead, brought back to life?";
+        dialogue[0][3] = "I do not expect you to understand.";
+        dialogue[0][4] = "Losing your loved one...";
+        dialogue[0][5] = "I am trying to achieve greatness!";
+        dialogue[0][6] = "I am bringing my lover back!";
+        dialogue[0][7] = "And if I have to become God to do it...";
+        dialogue[0][8] = "I will.";
+
+    }
+
     public void setMovement(){
 
         if (rage == false && HP < maxHP/2){
             rage = true;
             defaultSpeed++;
             speed = defaultSpeed;
-            attack *= 2;
+            attack += 3;
+        }
+
+        if (rage == true){
+            shootRate(100, 30);
         }
 
 		if (getTileDistance(gp.player) < 10){	
 			moveTowardPlayer(60);
 		}
 
-        if (getTileDistance(gp.player) > 3 && getTileDistance(gp.player) < 10){
+        if (getTileDistance(gp.player) > 3 && getTileDistance(gp.player) < 10 && rage == false){
             shootRate(200, 30);
-            summon(this, 400, 30);
         }
 
 		else {
@@ -94,28 +117,30 @@ public class Enemy_Necromancer extends Entity{
 
    
     public void checkDrop(){
-        // Cast die
-        dropItem(new Object_Heart(gp));
+
+        gp.bossBattleOn = false;
+        Progress.necromancerDefeated = true;
+
+        // Restore Previous Music
+        gp.stopMusic();
+        gp.checkMusic();
+
+        // Remove the iron doors
+        for (int i = 0; i < gp.obj[1].length; i++){
+            if (gp.obj[gp.currentMap][i] != null && gp.obj[gp.currentMap][i].name.equals(Object_WitheredTree.objectName)){
+                gp.playSoundEffect(24);
+                gp.obj[gp.currentMap][i] = null;
+            }
+        }
+        
+        dropItem(new Object_Sacred_Rose(gp));
+
+        startDialogue(gp.eHandler.eventMaster, 3);
 
     }
 
     public void dropItem(){
         
-    }
-
-    public void summon(Entity user, int rate, int summonInterval){
-        int i = new Random().nextInt(rate);
-        if (i == 0 && summonCounter == summonInterval){
-             for (int ii = 0; ii < gp.enemy[1].length; ii++){
-                    if (gp.enemy[gp.currentMap][ii] == null){
-                        gp.enemy[gp.currentMap][ii] = new Enemy_Skeleton(gp);
-                        gp.enemy[gp.currentMap][ii].worldX = user.worldX + gp.tileSize*3;
-                        gp.enemy[gp.currentMap][ii].worldY = user.worldY - gp.tileSize*2;;
-                        gp.enemy[gp.currentMap][ii].temp = true;
-                        break;
-                    }
-                }
-        }
     }
     
 }

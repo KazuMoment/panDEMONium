@@ -12,7 +12,7 @@ public class Object_Sword_Tinvaak extends Entity{
         type = type_sword;
         name =  objectName;
         down1 = setup("/objects/sword_normal", gp.tileSize, gp.tileSize);
-        attackValue = 1;
+        attackValue = 2;
         attackArea.width = 36;
         attackArea.height = 37; 
         description = "[" + name + "]\nThe sword from the town of \nTinvaak. It looks weird.";  

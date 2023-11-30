@@ -19,12 +19,12 @@ public class Object_Sacred_Rose extends Entity{
 	}
 
 	public void setDialogue(){
-		dialogue[0][0] = "Give this to Mayor Raiden!";
+		dialogue[0][0] = "Give this to Mayor Mounsi!";
 	}
 
 	public boolean use(Entity entity){
 
-		startDialogue(this, 1);
+		startDialogue(this, 0);
 
 		return false;
 	}

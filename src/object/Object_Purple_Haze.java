@@ -10,20 +10,20 @@ import main.GamePanel;
 public class Object_Purple_Haze extends Projectile{
 
     GamePanel gp;
-    public static final String objectName = "Purple";
+    public static final String objectName = "Purple Haze";
 
     public Object_Purple_Haze(GamePanel gp){
         super(gp);
         this.gp = gp;
 
         name = objectName;
-        solidArea = new Rectangle(8, 16 , 32, 32);
+        solidArea = new Rectangle(8 * 2, 16 * 2 , 32 * 2, 32 *2);
         solidAreaDefaultX = solidArea.x;
         speed = 9;
         maxHP = 70;
         HP = maxHP;
         knockbackPower = 3;
-        attack = 2;
+        attack = 8;
         useCost = 1;
         alive = false;
         getImage();

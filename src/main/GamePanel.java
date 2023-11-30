@@ -42,7 +42,7 @@ public class GamePanel extends JPanel implements Runnable{
     public int maxWorldRow;
     public final int worldWidth = tileSize * maxWorldColumn;
     public final int worldHeight = tileSize * maxWorldRow; 
-    public final int maxMap = 10;
+    public final int maxMap = 15;
     public int currentMap = 0;
 
     // Full Screen
@@ -114,6 +114,7 @@ public class GamePanel extends JPanel implements Runnable{
     // Level
     public int currentLevel;
     public int nextLevel;
+    public int previousLevel;    
     public final int tutorial_forest = 100;
     public final int tinvaak_village = 101;
     public final int tinvaak_dungeon = 102;
@@ -128,6 +129,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int vorlorn_house3 = 111;
     public final int vorlorn_townhall = 112;
     public final int vorlorn_dungeon = 113;
+    public final int demon_lair = 114;
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -143,6 +145,7 @@ public class GamePanel extends JPanel implements Runnable{
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        
         aSetter.setObject();    
         aSetter.setNPC();
         aSetter.setEnemy();
@@ -434,12 +437,14 @@ public class GamePanel extends JPanel implements Runnable{
                 case vorlorn_house2: 
                 case vorlorn_house3:
                 case vorlorn_townhall: playMusic(26); break;
+                case demon_lair: playMusic(1); break;
             }
         }
 
         public void changeArea(){
 
             if (nextLevel != currentLevel){
+                previousLevel = currentLevel;
                 currentLevel = nextLevel;
                 checkMusic();
             }

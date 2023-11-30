@@ -22,10 +22,10 @@ public class Enemy_Zombie extends Entity{
         name = enemyName;
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxHP = 6;
+        maxHP = 12;
         HP = maxHP;
-        attack = 1; 
-        defense = 0;
+        attack = 4; 
+        defense = 5;
         EXP = 2;
 
         solidArea.x = 2;

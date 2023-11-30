@@ -17,6 +17,19 @@ public class DataStorage implements Serializable{
     int nextLevelEXP;
     int gold;
 
+
+    // Current Area
+    int currentMap;
+    int previousLevel;
+    int currentLevel;
+    int currentArea;
+
+    // Progress
+    boolean orcDefeated;
+    boolean demonMonkDefeated;
+    boolean necromancerDefeated;
+    boolean demonLordDefeated;
+
     // Player Inventory
     ArrayList<String> itemNames = new ArrayList<>();
     ArrayList<Integer> itemAmount = new ArrayList<>();

@@ -14,6 +14,7 @@ public class NPC_Bogart extends Entity{
         name = npcName;
         direction = "down";
         speed = 4;
+        sleep = true;
 
         solidArea = new Rectangle(8, 16, 32, 32);
         solidAreaDefaultX = solidArea.x;
@@ -50,7 +51,7 @@ public class NPC_Bogart extends Entity{
         dialogue[2][0] = "The forest is just past this tree.";
         dialogue[2][1] = "Good luck, adventurer.";
         
-        dialogue[3][0] = "So the mayor asked you for help huh?";
+        dialogue[3][0] = "So the mayor asked you for help, huh?";
         dialogue[3][1] = "I know the way into the forest.";
         dialogue[3][2] = "I will guide you there, just follow me.";
         

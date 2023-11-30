@@ -54,6 +54,17 @@ public class Object_Paddle extends Entity{
 				break;
 			}
 		}
+
+		for (int i = 0; i < gp.obj[1].length; i++){
+			if (gp.obj[gp.currentMap][i] != null && 
+				gp.obj[gp.currentMap][i].name == Object_Boat.objectName &&
+				gp.obj[gp.currentMap][i].collision == true){
+					gp.obj[gp.currentMap][i].collision = false;
+					gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image2;
+					break;
+			}
+		}
+		
 	}
 
     

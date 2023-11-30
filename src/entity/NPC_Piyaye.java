@@ -54,7 +54,8 @@ public class NPC_Piyaye extends Entity {
         dialogue[2][3] = "When you hear a big banging sound, attack them!";
         dialogue[2][4] = "It'll do a big critical hit!";
 
-        dialogue[3][0] = "Alright. The boat's all fixed up. Help me set it up \nby interacting with the boat.";
+        dialogue[3][0] = "Alright. The boat's all fixed up.";
+        dialogue[3][1] = "Get in the boat when you're ready!";
 
 
     }

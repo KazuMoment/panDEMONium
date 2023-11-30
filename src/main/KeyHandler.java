@@ -132,7 +132,7 @@ public class KeyHandler implements KeyListener{
                 if (code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT){
                     gp.ui.commandNumber++;
                     gp.ui.currentSessionID++;
-                    System.out.println("printign");
+                    System.out.println("printing");
                     if (gp.ui.currentSessionID > gp.toSQL.getLastSessionID()){
                         gp.ui.commandNumber = 0;
                         gp.ui.currentSessionID = 1;
@@ -212,7 +212,14 @@ public class KeyHandler implements KeyListener{
                 case 1: gp.tileM.loadMap("/maps/dungeon_1.txt", 1);
                 case 2: gp.tileM.loadMap("/maps/merchant_house.txt", 2);
             }
-            
+        }
+        if (code == KeyEvent.VK_F4){
+            if (godModeOn == false){
+                godModeOn = true;
+            }
+            else if (godModeOn == true){
+                godModeOn = false;
+            }
         }
     }
 

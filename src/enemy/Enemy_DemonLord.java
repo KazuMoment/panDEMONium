@@ -1,15 +1,13 @@
 package enemy;
 
 import java.awt.Rectangle;
-import java.util.Random;
 
 import data.Progress;
 import entity.Entity;
 import main.GamePanel;
-import object.Object_Gold;
+
 import object.Object_Heart;
 import object.Object_Iron_Gate;
-import object.Object_ManaCrystal;
 
 public class Enemy_DemonLord extends Entity {
 	GamePanel gp;
@@ -23,14 +21,14 @@ public class Enemy_DemonLord extends Entity {
 		type = type_enemy;
 		boss = true;
 		name = enemyName;
-		defaultSpeed = 1;
+		defaultSpeed = 3;
 		speed = defaultSpeed;
-		maxHP = 50;
+		maxHP = 1000;
 		HP = maxHP;
-		attack = 4;
-		defense = 3;
-		EXP = 50;
-		knockbackPower = 8;
+		attack = 6;
+		defense = 8;
+		EXP = 1000;
+		knockbackPower = 100;
         sleep = true;
 		
 		int size = gp.tileSize*3;
@@ -73,10 +71,24 @@ public class Enemy_DemonLord extends Entity {
 	}
 
 	public void setDialogue(){
-		dialogue[0][0] = "Welcome.";
-		dialogue[0][1] = "You seem to be making a name for yourself, hero.";
-        dialogue[0][2] = "Unfortunately, the Demon Lord sees it fit to \nsee your true capabilities.";
-        dialogue[0][3] = "Let us do battle.";
+		dialogue[0][0] = "Ah, hero.";
+		dialogue[0][1] = "You have finally arrived.";
+        dialogue[0][2] = "It seems you have met Lao Xi the Monk...";
+        dialogue[0][3] = "And Renovamen the Necromancer...";
+ 		dialogue[0][4] = "But what you don't understand is that they were once \nhuman.";
+		dialogue[0][5] = "And needless to say, it wasn't my fault they turned out \nthis way.";
+		dialogue[0][6] = "But alas, I exist because they allowed it.";
+		dialogue[0][7] = "And I will end because they demand it.";
+		dialogue[0][8] = "Hero...";
+		dialogue[0][9] = "Key forces are at play here...";
+		dialogue[0][10] = "Everything happens for a reason.";
+		dialogue[0][11] = "And all of my generals... They keep the chaos at bay.";
+		dialogue[0][12] = "May I ask you... Who sent you here?";
+		dialogue[0][13] = "You are clearly not from this world.";
+		dialogue[0][14] = "No matter. Just know that whoever did summon you here is...";
+		dialogue[0][15] = "I cannot say any more. I fear it may ruin the fabric of time.";
+		dialogue[0][16] = "Grant me this final battle, hero.";
+
 	}
 
 	public void setMovement(){	
@@ -110,7 +122,7 @@ public class Enemy_DemonLord extends Entity {
 	public void checkDrop(){
 
         gp.bossBattleOn = false;
-        Progress.demonMonkDefeated = true;
+        Progress.demonLordDefeated = true;
 
         // Restore Previous Music
         gp.stopMusic();
@@ -124,17 +136,7 @@ public class Enemy_DemonLord extends Entity {
             }
         }
 
-		int i = new Random().nextInt(4);
+		dropItem(new Object_Heart(gp));
 
-		if (i == 0 || i == 3){
-			dropItem(new Object_Gold(gp));
-		}
-
-		if(i == 1){
-			dropItem(new Object_Heart(gp));
-		}
-		if(i == 2){
-			dropItem(new Object_ManaCrystal(gp));
-		}
 	}
 }

@@ -1,5 +1,6 @@
 package enemy;
 
+import data.Progress;
 import entity.Entity;
 import main.GamePanel;
 import object.Object_Paddle;
@@ -17,9 +18,9 @@ public class Enemy_Orc extends Entity{
         name = "Orc";
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxHP = 10;
+        maxHP = 15;
         HP = maxHP;
-        attack = 5; 
+        attack = 3; 
         defense = 2;
         EXP = 10;
         knockbackPower = 6;
@@ -94,6 +95,7 @@ public class Enemy_Orc extends Entity{
     }
 
     public void checkDrop(){
+        Progress.orcDefeated = true;
         dropItem(new Object_Paddle(gp));
     }
 

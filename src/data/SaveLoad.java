@@ -34,6 +34,17 @@ public class SaveLoad {
             ds.EXP = gp.player.EXP; 
             ds.nextLevelEXP = gp.player.nextLevelEXP;
             ds.gold = gp.player.gold;
+            ds.currentMap = gp.currentMap; 
+            ds.currentArea = gp.currentArea; 
+            ds.currentLevel = gp.currentLevel; 
+            ds.previousLevel = gp.previousLevel; 
+
+            // Progress
+            ds.orcDefeated = Progress.orcDefeated;
+            ds.demonMonkDefeated = Progress.demonMonkDefeated; 
+            ds.necromancerDefeated = Progress.necromancerDefeated;
+            ds.demonLordDefeated = Progress.demonLordDefeated; 
+
 
             // Player Inventory
             for(int i = 0; i < gp.player.inventory.size(); i++){
@@ -170,6 +181,16 @@ public class SaveLoad {
             gp.player.EXP = ds.EXP;
             gp.player.nextLevelEXP = ds.nextLevelEXP;
             gp.player.gold = ds.gold;
+            gp.currentMap = ds.currentMap;
+            gp.currentArea = ds.currentArea;
+            gp.currentLevel = ds.currentLevel;
+            gp.previousLevel = ds.previousLevel;
+
+            // Progress
+            Progress.orcDefeated = ds.orcDefeated;
+            Progress.demonMonkDefeated = ds.demonMonkDefeated;
+            Progress.necromancerDefeated = ds.necromancerDefeated;
+            Progress.demonLordDefeated = ds.demonLordDefeated;
 
             // Player Inventory
             gp.player.inventory.clear();

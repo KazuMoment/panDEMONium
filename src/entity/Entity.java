@@ -396,7 +396,7 @@ public class Entity {
                 shootCounter++;
             }
 
-            if (summonCounter < 30){
+            if (summonCounter < 60){
                 summonCounter++;
             }
 
@@ -513,45 +513,51 @@ public class Entity {
 
     public void damagePlayer(int attack){
         if (gp.player.invulnerable == false){
-                int damage = attack - gp.player.defense;
-
-                // Get opposite direction of attacker
-                String canGuardDirection = getOppositeDirection(direction);
-
-                if (gp.player.guarding == true && gp.player.direction == canGuardDirection){
-
-                    // Parry
-                    if (gp.player.guardCounter < 10){
-                        damage = 0;
-                        gp.playSoundEffect(18);
-                        setKnockback(this, gp.player, knockbackPower);
-                        parried = true;
-                        spriteCounter -= 120;
-                    }
-
-                    // Block
-                    else{ 
-                        damage /= 3;
-                        gp.playSoundEffect(17);
-                    }
+            int damage; 
+            if (attack >= gp.player.defense) {
+                    damage = (attack * 2) - gp.player.defense;
+                } 
+                else {
+                    damage = attack * (attack / gp.player.defense);
                 }
 
-                else{
-                    gp.playSoundEffect(7);
-                    if (damage < 1){
-                        damage = 1;
-                    }
+            // Get opposite direction of attacker
+            String canGuardDirection = getOppositeDirection(direction);
+
+            if (gp.player.guarding == true && gp.player.direction == canGuardDirection){
+
+                // Parry
+                if (gp.player.guardCounter < 10){
+                    damage = 0;
+                    gp.playSoundEffect(18);
+                    setKnockback(this, gp.player, knockbackPower);
+                    parried = true;
+                    spriteCounter -= 120;
                 }
 
-                if (damage != 0){
-                    gp.player.transparent = true;
-                    setKnockback(gp.player, this, knockbackPower);
+                // Block
+                else{ 
+                    damage /= 3;
+                    gp.playSoundEffect(17);
                 }
+            }
 
-                gp.player.HP -= damage;
-                gp.player.invulnerable = true;
-                
-            } 
+            else{
+                gp.playSoundEffect(7);
+                if (damage < 1){
+                    damage = 1;
+                }
+            }
+
+            if (damage != 0){
+                gp.player.transparent = true;
+                setKnockback(gp.player, this, knockbackPower);
+            }
+
+            gp.player.HP -= damage;
+            gp.player.invulnerable = true;
+            
+        } 
     }
 
     public boolean inCamera(){

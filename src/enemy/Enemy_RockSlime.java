@@ -22,10 +22,10 @@ public class Enemy_RockSlime extends Entity{
         name = "Rock Slime";
         defaultSpeed = (int)1.5;
         speed = defaultSpeed;
-        maxHP = 10;
+        maxHP = 15;
         HP = maxHP;
         attack = 2; 
-        defense = 2;
+        defense = 5;
         EXP = 4;
         projectile = new Object_Lavaball(gp);
 

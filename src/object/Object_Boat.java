@@ -1,7 +1,6 @@
 package object;
 
 import entity.Entity;
-import entity.NPC_Piyaye;
 import main.GamePanel;
 
 public class Object_Boat extends Entity {
@@ -33,28 +32,10 @@ public class Object_Boat extends Entity {
 	public void setDialogue(){
 
 		dialogue[0][0] = "It's a boat. It's missing some parts though.";
-		
-		dialogue[1][0] = "Helped Piyaye fix the boat!";
-		dialogue[1][1] = "Now you can hop on the boat!";
 
 	}
 
 	public void interact(){
-	    for (int i = 0; i < gp.npc[1].length; i++) {
-			if (gp.npc[gp.currentMap][i].name.equals(NPC_Piyaye.npcName)){
-				if (gp.npc[gp.currentMap][i].doneQuest1 == false) {
-					startDialogue(this, 0);
-					break;
-				} 
-				else if (gp.npc[gp.currentMap][i].doneQuest1 == true){
-					gp.playSoundEffect(4);
-					opened = true;
-					down1 = image2;
-					collision = false;
-					startDialogue(this, 1);
-					break;
-				}
-			}        
-	    }
+		startDialogue(this, 0);
 	}
 }

@@ -14,7 +14,7 @@ public class Object_Seal extends Entity{
 		name = objectName;
 		price = 23;
 		down1 = setup("/objects/seal",gp.tileSize,gp.tileSize);
-		description = "[" + name + "]\nA seal that is emitting a really strange aura.";
+		description = "[" + name + "]\nA seal that is emitting a \nreally strange aura.";
 	
 		setDialogue();
 	}

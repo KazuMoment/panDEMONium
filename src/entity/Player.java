@@ -7,10 +7,6 @@ import java.awt.image.BufferedImage;
 
 import main.GamePanel;
 import main.KeyHandler;
-import object.Object_Key;
-import object.Object_Lantern;
-import object.Object_Paddle;
-import object.Object_Sword_Vorlorn;
 import object.Object_Fireball;
 import object.Object_Health_Potion_Small;
 
@@ -85,6 +81,15 @@ public class Player extends Entity{
             case 3:
             case 4:
             case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 9: worldX = gp.tileSize * 31; worldY = gp.tileSize * 38; break;
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+            case 14: worldX = gp.tileSize * 21; worldY = gp.tileSize * 35; break;
             default: 
         }
         direction = "down";
@@ -111,13 +116,8 @@ public class Player extends Entity{
     }
 
     public void setItems(){
-
         inventory.clear();
-        inventory.add(new Object_Paddle(gp));
-        inventory.add(new Object_Key(gp));
         inventory.add(new Object_Health_Potion_Small(gp));
-        inventory.add(new Object_Lantern(gp));
-
     }
 
     public int getAttack(){
@@ -487,10 +487,10 @@ public class Player extends Entity{
                 gp.playSoundEffect(7);
                 int damage; 
                 if (gp.enemy[gp.currentMap][i].attack >= defense) {
-                    damage = gp.enemy[gp.currentMap][i].attack - defense;
+                    damage = (gp.enemy[gp.currentMap][i].attack * 2) - defense;
                 } 
                 else {
-                    damage = gp.enemy[gp.currentMap][i].attack / defense;
+                    damage = gp.enemy[gp.currentMap][i].attack * (gp.enemy[gp.currentMap][i].attack / defense);
                 }
                 
                 if (damage < 1){
@@ -517,13 +517,13 @@ public class Player extends Entity{
 
                 int damage;
                 if (attack >= gp.enemy[gp.currentMap][i].defense) {
-                    damage = attack - gp.enemy[gp.currentMap][i].defense;
+                    damage = (attack * 2) - gp.enemy[gp.currentMap][i].defense;
                 } 
                 else {
-                    damage = attack / gp.enemy[gp.currentMap][i].defense;
+                    damage = attack * (attack / gp.enemy[gp.currentMap][i].defense);
                 }
-                if (damage < 0){
-                    damage = 0;
+                if (damage < 1){
+                    damage = 1;
                 }
                 gp.enemy[gp.currentMap][i].HP -= damage;
                 gp.ui.addMessage(damage + " damage!");

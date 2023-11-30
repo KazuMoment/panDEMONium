@@ -2,7 +2,7 @@ package enemy;
 
 import entity.Entity;
 import main.GamePanel;
-import object.Object_Paddle;
+import object.Object_Heart;
 
 public class Enemy_Skeleton extends Entity{
 
@@ -19,7 +19,7 @@ public class Enemy_Skeleton extends Entity{
         name = enemyName;
         defaultSpeed = 2;
         speed = defaultSpeed;
-        maxHP = 5;
+        maxHP = 10;
         HP = maxHP;
         attack = 3; 
         defense = 2;
@@ -32,24 +32,20 @@ public class Enemy_Skeleton extends Entity{
         solidArea.height = 44;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        attackArea.width = 48;
-        attackArea.height = 45;
-        motion1_duration = 40;
-        motion2_duration = 85;
 
         getImage();
     }
 
     public void getImage(){
 
-        down1 = setup("/enemy/skeleton_left1", gp.tileSize, gp.tileSize);
-        down2 = setup("/enemy/skeleton_left2", gp.tileSize, gp.tileSize);
-        up1 = setup("/enemy/skeleton_right1", gp.tileSize, gp.tileSize);
-        up2 = setup("/enemy/skeleton_right2", gp.tileSize, gp.tileSize);
-        left1 = setup("/enemy/skeleton_left1", gp.tileSize, gp.tileSize);
-        left2 = setup("/enemy/skeleton_left2", gp.tileSize, gp.tileSize);
-        right1 = setup("/enemy/skeleton_right1", gp.tileSize, gp.tileSize);
-        right2 = setup("/enemy/skeleton_right2", gp.tileSize, gp.tileSize);
+        down1 = setup("/enemy/skeleton_down_1", gp.tileSize, gp.tileSize);
+        down2 = setup("/enemy/skeleton_down_2", gp.tileSize, gp.tileSize);
+        up1 = setup("/enemy/skeleton_up_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/enemy/skeleton_up_2", gp.tileSize, gp.tileSize);
+        left1 = setup("/enemy/skeleton_down_1", gp.tileSize, gp.tileSize);
+        left2 = setup("/enemy/skeleton_down_2", gp.tileSize, gp.tileSize);
+        right1 = setup("/enemy/skeleton_up_1", gp.tileSize, gp.tileSize);
+        right2 = setup("/enemy/skeleton_up_2", gp.tileSize, gp.tileSize);
 
     }
 
@@ -82,7 +78,7 @@ public class Enemy_Skeleton extends Entity{
     }
 
     public void checkDrop(){
-        dropItem(new Object_Paddle(gp));
+        dropItem(new Object_Heart(gp));
     }
 
 }
