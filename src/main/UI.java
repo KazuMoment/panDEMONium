@@ -390,17 +390,17 @@ public class UI {
         if(recordCounter && delayCounter >120){
             //RecordScreen Placeholder
             sessionID = gp.toSQL.getValue(1, currentSessionID);
-            level = gp.toSQL.getValue(3, currentSessionID);
-            maxHP = gp.toSQL.getValue(4, currentSessionID);
-            hp = gp.toSQL.getValue(5, currentSessionID);
-            maxMana = gp.toSQL.getValue(6, currentSessionID);
-            mana = gp.toSQL.getValue(7, currentSessionID);
-            strength = gp.toSQL.getValue(8, currentSessionID);
-            dexterity = gp.toSQL.getValue(9, currentSessionID);
-            player_gold = gp.toSQL.getValue(10, currentSessionID);
-            weapon = gp.toSQL.getValue(11, currentSessionID);
-            shield = gp.toSQL.getValue(12, currentSessionID);
-            playtime = gp.toSQL.getValue(13, currentSessionID);
+            level = gp.toSQL.getValue(2, currentSessionID);
+            maxHP = gp.toSQL.getValue(3, currentSessionID);
+            hp = gp.toSQL.getValue(4, currentSessionID);
+            maxMana = gp.toSQL.getValue(5, currentSessionID);
+            mana = gp.toSQL.getValue(6, currentSessionID);
+            strength = gp.toSQL.getValue(7, currentSessionID);
+            dexterity = gp.toSQL.getValue(8, currentSessionID);
+            player_gold = gp.toSQL.getValue(9, currentSessionID);
+            weapon = gp.toSQL.getValue(10, currentSessionID);
+            shield = gp.toSQL.getValue(11, currentSessionID);
+            playtime = gp.toSQL.getValue(12, currentSessionID);
             recordCounter = false;
             delayCounter = 0;
         }
@@ -444,10 +444,12 @@ public class UI {
         textY += lineHeight;
         g2.drawString("Play Time", textX, textY);
         textY += lineHeight * 3;
-        textX += 250;
-        g2.drawString("Next >>", textX, textY);
-        textX -= 582;
-        g2.drawString("<< Prev", textX, textY);
+        textX -= 332;
+        g2.drawString("Next: =>", textX, textY);
+        textY += lineHeight;
+        g2.drawString("Prev: <=", textX, textY);
+        textY += lineHeight;
+        g2.drawString("Back to Title Screen: Enter", textX, textY);
 
         // Display Parameter Values
         int tailX = (frameX + frameWidth) - 450;
