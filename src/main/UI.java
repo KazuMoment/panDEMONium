@@ -41,6 +41,7 @@ public class UI {
     boolean recordCounter = true;
 
     String sessionID;
+    int currentSessionID = 1;
     String level;
     String maxHP;
     String hp;
