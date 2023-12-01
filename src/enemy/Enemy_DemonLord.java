@@ -5,8 +5,7 @@ import java.awt.Rectangle;
 import data.Progress;
 import entity.Entity;
 import main.GamePanel;
-
-import object.Object_Heart;
+import object.Object_DemonLord_Helmet;
 import object.Object_Iron_Gate;
 
 public class Enemy_DemonLord extends Entity {
@@ -136,7 +135,7 @@ public class Enemy_DemonLord extends Entity {
             }
         }
 
-		dropItem(new Object_Heart(gp));
+		dropItem(new Object_DemonLord_Helmet(gp));
 
 	}
 }

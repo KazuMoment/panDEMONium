@@ -759,7 +759,7 @@ public class UI {
             }
 
 
-            slotX += gp.tileSize;
+            slotX += slotSize;
 
             if (i == 4 || i == 9 || i == 14){
                 slotX = slotXStart;
@@ -771,8 +771,8 @@ public class UI {
 
         // Cursor
         if (cursor == true){
-            int cursorX = slotXStart + (gp.tileSize * slotColumn);
-            int cursorY = slotYStart + (gp.tileSize * slotRow);
+            int cursorX = slotXStart + (slotSize * slotColumn);
+            int cursorY = slotYStart + (slotSize * slotRow);
             int cursorWidth = gp.tileSize;
             int cursorHeight = gp.tileSize;
 

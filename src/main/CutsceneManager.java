@@ -7,6 +7,7 @@ import enemy.Enemy_DemonMonk;
 import enemy.Enemy_Necromancer;
 import enemy.Enemy_Skeleton;
 import entity.PlayerDummy;
+import object.Object_DemonLord_Helmet;
 import object.Object_Iron_Gate;
 import object.Object_WitheredTree;
 
@@ -15,12 +16,16 @@ public class CutsceneManager {
     Graphics2D g2;
     public int sceneNumber;
     public int scenePhase;
+    int counter = 0;
+    float alpha = 0;
+    int y = 0;
 
     // Scene Number
     public final int NA = 0;
     public final int demonMonk = 1;
     public final int necromancer = 2;
     public final int demonLord = 3;
+    public final int ending = 4;
 
 
     public CutsceneManager(GamePanel gp){
@@ -34,7 +39,7 @@ public class CutsceneManager {
             case demonMonk: scene_demonMonk(); break;
             case necromancer: scene_necromancer(); break;
             case demonLord: scene_demonLord(); break;
-            
+            case ending: scene_ending(); break;
         }
 
     }
@@ -372,6 +377,30 @@ public class CutsceneManager {
             // Change Music
             gp.playMusic(0);
         }
+
+    }
+
+     public void scene_ending(){
+
+        if (scenePhase == 0){
+            gp.stopMusic();
+            gp.ui.npc = new Object_DemonLord_Helmet(gp);
+            scenePhase++;
+        }
+
+        if (scenePhase == 1){
+
+            // Display dialogue
+            gp.ui.drawDialogueScreen();
+
+        }
+
+        if (scenePhase == 2){
+
+            
+
+        }
+
 
     }
 
