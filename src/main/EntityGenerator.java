@@ -40,6 +40,8 @@ import object.Object_Slimeball;
 import object.Object_Sword_Tinvaak;
 import object.Object_Sword_Vorlorn;
 import object.Object_Tent;
+import object.Object_WaterBall;
+import object.Object_WitheredTree;
 
 public class EntityGenerator {
 
@@ -82,6 +84,8 @@ public class EntityGenerator {
             case Object_Sword_Tinvaak.objectName: obj = new Object_Sword_Tinvaak(gp); break;   
             case Object_Sword_Vorlorn.objectName: obj = new Object_Sword_Vorlorn(gp); break;
             case Object_Tent.objectName: obj = new Object_Tent(gp); break; 
+            case Object_WaterBall.objectName: obj = new Object_WaterBall(gp); break;
+            case Object_WitheredTree.objectName: obj = new Object_WitheredTree(gp); break;
         }
         return obj;
     }

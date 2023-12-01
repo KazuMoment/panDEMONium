@@ -50,14 +50,6 @@ public class EventHandler {
 
     public void setDialogue(){
 
-        eventMaster.dialogue[0][0] = "Oh, finally!";
-        
-        eventMaster.dialogue[1][0] = "You drank the water.\nYour HP and MP have been recovered!\nProgress is saved.";
-
-        eventMaster.dialogue[2][0] = "The seal... keeps them at bay...";
-
-        eventMaster.dialogue[3][0] = "Salvation... was supposed to be achieved...";
-
     }
 
     public void checkEvent(){
@@ -97,7 +89,7 @@ public class EventHandler {
             else if (hit(8, 20, 7, "any") == true){teleport(9, 31, 40, gp.dungeon, gp.vorlorn_dungeon);} // dungeon 
             else if (hit(9, 31, 40, "any") == true){teleport(8, 20, 7, gp.dungeon, gp.vorlorn_village);} // back to village 
             else if (hit(8, 38, 8, "any") == true){teleport(2, 25, 31, gp.indoor, gp.merchant_tent);} // merchant tent 
-            else if (hit(2, 25, 31, "any") == true && gp.previousLevel == gp.vorlorn_village){teleport(8, 38, 8, gp.outdoor, gp.vorlorn_village);} // to village 2
+            else if (hit(2, 25, 31, "any") == true && gp.previousLevel == gp.vorlorn_village){teleport(8, 38, 8, gp.dungeon, gp.vorlorn_village);} // to village 2
             else if (hit(8, 27, 28, "up") == true){teleport(10, 23, 29, gp.indoor, gp.vorlorn_townhall);} // mayor office
             else if (hit(10, 23, 29, "down") == true){teleport(8, 27, 28, gp.dungeon, gp.vorlorn_village);} // back to village
             else if (hit(8, 18, 34, "up") == true){teleport(11, 30, 32, gp.indoor, gp.vorlorn_house1);} // house1
@@ -155,24 +147,6 @@ public class EventHandler {
         }
 
         return hit;
-    }
-
-    public void damagePit(int gameState){
-        gp.gameState = gameState;
-        eventMaster.startDialogue(eventMaster, 0);
-        gp.player.HP -= 1;
-        canTriggerEvent = false;
-    }
-
-    public void healingPool (int gameState){
-        if (gp.keyH.enterPressed == true){
-            gp.gameState = gameState;
-            eventMaster.startDialogue(eventMaster, 1);
-            gp.player.HP = gp.player.maxHP;
-            gp.player.MP = gp.player.maxMP;
-            gp.aSetter.setEnemy();
-            gp.saveLoad.save();
-        }
     }
 
     public void teleport(int map, int column, int row, int area, int level){
