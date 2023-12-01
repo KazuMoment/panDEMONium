@@ -14,6 +14,7 @@ public class NPC_Martha extends Entity{
 
         direction = "left";
         speed = 1;
+        name = npcName;
 
         solidArea = new Rectangle(8, 16, 32, 32);
         solidAreaDefaultX = solidArea.x;
