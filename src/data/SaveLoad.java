@@ -36,7 +36,7 @@ public class SaveLoad {
             ds.gold = gp.player.gold;
             ds.worldX = gp.player.worldX;
             ds.worldY = gp.player.worldY;
-            
+
             ds.currentMap = gp.currentMap; 
             ds.currentArea = gp.currentArea; 
             ds.currentLevel = gp.currentLevel; 
@@ -211,6 +211,7 @@ public class SaveLoad {
             gp.player.getAttack();
             gp.player.getDefense();
             gp.player.getAttackImage();
+            gp.player.getGuardImage();
 
             // Objects on Map
             for (int mapNum = 0; mapNum < gp.maxMap; mapNum++){
