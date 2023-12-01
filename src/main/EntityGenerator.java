@@ -71,7 +71,7 @@ public class EntityGenerator {
             case Object_Gold.objectName: obj = new Object_Gold(gp); break;
             case Object_Health_Potion_Small.objectName: obj = new Object_Health_Potion_Small(gp); break;
             case Object_Heart.objectName: obj = new Object_Heart(gp); break;
-            case Object_Iron_Gate.objectName: new Object_Iron_Gate(gp); break;
+            case Object_Iron_Gate.objectName: obj = new Object_Iron_Gate(gp); break;
             case Object_Key.objectName: obj = new Object_Key(gp); break;
             case Object_Lantern.objectName: obj = new Object_Lantern(gp); break;
             case Object_Lavaball.objectName: obj = new Object_Lavaball(gp); break;
