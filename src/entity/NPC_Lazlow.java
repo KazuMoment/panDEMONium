@@ -13,6 +13,7 @@ public class NPC_Lazlow extends Entity{
 
         direction = "down";
         speed = 0;
+        name = npcName;
 
         solidArea = new Rectangle(8, 16, 32, 32);
         solidAreaDefaultX = solidArea.x;
