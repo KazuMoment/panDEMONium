@@ -60,6 +60,7 @@ public class Object_Paddle extends Entity{
 				gp.obj[gp.currentMap][i].name == Object_Boat.objectName &&
 				gp.obj[gp.currentMap][i].collision == true){
 					gp.obj[gp.currentMap][i].collision = false;
+					gp.obj[gp.currentMap][i].opened = true;
 					gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image2;
 					break;
 			}

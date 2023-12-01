@@ -36,15 +36,6 @@ public class Object_Lever extends Entity{
 
     }
 
-    public void setOpen(int mapNumber, int index){
-        obstacleNumber = mapNumber;
-        obstacleIndex = index;
-    }
-
-    public void openObstacle(int obstacleNumber, int obstacleIndex){
-        gp.obj[obstacleNumber][obstacleIndex] = null;
-    }
-
     public void interact(){
 
         if (opened == false){
@@ -52,7 +43,11 @@ public class Object_Lever extends Entity{
             startDialogue(this, 0);
             down1 = image2;
             opened = true;
-            openObstacle(obstacleNumber, obstacleIndex);
+            for (int i = 0; i < gp.obj[1].length; i++){
+                if (gp.obj[gp.currentMap][i] != null && gp.obj[gp.currentMap][i].name.equals(Object_Iron_Gate.objectName)){
+                    gp.obj[gp.currentMap][i] = null;
+                }
+            }
             gp.playSoundEffect(24);
         }
 

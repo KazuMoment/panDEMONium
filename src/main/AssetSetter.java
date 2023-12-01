@@ -67,7 +67,7 @@ public class AssetSetter {
 		gp.obj[mapNumber][i] = new Object_Chest(gp);
 		gp.obj[mapNumber][i].setLoot(new Object_Health_Potion_Small(gp));
 		gp.obj[mapNumber][i].worldX = gp.tileSize * 29;
-		gp.obj[mapNumber][i].worldY = gp.tileSize * 40;
+		gp.obj[mapNumber][i].worldY = gp.tileSize * 38;
 		i++;
 
         gp.obj[mapNumber][i] = new Object_Chest(gp);
@@ -140,7 +140,6 @@ public class AssetSetter {
 		i++;
 
 		gp.obj[mapNumber][i] = new Object_Lever(gp);
-		gp.obj[mapNumber][i].setOpen(mapNumber, 2);
 		gp.obj[mapNumber][i].worldX = gp.tileSize * 15;
 		gp.obj[mapNumber][i].worldY = gp.tileSize * 20;
 		i++;
@@ -182,6 +181,14 @@ public class AssetSetter {
 		gp.obj[mapNumber][i].worldY = gp.tileSize * 34;
 		i++;
 
+		gp.obj[mapNumber][i] = new Object_Boat(gp);
+		gp.obj[mapNumber][i].worldX = gp.tileSize * 31;
+		gp.obj[mapNumber][i].worldY = gp.tileSize * 43;
+		gp.obj[mapNumber][i].collision = false;
+		gp.obj[mapNumber][i].opened = true;
+		gp.obj[mapNumber][i].down1 = gp.obj[mapNumber][i].image2;
+		i++;
+
 		mapNumber = 5;
 		i = 0; 
 		gp.obj[mapNumber][i] = new Object_Chest(gp);
@@ -220,6 +227,11 @@ public class AssetSetter {
 		gp.obj[mapNumber][i].worldY = gp.tileSize * 25;
 		i++;
 
+		gp.obj[mapNumber][i] = new Object_Bonfire(gp);
+		gp.obj[mapNumber][i].worldX = gp.tileSize*32;
+		gp.obj[mapNumber][i].worldY = gp.tileSize*28;
+		i++;
+
 		gp.obj[mapNumber][i] = new Object_Boat(gp);
 		gp.obj[mapNumber][i].worldX = gp.tileSize*14;
 		gp.obj[mapNumber][i].worldY = gp.tileSize*22;
@@ -252,6 +264,8 @@ public class AssetSetter {
 		gp.obj[mapNumber][i].worldX = gp.tileSize*21;
 		gp.obj[mapNumber][i].worldY = gp.tileSize*42;
 		gp.obj[mapNumber][i].collision = false;
+		gp.obj[mapNumber][i].opened = true;
+		gp.obj[mapNumber][i].down1 = gp.obj[mapNumber][i].image2;
 		i++;
 
 		gp.obj[mapNumber][i] = new Object_Bonfire(gp);

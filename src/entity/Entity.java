@@ -217,7 +217,6 @@ public class Entity {
 
     public void setReward(Entity reward){}
 
-    public void setOpen(int mapNumber, int index){}
 
     public void setMovement(){}
 

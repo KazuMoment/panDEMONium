@@ -94,6 +94,7 @@ public class NPC_Mounsi extends Entity{
                         gp.obj[mapNum][i].name == Object_Boat.objectName &&
                         gp.obj[mapNum][i].collision == true){
                             gp.obj[mapNum][i].collision = false;
+                            gp.obj[mapNum][i].opened = true;
                             gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image2;
                             break;
                     }

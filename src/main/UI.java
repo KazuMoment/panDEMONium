@@ -536,9 +536,12 @@ public class UI {
         y += gp.tileSize;
 
         if (npc.dialogue[npc.dialogueSet][npc.dialogueIndex] != null){
+
+            // currentDialogue = npc.dialogue[npc.dialogueSet][npc.dialogueIndex];
+
             char characters[] = npc.dialogue[npc.dialogueSet][npc.dialogueIndex].toCharArray();
             if (charIndex < characters.length){
-                gp.playSoundEffect(19);
+                // gp.playSoundEffect(19);
                 String s  = String.valueOf(characters[charIndex]);
                 combinedText = combinedText + s;
                 currentDialogue = combinedText;

@@ -71,7 +71,7 @@ public class EventHandler {
             
             // Tinvaak Village
             else if (hit(0, 34, 39, "down") == true){teleport(3, 31, 42, gp.outdoor, gp.tinvaak_village);} // tinvaak village
-            else if (hit(3, 31, 42, "down") == true){teleport(0, 34, 38, gp.outdoor, gp.tutorial_forest);} // back to forest 
+            else if (hit(3, 31, 43, "down") == true){teleport(0, 34, 38, gp.outdoor, gp.tutorial_forest);} // back to forest 
             else if (hit(3, 15, 21, "up") == true){teleport(4, 23, 29, gp.indoor, gp.tinvaak_townhall);} // tinvaak town hall
             else if (hit (4, 23, 30, "down") == true){teleport(3, 15, 21, gp.outdoor, gp.tinvaak_village);} // village 1
             else if (hit (3, 19, 32, "any") == true){teleport(5, 30, 31, gp.indoor, gp.tinvaak_house1);} // house 1
