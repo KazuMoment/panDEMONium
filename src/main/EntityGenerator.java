@@ -2,13 +2,18 @@ package main;
 
 import entity.Entity;
 import entity.NPC_BJ;
+import entity.NPC_Bogart;
 import entity.NPC_Cally;
 import entity.NPC_Farid;
 import entity.NPC_Fischer;
 import entity.NPC_Hal;
 import entity.NPC_Holly;
 import entity.NPC_JB;
+import entity.NPC_Jobert;
 import entity.NPC_Kane;
+import entity.NPC_Lazlow;
+import entity.NPC_Martha;
+import entity.NPC_Mounsi;
 import entity.NPC_Piyaye;
 import entity.NPC_Reul;
 import entity.NPC_Wally;
@@ -96,13 +101,18 @@ public class EntityGenerator {
 
         switch(npcName){
             case NPC_BJ.npcName: npc = new NPC_BJ(gp); break;
+            case NPC_Bogart.npcName: npc = new NPC_Bogart(gp); break;
             case NPC_Cally.npcName: npc = new NPC_Cally(gp); break;
             case NPC_Farid.npcName: npc = new NPC_Farid(gp); break;
             case NPC_Fischer.npcName: npc = new NPC_Fischer(gp); break;
             case NPC_Hal.npcName: npc = new NPC_Hal(gp); break;
             case NPC_Holly.npcName: npc = new NPC_Holly(gp); break;
             case NPC_JB.npcName: npc = new NPC_JB(gp); break;
+            case NPC_Jobert.npcName: npc = new NPC_Jobert(gp); break;
             case NPC_Kane.npcName: npc = new NPC_Kane(gp); break;
+            case NPC_Lazlow.npcName: npc = new NPC_Lazlow(gp); break;
+            case NPC_Martha.npcName: npc = new NPC_Martha(gp); break;
+            case NPC_Mounsi.npcName: npc = new NPC_Mounsi(gp); break;
             case NPC_Piyaye.npcName: npc = new NPC_Piyaye(gp); break;
             case NPC_Reul.npcName: npc = new NPC_Reul(gp); break;
             case NPC_Wally.npcName: npc = new NPC_Wally(gp); break;    

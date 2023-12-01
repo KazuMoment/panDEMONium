@@ -16,6 +16,8 @@ public class DataStorage implements Serializable{
     int EXP;
     int nextLevelEXP;
     int gold;
+    int worldX;
+    int worldY;
 
 
     // Current Area

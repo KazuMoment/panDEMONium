@@ -34,6 +34,9 @@ public class SaveLoad {
             ds.EXP = gp.player.EXP; 
             ds.nextLevelEXP = gp.player.nextLevelEXP;
             ds.gold = gp.player.gold;
+            ds.worldX = gp.player.worldX;
+            ds.worldY = gp.player.worldY;
+            
             ds.currentMap = gp.currentMap; 
             ds.currentArea = gp.currentArea; 
             ds.currentLevel = gp.currentLevel; 
@@ -181,6 +184,9 @@ public class SaveLoad {
             gp.player.EXP = ds.EXP;
             gp.player.nextLevelEXP = ds.nextLevelEXP;
             gp.player.gold = ds.gold;
+            gp.player.worldX = ds.worldX;
+            gp.player.worldY = ds.worldY;
+
             gp.currentMap = ds.currentMap;
             gp.currentArea = ds.currentArea;
             gp.currentLevel = ds.currentLevel;
