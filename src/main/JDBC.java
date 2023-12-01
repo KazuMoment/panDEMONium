@@ -10,7 +10,7 @@ public class JDBC {
     String url = "jdbc:sqlite:mydatabase.db";
     public Connection connection = null;
     public Statement statement = null;
-    public int SessionID;
+    public int SessionID = getLastSessionID();
     
     public void createDatabase() throws ClassNotFoundException {
         try {
