@@ -30,10 +30,10 @@ public class Enemy_Necromancer extends Entity{
         speed = defaultSpeed;
         maxHP = 500;
         HP = maxHP;
-        attack = 6; 
-        defense = 7;
-        knockbackPower = 1;
-        EXP = 50;
+        attack = 9; 
+        defense = 8;
+        knockbackPower = 10;
+        EXP = 200;
         projectile = new Object_Purple_Haze(gp);
 
         int size = gp.tileSize*3;
@@ -132,10 +132,10 @@ public class Enemy_Necromancer extends Entity{
                 gp.obj[gp.currentMap][i] = null;
             }
         }
-        
-        dropItem(new Object_Sacred_Rose(gp));
 
-        startDialogue(gp.eHandler.eventMaster, 3);
+        if (Progress.completedGame == false){
+            dropItem(new Object_Sacred_Rose(gp));
+        }
 
     }
 

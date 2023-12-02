@@ -15,7 +15,7 @@ public class Object_DemonLord_Helmet extends Entity {
 
         type = type_pickuponly;
         name = objName;
-        down1 = setup("/object/Demon Lord Helm", gp.tileSize, gp.tileSize);
+        down1 = setup("/objects/Demon Lord Helm", gp.tileSize, gp.tileSize);
 
         setDialogue();
 

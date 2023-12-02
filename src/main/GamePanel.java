@@ -132,14 +132,17 @@ public class GamePanel extends JPanel implements Runnable{
     public final int demon_lair = 114;
 
     public GamePanel(){
+
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
-    }
 
+    }
+    
     public void setupGame(){
+
         try {
             toSQL.createDatabase();
         } catch (ClassNotFoundException e) {
@@ -431,12 +434,13 @@ public class GamePanel extends JPanel implements Runnable{
                 case tinvaak_house3:
                 case tinvaak_townhall: playMusic(26); break;
                 case tinvaak_dungeon: playMusic(25); break;
-                case merchant_tent: playMusic(22); break;
+                case merchant_tent: playMusic(23); break;
                 case vorlorn_village:
                 case vorlorn_house1:
                 case vorlorn_house2: 
                 case vorlorn_house3:
-                case vorlorn_townhall: playMusic(26); break;
+                case vorlorn_townhall: playMusic(27); break;
+                case vorlorn_dungeon: playMusic(28); break;
                 case demon_lair: playMusic(1); break;
             }
         }

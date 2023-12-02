@@ -44,6 +44,9 @@ public class Sound {
         soundURL[24] = getClass().getResource("/sound/open wall.wav");   
         soundURL[25] = getClass().getResource("/sound/Tinvaak Dungeon - panDEMONium.wav");  
         soundURL[26] = getClass().getResource("/sound/Tinvaak Village - panDEMONium.wav"); 
+        soundURL[27] = getClass().getResource("/sound/Under Cover of Vorlorn Village - panDEMONium.wav"); 
+        soundURL[28] = getClass().getResource("/sound/Under Cover of Vorlorn Dungeon - panDEMONium.wav"); 
+        soundURL[29] = getClass().getResource("/sound/Under Cover of Necromancy - panDEMONium.wav"); 
 
     }
 

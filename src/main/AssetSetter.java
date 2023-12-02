@@ -1,6 +1,7 @@
 package main;
 
 import data.Progress;
+import enemy.Enemy_BlueSlime;
 import enemy.Enemy_DemonLord;
 import enemy.Enemy_GreenSlime;
 import enemy.Enemy_DemonMonk;
@@ -490,6 +491,50 @@ public class AssetSetter {
 			gp.enemy[mapNumber][i].worldY = gp.tileSize * 27;
 			i++;
 		}
+
+		mapNumber = 3;
+		i = 0;
+
+		gp.enemy[mapNumber][i] = new Enemy_BlueSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 25;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 9;
+		i++;
+		
+		gp.enemy[mapNumber][i] = new Enemy_BlueSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 26;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 11;
+		i++;
+
+		gp.enemy[mapNumber][i] = new Enemy_BlueSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 25;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 9;
+		i++;
+
+		gp.enemy[mapNumber][i] = new Enemy_BlueSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 31;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 14;
+		i++;
+
+		gp.enemy[mapNumber][i] = new Enemy_BlueSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 19;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 10;
+		i++;
+
+		gp.enemy[mapNumber][i] = new Enemy_BlueSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 9;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 11;
+		i++;
+
+		gp.enemy[mapNumber][i] = new Enemy_RockSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 39;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 12;
+		i++;
+
+		gp.enemy[mapNumber][i] = new Enemy_RockSlime(gp);
+		gp.enemy[mapNumber][i].worldX = gp.tileSize * 38;
+		gp.enemy[mapNumber][i].worldY = gp.tileSize * 9;
+		i++;
+
 
 		// village_2
 		mapNumber = 8;

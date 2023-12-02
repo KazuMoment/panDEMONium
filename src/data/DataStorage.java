@@ -31,6 +31,7 @@ public class DataStorage implements Serializable{
     boolean demonMonkDefeated;
     boolean necromancerDefeated;
     boolean demonLordDefeated;
+    boolean completedGame;
 
     // Player Inventory
     ArrayList<String> itemNames = new ArrayList<>();

@@ -1,7 +1,10 @@
 package main;
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Graphics2D;
 
+import data.Progress;
 import enemy.Enemy_DemonLord;
 import enemy.Enemy_DemonMonk;
 import enemy.Enemy_Necromancer;
@@ -19,6 +22,7 @@ public class CutsceneManager {
     int counter = 0;
     float alpha = 0;
     int y = 0;
+    String endCredits;
 
     // Scene Number
     public final int NA = 0;
@@ -30,6 +34,25 @@ public class CutsceneManager {
 
     public CutsceneManager(GamePanel gp){
         this.gp = gp;
+
+        endCredits = "Lead Programmer/Music/Pixel Art\n"
+            + "Vency Gyro Capistrano"
+            + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+            + "Lead Pixel Artist\n"
+            + "Elwin Jen Barredo"
+            + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+            + "Level Designers\n"
+            + "Francois Louise Mosuela\n"
+            + "Cyrus Rol"
+            + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+            + "Database Designer\n"
+            + "Jon Endrick Babao"
+            + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+            + "Special Thanks to\n"
+            + "RyiSnow\n"
+            + "Ms. Jelen Mangubat\n"
+            + "Ms. Fatima Marie Agdon\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+            + "Thank you for playing!";
     }
     
     public void draw(Graphics2D g2){
@@ -283,7 +306,7 @@ public class CutsceneManager {
             gp.gameState = gp.playState;
 
             // Change Music
-            gp.playMusic(20);
+            gp.playMusic(29);
         }
 
     }
@@ -396,11 +419,142 @@ public class CutsceneManager {
         }
 
         if (scenePhase == 2){
+            // Play sound effect
+            gp.playSoundEffect(24);
+            scenePhase++;
+        }
 
+        if (scenePhase == 3){
+            // Wait until sound effect ends
+            if (counterReached(200) == true){
+                scenePhase++;
+            }
+        }
+
+        if (scenePhase == 4){
+
+            // Screen gets darker
+            alpha += 0.005f;
+            if (alpha > 1f){
+                alpha = 1f;
+            }
+            drawBlackBackground(alpha);
+
+            if (alpha == 1f){
+                alpha = 0;
+                scenePhase++;
+            }
+        }
+
+        if (scenePhase == 5){
+
+            drawBlackBackground(1f);
+
+            alpha += 0.005f;
+            if (alpha > 1f){
+                alpha = 1f;
+            }
+
+            String text = "After picking up the Demon Lord's helmet,\n"
+                + "the girl could not resist putting it on.\n"
+                + "It was then that her body transformed,\n"
+                + "making her grow wings and grow larger in size.\n"
+                + "Little did she know... that the cycle only continues.";
+            drawString(alpha, 38f, 150, text, 70);
+
+            if (counterReached(600) == true){
+                gp.playMusic(21);
+                scenePhase++;
+            }
+        }
+
+        if (scenePhase == 6){
+
+            drawBlackBackground(1f);
+
+            drawString(1f, 120f, gp.screenHeight/2, "panDEMONium", 40);
+
+             if (counterReached(600) == true){
+                scenePhase++;
+            }
+        }
+
+        if (scenePhase == 7){
+
+            drawBlackBackground(1f);
             
+            y = gp.screenHeight/2;
+            drawString(1f, 38f, y, endCredits, 40);
+            
+            if (counterReached(480) == true){
+                scenePhase++;
+            }
 
         }
 
+        if (scenePhase == 8){
+
+            drawBlackBackground(1f);
+
+            y--;
+
+            drawString(1f, 38f, y, endCredits, 40);
+
+            if (counterReached(3700) == true){
+                // Reset
+                sceneNumber = NA;
+                scenePhase = 0;
+                gp.currentMap = 0;
+                gp.currentLevel = gp.tutorial_forest;
+                gp.player.setDefaultPosition();
+                gp.gameState = gp.playState;
+
+                // Change Music
+                gp.checkMusic();
+                Progress.completedGame = true;
+                Progress.demonMonkDefeated = false;
+                Progress.necromancerDefeated = false;
+                Progress.demonLordDefeated = false;
+            }
+
+        }
+
+    }
+
+    public boolean counterReached(int target){
+
+        boolean counterReached = false;
+        counter++;
+        if (counter > target){
+            counterReached = true;
+            counter = 0;
+        }
+
+        return counterReached;
+
+    }
+
+    public void drawBlackBackground(float alpha){
+        
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+        g2.setColor(Color.black);
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+    }
+
+    public void drawString(float alpha, float fontSize, int y, String text, int lineHeight){
+
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+        g2.setColor(Color.white);
+        g2.setFont(g2.getFont().deriveFont(fontSize));
+
+        for(String line: text.split("\n")){
+            int x = gp.ui.getXforCenteredText(line);
+            g2.drawString(line, x, y);
+            y += lineHeight;
+        }
+
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
     }
 

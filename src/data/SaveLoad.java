@@ -47,6 +47,7 @@ public class SaveLoad {
             ds.demonMonkDefeated = Progress.demonMonkDefeated; 
             ds.necromancerDefeated = Progress.necromancerDefeated;
             ds.demonLordDefeated = Progress.demonLordDefeated; 
+            ds.completedGame = Progress.completedGame;
 
 
             // Player Inventory
@@ -197,6 +198,7 @@ public class SaveLoad {
             Progress.demonMonkDefeated = ds.demonMonkDefeated;
             Progress.necromancerDefeated = ds.necromancerDefeated;
             Progress.demonLordDefeated = ds.demonLordDefeated;
+            Progress.completedGame = ds.completedGame;
 
             // Player Inventory
             gp.player.inventory.clear();

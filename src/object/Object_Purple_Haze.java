@@ -23,7 +23,7 @@ public class Object_Purple_Haze extends Projectile{
         maxHP = 70;
         HP = maxHP;
         knockbackPower = 3;
-        attack = 8;
+        attack = 3;
         useCost = 1;
         alive = false;
         getImage();

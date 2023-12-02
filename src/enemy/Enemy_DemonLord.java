@@ -6,6 +6,7 @@ import data.Progress;
 import entity.Entity;
 import main.GamePanel;
 import object.Object_DemonLord_Helmet;
+import object.Object_Fireball;
 import object.Object_Iron_Gate;
 
 public class Enemy_DemonLord extends Entity {
@@ -26,9 +27,10 @@ public class Enemy_DemonLord extends Entity {
 		HP = maxHP;
 		attack = 6;
 		defense = 8;
-		EXP = 1000;
-		knockbackPower = 100;
+		EXP = 10000;
+		knockbackPower = 30;
         sleep = true;
+		projectile = new Object_Fireball(gp);
 		
 		int size = gp.tileSize*3;
 		solidArea = new Rectangle(48, 48, size - 48 * 2, size - 48);

@@ -9,8 +9,6 @@ import main.GamePanel;
 import main.KeyHandler;
 import object.Object_Fireball;
 import object.Object_Health_Potion_Small;
-import object.Object_Sword_Vorlorn;
-
 
 public class Player extends Entity{
 
@@ -78,13 +76,13 @@ public class Player extends Entity{
         switch(gp.currentMap){
             case 0: worldX = gp.tileSize * 30; worldY = gp.tileSize * 26; break;
             case 1: worldX = gp.tileSize * 41; worldY = gp.tileSize * 40; break;
-            case 2: worldX = gp.tileSize * 25; worldY = gp.tileSize * 28; break;
-            case 3:
+            case 2: 
+            case 3: worldX = gp.tileSize * 17; worldY = gp.tileSize * 32; break;
             case 4:
             case 5:
             case 6:
             case 7:
-            case 8:
+            case 8: worldX = gp.tileSize * 31; worldY = gp.tileSize * 32; break;
             case 9: worldX = gp.tileSize * 31; worldY = gp.tileSize * 38; break;
             case 10:
             case 11:
@@ -119,20 +117,6 @@ public class Player extends Entity{
     public void setItems(){
         inventory.clear();
         inventory.add(new Object_Health_Potion_Small(gp));
-        inventory.add(new Object_Sword_Vorlorn(gp));
-        inventory.add(new Object_Sword_Vorlorn(gp));
-        inventory.add(new Object_Sword_Vorlorn(gp));
-        inventory.add(new Object_Sword_Vorlorn(gp));
-        inventory.add(new Object_Sword_Vorlorn(gp));
-        inventory.add(new Object_Sword_Vorlorn(gp));
-        inventory.add(new Object_Sword_Vorlorn(gp));
-        inventory.add(new Object_Sword_Vorlorn(gp));
-        inventory.add(new Object_Sword_Vorlorn(gp));
-        inventory.add(new Object_Sword_Vorlorn(gp));
-        inventory.add(new Object_Sword_Vorlorn(gp));
-        inventory.add(new Object_Sword_Vorlorn(gp));
-        inventory.add(new Object_Sword_Vorlorn(gp));
-        
     }
 
     public int getAttack(){

@@ -8,7 +8,7 @@ import main.GamePanel;
 import object.Object_Health_Potion_Small;
 import object.Object_Heart;
 import object.Object_Mana_Potion_Small;
-import object.Object_Slimeball;
+import object.Object_WaterBall;
 
 public class Enemy_BlueSlime extends Entity{
     GamePanel gp;
@@ -28,7 +28,7 @@ public class Enemy_BlueSlime extends Entity{
         attack = 3; 
         defense = 4;
         EXP = 3;
-        projectile = new Object_Slimeball(gp);
+        projectile = new Object_WaterBall(gp);
 
         solidArea.x = 2;
         solidArea.y = 6;

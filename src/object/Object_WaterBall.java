@@ -21,7 +21,7 @@ public class Object_WaterBall extends Projectile{
         speed = 5;
         maxHP = 100;
         HP = maxHP;
-        attack = 2;
+        attack = 1;
         useCost = 1;
         alive = false;
 

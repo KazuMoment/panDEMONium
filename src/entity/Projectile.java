@@ -32,7 +32,7 @@ public class Projectile extends Entity {
         if (user == gp.player){
             int enemyIndex = gp.collisionChecker.checkEntity(this, gp.enemy);
             if (enemyIndex != 999){
-                gp.player.damageEnemy(enemyIndex, this, attack * (gp.player.level/2), knockbackPower);
+                gp.player.damageEnemy(enemyIndex, this, attack * gp.player.level, knockbackPower);
                 generateParticle(user.projectile, gp.enemy[gp.currentMap][enemyIndex]);
                 alive = false;
             }
@@ -40,7 +40,7 @@ public class Projectile extends Entity {
         if (user != gp.player){
             boolean contactPlayer = gp.collisionChecker.checkPlayer(this);
             if (gp.player.invulnerable == false && contactPlayer == true){
-                damagePlayer(attack);
+                damagePlayer(attack * (user.attack/2));
                 generateParticle(user.projectile, user.projectile);
                 alive = false; 
             }
