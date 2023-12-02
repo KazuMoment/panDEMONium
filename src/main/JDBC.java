@@ -62,11 +62,11 @@ public class JDBC {
             if (resultSet.next()) {
                 return resultSet.getInt(1);
             } else {
-                return -1;
+                return 0;
             }
         } catch (Exception e) {
             System.out.println(e);
-            return -1;
+            return 0;
         }
     }
     

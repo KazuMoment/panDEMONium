@@ -123,8 +123,6 @@ public class Enemy_DemonMonk extends Entity {
             }
         }
 
-		startDialogue(gp.eHandler.eventMaster, 2);
-
 		if (Progress.completedGame == false){
 			dropItem(new Object_Seal(gp));
 		}

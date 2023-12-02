@@ -50,7 +50,7 @@ public class CutsceneManager {
             + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
             + "Special Thanks to\n"
             + "RyiSnow\n"
-            + "Ms. Jelen Mangubat\n"
+            + "Ms. Jeleen Mangubat\n"
             + "Ms. Fatima Marie Agdon\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
             + "Thank you for playing!";
     }

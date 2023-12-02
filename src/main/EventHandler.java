@@ -7,7 +7,7 @@ public class EventHandler {
 
     GamePanel gp;
     EventRectangle eventRectangle[][][];
-    public Entity eventMaster;
+    Entity eventMaster;
 
     int previousEventX, previousEventY;
     boolean canTriggerEvent = true;
