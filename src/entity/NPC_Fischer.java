@@ -2,6 +2,7 @@ package entity;
 
 import java.awt.Rectangle;
 
+import data.Progress;
 import main.GamePanel;
 import object.Object_Seal;
 
@@ -52,6 +53,9 @@ public class NPC_Fischer extends Entity {
         dialogue[2][2] = "Because of you, our village is safe now.";
         
         dialogue[3][0] = "I wish you goodluck to your future travels!";
+
+        dialogue[4][0] = "Thank you for getting rid of the evil from this world, adventurer!";
+        dialogue[4][1] = "I wish you goodluck to your future travels!";
         
     }
 
@@ -71,6 +75,10 @@ public class NPC_Fischer extends Entity {
 
         else {
             dialogueSet = 3;
+        }
+
+        if (Progress.completedGame == true){
+            dialogueSet = 4;
         }
 
         int index = gp.player.searchItemInInventory(Object_Seal.objectName);

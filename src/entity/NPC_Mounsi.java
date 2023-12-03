@@ -2,6 +2,7 @@ package entity;
 
 import java.awt.Rectangle;
 
+import data.Progress;
 import main.GamePanel;
 import object.Object_Boat;
 import object.Object_Sacred_Rose;
@@ -56,6 +57,12 @@ public class NPC_Mounsi extends Entity{
         dialogue[2][3] = "Thank you, adventurer.";
         dialogue[2][4] = "Our boat will be accessible now. Without the two generals to \nmaintain peace, you can challenge the Demon Lord!";
 
+        dialogue[3][0] = "Thank you, adventurer.";
+        dialogue[3][1] = "Our boat will be accessible now. Without the two generals to \nmaintain peace, you can challenge the Demon Lord!";
+
+        dialogue[4][0] = "Thank you for defeating the Demon Lord, adventurer!";
+        dialogue[4][1] = "Huh? What do you mean you became the Demon Lord?";
+
     }
 
     public void setMovement(){
@@ -65,7 +72,6 @@ public class NPC_Mounsi extends Entity{
     public void speak(){
     	facePlayer();
         startDialogue(this, dialogueSet);
-        dialogueSet++;
         
         if (introDone == false) {
         	for (int mapNum = 0; mapNum < gp.maxMap; mapNum++){
@@ -79,7 +85,7 @@ public class NPC_Mounsi extends Entity{
         	}
         }
         
-        if (introDone == true && dialogueSet > 1){
+        if (introDone == true && dialogueSet > 1 && doneQuest1 == true){
             dialogueSet = 1;
         }
 
@@ -100,7 +106,15 @@ public class NPC_Mounsi extends Entity{
                     }
                 }
             }
-        }       
+        }
+        
+        if (doneQuest1 == true){
+            dialogueSet = 3;
+        }
+
+        if (Progress.completedGame == true){
+            dialogueSet = 4;
+        }
 
     }
     

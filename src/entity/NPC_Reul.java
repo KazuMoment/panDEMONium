@@ -2,6 +2,7 @@ package entity;
 
 import java.awt.Rectangle;
 
+import data.Progress;
 import enemy.Enemy_GreenSlime;
 import main.GamePanel;
 
@@ -73,6 +74,9 @@ public class NPC_Reul extends Entity{
         dialogue[5][0] = "Received a Small Health Potion from Reul!";
 
         dialogue[6][0] = "I can't give you it yet. Your inventory is full.";
+
+        dialogue[7][0] = "As I thought, summoning you here was the best idea.";
+        dialogue[7][1] = "Do not believe what the Demon Lord said.\nYou should be thankful to be here.";
 
     }
 
@@ -156,6 +160,7 @@ public class NPC_Reul extends Entity{
     public void speak(){
         facePlayer();
         startDialogue(this, dialogueSet);
+
         if (doneQuest1 == true && doneQuest2 == false){
             dialogueSet = 2;
             dialogueSet++;
@@ -163,6 +168,7 @@ public class NPC_Reul extends Entity{
                 dialogueSet--;
             }
         }
+
         if (doneQuest2 == true){
             dialogueSet = 3;
             dialogueSet++;
@@ -180,6 +186,11 @@ public class NPC_Reul extends Entity{
                 dialogueSet--;
             }
         }
+
+        if (Progress.completedGame == true){
+            
+        }
+
     }
     
 }
