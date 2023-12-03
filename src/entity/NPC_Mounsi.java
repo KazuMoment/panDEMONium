@@ -77,11 +77,8 @@ public class NPC_Mounsi extends Entity{
             activateBogart();
         }
         
-        if (introDone == true && dialogueSet > 1 && doneQuest1 == false){
+        if (introDone == true && doneQuest1 == false){
             dialogueSet = 1;
-        }
-
-        if (introDone == true){
             searchSacredRose();
         }
         
@@ -113,8 +110,8 @@ public class NPC_Mounsi extends Entity{
         if (index != 999){
             dialogueSet = 2;
             gp.player.inventory.remove(index);
-            doneQuest1 = true;
             openBoat();
+            doneQuest1 = true;
         }
     }
 

@@ -142,7 +142,6 @@ public class GamePanel extends JPanel implements Runnable{
     }
     
     public void setupGame(){
-
         try {
             toSQL.createDatabase();
         } catch (ClassNotFoundException e) {
