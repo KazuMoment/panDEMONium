@@ -99,13 +99,13 @@ public class Lighting {
         // Check the state of the day
         if (dayState == day){
             dayCounter++;
-            if (dayCounter > 36000){
+            if (dayCounter > 18000){
                 dayState = dusk;
                 dayCounter = 0;
             }
         }
         if (dayState == dusk){
-            filterAlpha += 0.00003f;
+            filterAlpha += 0.0003f;
             if (filterAlpha > 1f){
                 filterAlpha = 1f;
                 dayState = night;
@@ -113,13 +113,13 @@ public class Lighting {
         }
         if (dayState == night){
             dayCounter++;
-            if (dayCounter > 36000){
+            if (dayCounter > 18000){
                 dayState = dawn;
                 dayCounter = 0;
             }
         }
         if (dayState == dawn){
-            filterAlpha -= 0.00003f;
+            filterAlpha -= 0.0003f;
             if (filterAlpha < 0){
                 filterAlpha = 0;
                 dayState = day;
