@@ -14,7 +14,7 @@ public class Object_Lantern extends Entity{
         type = type_light;
         name = objectName;
         down1 = setup("/objects/lantern", gp.tileSize, gp.tileSize);
-        description = "[Lantern]\nIlluminates your\nsurroundings";
+        description = "[" + name + "]" + "\nIlluminates your\nsurroundings.";
         price = 200;
         lightRadius = 350;
     }
