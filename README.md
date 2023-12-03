@@ -1,18 +1,18 @@
-## Getting Started
+## panDEMONium
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+A simple 2D RPG game for fulfilling the final requirement for the subject, Object-Oriented Programming.
 
-## Folder Structure
+## It features:
 
-The workspace contains two folders by default, where:
+- `NPCs` you can talk and interact with!
+- `Weapons` and Items!
+- `Enemies` and Bossfights!
+- `Levels` that have different music!
+- `Parrying and Combat` with some added oomph!
+- `Story` of an isekaid adventurer!
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+## Special Thanks to 
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+RyiSnow for providing us a tutorial for making this game. Some assets such as the `orc` and his `table` are used.
+You can find more about his channel [here](https://www.youtube.com/@RyiSnow)!
