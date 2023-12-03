@@ -6,7 +6,7 @@ import main.GamePanel;
 public class Object_DemonLord_Helmet extends Entity {
 
     GamePanel gp;
-    public static final String objName = "Demon Lord Helmet";
+    public static final String objectName = "Demon Lord Helmet";
 
     public Object_DemonLord_Helmet(GamePanel gp){
         super(gp);
@@ -14,7 +14,7 @@ public class Object_DemonLord_Helmet extends Entity {
         this.gp = gp;
 
         type = type_pickuponly;
-        name = objName;
+        name = objectName;
         down1 = setup("/objects/Demon Lord Helm", gp.tileSize, gp.tileSize);
 
         setDialogue();
