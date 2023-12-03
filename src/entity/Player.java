@@ -9,6 +9,9 @@ import main.GamePanel;
 import main.KeyHandler;
 import object.Object_Fireball;
 import object.Object_Health_Potion_Small;
+import object.Object_Lantern;
+import object.Object_Sacred_Rose;
+import object.Object_Seal;
 
 public class Player extends Entity{
 
@@ -117,6 +120,9 @@ public class Player extends Entity{
     public void setItems(){
         inventory.clear();
         inventory.add(new Object_Health_Potion_Small(gp));
+        inventory.add(new Object_Seal(gp));
+        inventory.add(new Object_Sacred_Rose(gp));
+        inventory.add(new Object_Lantern(gp));
     }
 
     public int getAttack(){

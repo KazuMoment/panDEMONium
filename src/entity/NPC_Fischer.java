@@ -86,17 +86,21 @@ public class NPC_Fischer extends Entity {
             dialogueSet = 2;
             gp.player.inventory.remove(index);
             doneQuest1 = true;
-            
-            for(int mapNum = 0; mapNum < gp.maxMap; mapNum++){
-                for (int i = 0; i < gp.npc[1].length; i++){
-                    if (gp.npc[mapNum][i] != null && 
-                        gp.npc[mapNum][i].name == NPC_Cally.npcName){
-                        gp.npc[mapNum][i].sleep = false;
-                        gp.npc[mapNum][i].doneQuest1 = true;
-                    } 
-                }	
-            }
+            searchCally();            
         }
-
     }
+
+    public void searchCally(){
+        for(int mapNum = 0; mapNum < gp.maxMap; mapNum++){
+            for (int i = 0; i < gp.npc[1].length; i++){
+                if (gp.npc[mapNum][i] != null && 
+                    gp.npc[mapNum][i].name == NPC_Cally.npcName){
+                    gp.npc[mapNum][i].sleep = false;
+                    gp.npc[mapNum][i].doneQuest1 = true;
+                } 
+            }	
+        }
+    }
+
+
 }

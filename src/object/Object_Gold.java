@@ -20,7 +20,7 @@ public class Object_Gold extends Entity {
 
     public boolean use (Entity entity){
         gp.playSoundEffect(2);
-        gp.ui.addMessage("Picked up " + value + "Gold!");
+        gp.ui.addMessage("Picked up " + value + " Gold!");
         gp.player.gold += value;
         return true;
     }

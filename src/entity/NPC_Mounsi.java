@@ -21,7 +21,7 @@ public class NPC_Mounsi extends Entity{
         solidArea = new Rectangle(8, 16, 32, 32);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        dialogueSet = -1;
+        dialogueSet = 0;
 
 
         getImage();
@@ -73,39 +73,16 @@ public class NPC_Mounsi extends Entity{
     	facePlayer();
         startDialogue(this, dialogueSet);
         
-        if (introDone == false) {
-        	for (int mapNum = 0; mapNum < gp.maxMap; mapNum++){
-        		for (int i = 0; i < gp.npc[1].length; i++){
-        			if (gp.npc[mapNum][i] != null && 
-        				gp.npc[mapNum][i].name == (NPC_Bogart.npcName)){
-        				gp.npc[mapNum][i].doneQuest1 = true;
-                        gp.npc[mapNum][i].sleep = false;
-        			}
-        		}	
-        	}
+        if (introDone == false){
+            activateBogart();
         }
         
-        if (introDone == true && dialogueSet > 1 && doneQuest1 == true){
+        if (introDone == true && dialogueSet > 1 && doneQuest1 == false){
             dialogueSet = 1;
         }
 
-        int index = gp.player.searchItemInInventory(Object_Sacred_Rose.objectName);
-        if (index != 999){
-            dialogueSet = 2;
-            gp.player.inventory.remove(index);
-            doneQuest1 = true;
-            for (int mapNum = 0; mapNum < gp.maxMap; mapNum++){
-                for (int i = 0; i < gp.obj[1].length; i++){
-                    if (gp.obj[mapNum][i] != null && 
-                        gp.obj[mapNum][i].name == Object_Boat.objectName &&
-                        gp.obj[mapNum][i].collision == true){
-                            gp.obj[mapNum][i].collision = false;
-                            gp.obj[mapNum][i].opened = true;
-                            gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image2;
-                            break;
-                    }
-                }
-            }
+        if (introDone == true){
+            searchSacredRose();
         }
         
         if (doneQuest1 == true){
@@ -117,5 +94,42 @@ public class NPC_Mounsi extends Entity{
         }
 
     }
-    
+
+    public void activateBogart(){
+        for (int mapNum = 0; mapNum < gp.maxMap; mapNum++){
+        	for (int i = 0; i < gp.npc[1].length; i++){
+        		if (gp.npc[mapNum][i] != null && 
+                    gp.npc[mapNum][i].name == (NPC_Bogart.npcName)){
+                    gp.npc[mapNum][i].doneQuest1 = true;
+                    gp.npc[mapNum][i].sleep = false;
+                    break;
+                }
+        	}	
+        }
+    }
+
+    public void searchSacredRose(){
+        int index = gp.player.searchItemInInventory(Object_Sacred_Rose.objectName);
+        if (index != 999){
+            dialogueSet = 2;
+            gp.player.inventory.remove(index);
+            doneQuest1 = true;
+            openBoat();
+        }
+    }
+
+    public void openBoat(){
+        for (int mapNum = 0; mapNum < gp.maxMap; mapNum++){
+            for (int i = 0; i < gp.obj[1].length; i++){
+                if (gp.obj[mapNum][i] != null && 
+                    gp.obj[mapNum][i].name == Object_Boat.objectName &&
+                    gp.obj[mapNum][i].collision == true){
+                        gp.obj[mapNum][i].collision = false;
+                        gp.obj[mapNum][i].opened = true;
+                        gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image2;
+                        break;
+                }
+            }
+        }
+    }
 }
