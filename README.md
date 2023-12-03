@@ -16,3 +16,13 @@ A simple 2D RPG game for fulfilling the final requirement for the subject, Objec
 
 RyiSnow for providing us a tutorial for making this game. Some assets such as the `orc` and his `table` are used.
 You can find more about his channel [here](https://www.youtube.com/@RyiSnow)!
+
+## Controls
+- `T` to open the inventory!
+- `ENTER` to interact with objects or NPCs!
+- `F` to launch fireballs!
+- `WASD` to move!
+- `SPACE` to block or parry!
+- `ESCAPE` to access the options menu!
+- `X` to open the minimap!
+- `M` to open the map!
