@@ -41,7 +41,7 @@ public class CutsceneManager {
             + "Lead Pixel Artist\n"
             + "Elwin Jen Barredo"
             + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-            + "Level Designers\n"
+            + "Programmers/Level Designers\n"
             + "Francois Louise Mosuela\n"
             + "Cyrus Rol"
             + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
@@ -502,21 +502,38 @@ public class CutsceneManager {
 
             if (counterReached(3700) == true){
                 // Reset
-                sceneNumber = NA;
-                scenePhase = 0;
-                gp.currentMap = 0;
-                gp.currentLevel = gp.tutorial_forest;
-                gp.player.setDefaultPosition();
-                gp.gameState = gp.playState;
-
-                // Change Music
-                gp.checkMusic();
+                gp.stopMusic();
                 Progress.completedGame = true;
                 Progress.demonMonkDefeated = false;
                 Progress.necromancerDefeated = false;
                 Progress.demonLordDefeated = false;
+                gp.currentMap = 0;
+                gp.currentLevel = gp.tutorial_forest;
+                gp.resetGame(false);
+                scenePhase++;
+                
             }
 
+        }
+
+        if (scenePhase == 9){
+
+            gp.ui.npc.dialogueSet = 1;
+            scenePhase++;
+        }
+
+        if (scenePhase == 10){
+            gp.ui.drawDialogueScreen();
+
+        }
+
+        if (scenePhase == 11){
+            // Change Music
+            gp.checkMusic();
+            sceneNumber = NA;
+            scenePhase = 0;
+            gp.gameState = gp.playState;
+            
         }
 
     }

@@ -188,7 +188,7 @@ public class NPC_Reul extends Entity{
         }
 
         if (Progress.completedGame == true){
-            
+            dialogueSet = 7;
         }
 
     }

@@ -28,6 +28,7 @@ import object.Object_Axe_Normal;
 import object.Object_Boat;
 import object.Object_Bonfire;
 import object.Object_Chest;
+import object.Object_DemonLord_Helmet;
 import object.Object_Door;
 import object.Object_Health_Potion_Small;
 import object.Object_Iron_Gate;
@@ -272,6 +273,11 @@ public class AssetSetter {
 		gp.obj[mapNumber][i] = new Object_Bonfire(gp);
 		gp.obj[mapNumber][i].worldX = gp.tileSize*20;
 		gp.obj[mapNumber][i].worldY = gp.tileSize*37;
+		i++;
+
+		gp.obj[mapNumber][i] = new Object_DemonLord_Helmet(gp);
+		gp.obj[mapNumber][i].worldX = gp.tileSize*30;
+		gp.obj[mapNumber][i].worldY = gp.tileSize*25;
 		i++;
 
     }

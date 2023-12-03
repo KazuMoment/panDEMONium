@@ -27,6 +27,8 @@ public class Object_DemonLord_Helmet extends Entity {
         dialogue[0][1] = "The horns are attached to it...";
         dialogue[0][2] = "You feel its compelling presence to wear it...";
 
+        dialogue[1][0] = "The loop continues once more...";
+
     }
 
     public boolean use (Entity entity){
