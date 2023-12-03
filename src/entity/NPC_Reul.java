@@ -57,11 +57,14 @@ public class NPC_Reul extends Entity{
 
         dialogue[1][0] = "Oh, you got the axe. Good. Now, just cut the tree over there!";
         dialogue[1][1] = "It's the tree over there with a different shape!";
-        dialogue[1][2] = "Just get close there and press E!";
-        dialogue[1][3] = "You can interact with objects too by pressing ENTER!";
+        dialogue[1][2] = "Press T to open your inventory, \nselect the axe using ENTER, and press E!";
+        dialogue[1][3] = "You can interact with objects and people too by pressing ENTER!";
 
         dialogue[2][0] = "You cut the tree! Good job!";
-        dialogue[2][1] = "Now, follow me.";
+        dialogue[2][1] = "When people ask you to find stuff,";
+        dialogue[2][2] = "Select the item in your inventory and press ENTER!";
+        dialogue[2][3] = "Usually, you don't need to do that.";
+        dialogue[2][3] = "Now, follow me.";
         
         dialogue[3][0] = "I will be staying here for a while.";
         dialogue[3][1] = "There are many slimes around.";
