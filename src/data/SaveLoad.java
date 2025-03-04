@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
 import main.GamePanel;
 
 public class SaveLoad {
@@ -144,7 +143,6 @@ public class SaveLoad {
             int lastSessionID = gp.toSQL.getLastSessionID();
             System.out.println("last sessionID = " + lastSessionID);
             if (gp.toSQL.SessionID == lastSessionID){
-                System.out.println("updating");
                 gp.toSQL.toDatabase("update playerrecords set level = " + ds.level + ", maxhp = " + ds.maxHP + ", hp = " + ds.HP + ", maxmana = " +
                                     ds.maxMP + ", mana = " + ds.MP + ", strength = " + ds.strength + ", dexterity = " + ds.dexterity + ", gold = " + 
                                     ds.gold + ", weapon = \"" + weaponName + "\", shield = \"" + shieldName + "\", playtime = \"" + 
@@ -153,13 +151,12 @@ public class SaveLoad {
                 System.out.println(gp.playerTime.formatDuration(gp.playerTime.seconds));
             }
             else {
-                System.out.println("new entry");
                 gp.toSQL.toDatabase("insert into playerrecords values(" + (lastSessionID + 1) + "," + ds.level + "," + ds.maxHP + 
                             "," + ds.HP + "," + ds.maxMP + "," + ds.MP + "," + ds.strength + "," + 
                             ds.dexterity + "," + gp.player.gold + ",\"" + weaponName + "\",\"" + shieldName + "\",\"" + 
                             gp.playerTime.formatDuration(gp.playerTime.seconds) + "\")");
                 gp.playerTime.saveTimer();
-                System.out.println(gp.playerTime.formatDuration(gp.playerTime.seconds));
+                oos.close();
             }
         } catch (Exception e) {
             System.out.println("Save Exception!");
@@ -262,7 +259,7 @@ public class SaveLoad {
                 }
             }
 
-
+            ois.close();
 
         } catch (Exception e) {
             e.printStackTrace();

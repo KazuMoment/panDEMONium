@@ -68,7 +68,6 @@ public class PlayerTime {
         public void run() {
             while (!stop) {
                 // Code to be executed when the timer triggers
-                System.out.println("Time elapsed: " + formatDuration(seconds));
                 seconds++;
 
                 try {

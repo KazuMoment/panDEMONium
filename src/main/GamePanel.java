@@ -1,16 +1,16 @@
 package main;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import javax.swing.JFrame;
 
 import javax.swing.JPanel;
 
@@ -163,7 +163,7 @@ public class GamePanel extends JPanel implements Runnable{
         g2 = (Graphics2D)tempScreen.getGraphics();
 
         if (fullScreenOn == true){
-            setFullscreen();
+            setFullScreen();
         }
     }
 
@@ -184,23 +184,21 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
 
-    public void setFullscreen(){
-        
-        // Get Local Screen Device
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice gd = ge.getDefaultScreenDevice();
-        gd.setFullScreenWindow(Main.window);
-
-        // Get Full Screen Width and Height
-        screenWidth2 = Main.window.getWidth();
-        screenHeight2 = Main.window.getHeight();
-    }
+    public void setFullScreen() {
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		double width = screenSize.getWidth();
+		double height = screenSize.getHeight();
+		Main.window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		screenWidth2 = (int) width;
+		screenHeight2 = (int) height;
+	}
 
     public void startGameThread(){
         gameThread = new Thread(this);
         gameThread.start();
     }
  
+    @Override
     public void run() {
 
         double drawInterval = 1000000000/FPS; // 0.1666 seconds
@@ -396,7 +394,7 @@ public class GamePanel extends JPanel implements Runnable{
                 g2.drawString("WorldX: " + player.worldX, x, y); y += lineHeight;
                 g2.drawString("WorldY: " + player.worldY, x, y); y += lineHeight;
                 g2.drawString("Column: " + (player.worldX + player.solidArea.x)/tileSize, x, y); y += lineHeight;
-                g2.drawString("Row: " + (player.worldY + player.solidArea.y)/tileSize, x, y); y += lineHeight;
+                g2.drawString("Row: " + (player.worldY + player.solidArea.y)/tileSize, x, y); 
             } 
 
         }
