@@ -158,7 +158,7 @@ public class NPC_Reul extends Entity implements QuestListener{
             if (gp.player.canObtainItem(reward)) {
                 gp.playSoundEffect(2);
                 startDialogue(this, 6);
-                gp.player.hasNpcQuestEvent(NPC_Reul.npcName, QuestEvent.REWARD_RECEIVED);
+                gp.player.addNpcQuestEvent(NPC_Reul.npcName, QuestEvent.REWARD_RECEIVED);
             } else {
                 startDialogue(this, 7);
             }

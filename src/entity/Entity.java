@@ -328,6 +328,39 @@ public class Entity {
         }
     }
 
+    public void unlockTransportation(String transportName){
+        for (int i = 0; i < gp.obj[1].length; i++){
+			if (gp.obj[gp.currentMap][i] != null && 
+				gp.obj[gp.currentMap][i].name == transportName &&
+				gp.obj[gp.currentMap][i].collision == true){
+					gp.obj[gp.currentMap][i].collision = false;
+					gp.obj[gp.currentMap][i].opened = true;
+					gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image2;
+					break;
+			}
+		}
+    }
+
+    public void triggerNPCPathAndQuest(String npcName, QuestEvent event){
+        for (int i = 0; i < gp.npc[1].length; i++){
+			if (gp.npc[gp.currentMap][i].name.equals(npcName)){
+				gp.npc[gp.currentMap][i].onPath = true;
+				gp.player.addNpcQuestEvent(npcName, event);
+				break;
+			}
+		}
+    }
+
+    public void changeHomeCoordinates(String npcName, int homeCol, int homeRow){
+        for (int i = 0; i < gp.npc[1].length; i++){
+			if (gp.npc[gp.currentMap][i].name.equals(npcName)){
+				gp.npc[gp.currentMap][i].homeCol = homeCol;
+                gp.npc[gp.currentMap][i].homeRow = homeRow;
+				break;
+			}
+		}
+    }
+
     public void moveAndQuestAdvance(int goalColumn, int goalRow, String npcName, QuestEvent event) {
         goalReached = false;
         searchPath(goalColumn, goalRow);

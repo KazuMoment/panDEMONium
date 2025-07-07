@@ -16,6 +16,7 @@ public enum QuestEvent {
     REUL_KILL_SLIMES_COMPLETED,
 
     // Piyaye Quest Events
-    PIYAYE_PADDLE_GIVEN,
-    
+    PIYAYE_PADDLE_GIVEN_ACCEPTED,
+    PIYAYE_PADDLE_GIVEN_COMPLETED,    
+
 }

@@ -72,7 +72,7 @@ public class NPC_Piyaye extends Entity {
 
             searchPath(goalColumn, goalRow);
             if (goalReached == true){
-                sleep = true;
+               
             }
         }
 
@@ -85,16 +85,21 @@ public class NPC_Piyaye extends Entity {
         facePlayer();
         startDialogue(this, dialogueSet);
 
-        if (!gp.player.hasNpcQuestEvent(npcName, QuestEvent.INTRO_DONE)){
+        if (!gp.player.hasNpcQuestEvent(NPC_Piyaye.npcName, QuestEvent.INTRO_DONE)){
+            dialogueSet = 0;
+            gp.player.addNpcQuestEvent(NPC_Piyaye.npcName, QuestEvent.PIYAYE_PADDLE_GIVEN_ACCEPTED);
+        }
+        else if (gp.player.hasNpcQuestEvent(NPC_Piyaye.npcName, QuestEvent.PIYAYE_PADDLE_GIVEN_ACCEPTED)
+            && !gp.player.hasNpcQuestEvent(NPC_Piyaye.npcName, QuestEvent.PIYAYE_PADDLE_GIVEN_COMPLETED)){
             dialogueSet = 1;
         }
         else if (gp.player.currentShield != null 
             && gp.player.currentShield.name == Object_Shield_Wood.objectName
-            && !gp.player.hasNpcQuestEvent(NPC_Piyaye.npcName, QuestEvent.PIYAYE_PADDLE_GIVEN)){
+            && !gp.player.hasNpcQuestEvent(NPC_Piyaye.npcName, QuestEvent.PIYAYE_PADDLE_GIVEN_COMPLETED)){
             dialogueSet = 2;
         }
 
-        else if (!gp.player.hasNpcQuestEvent(npcName, QuestEvent.PIYAYE_PADDLE_GIVEN)){
+        else if (gp.player.hasNpcQuestEvent(NPC_Piyaye.npcName, QuestEvent.PIYAYE_PADDLE_GIVEN_COMPLETED)){
             dialogueSet = 3;
         }
 

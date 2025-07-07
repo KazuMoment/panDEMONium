@@ -47,26 +47,8 @@ public class Object_Paddle extends Entity{
 	}
 	
 	public void questOver(){
-		for (int i = 0; i < gp.npc[1].length; i++){
-			if (gp.npc[gp.currentMap][i].name.equals(NPC_Piyaye.npcName)){
-				gp.npc[gp.currentMap][i].onPath = true;
-				gp.player.addNpcQuestEvent(NPC_Piyaye.npcName, QuestEvent.PIYAYE_PADDLE_GIVEN);
-				break;
-			}
-		}
-
-		for (int i = 0; i < gp.obj[1].length; i++){
-			if (gp.obj[gp.currentMap][i] != null && 
-				gp.obj[gp.currentMap][i].name == Object_Boat.objectName &&
-				gp.obj[gp.currentMap][i].collision == true){
-					gp.obj[gp.currentMap][i].collision = false;
-					gp.obj[gp.currentMap][i].opened = true;
-					gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image2;
-					break;
-			}
-		}
-		
+		triggerNPCPathAndQuest(NPC_Piyaye.npcName, QuestEvent.PIYAYE_PADDLE_GIVEN_COMPLETED);
+		changeHomeCoordinates(NPC_Piyaye.npcName, 33, 38);
+		unlockTransportation(Object_Boat.objectName);
 	}
-
-    
 }
