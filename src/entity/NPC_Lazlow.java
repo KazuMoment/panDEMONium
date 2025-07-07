@@ -53,15 +53,15 @@ public class NPC_Lazlow extends Entity{
 
     }
 
-    public void speak(){
-    	facePlayer();
-        startDialogue(this, dialogueSet);
-        dialogueSet++;
+    // public void speak(){
+    // 	facePlayer();
+    //     startDialogue(this, dialogueSet);
+    //     dialogueSet++;
         
-        if (introDone == true && dialogueSet > 1){
-            dialogueSet = 1;
-        }
+    //     if (introDone == true && dialogueSet > 1){
+    //         dialogueSet = 1;
+    //     }
 
-    }
+    // }
     
 }

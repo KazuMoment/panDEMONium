@@ -57,43 +57,43 @@ public class NPC_Bogart extends Entity{
         
     }
 
-    public void setMovement(){
+    // public void setMovement(){
     	    	
-    	if (doneQuest1 == true && doneQuest2 == false){
-			searchPath(getGoalColumn(gp.player), getGoalRow(gp.player));
-			if (gp.collisionChecker.checkPlayer(this) == true){
-				dialogueSet = 2;
-				this.speak();
-				doneQuest2 = true;
-			} 
-		}
+    // 	if (doneQuest1 == true && doneQuest2 == false){
+	// 		searchPath(getGoalColumn(gp.player), getGoalRow(gp.player));
+	// 		if (gp.collisionChecker.checkPlayer(this) == true){
+	// 			dialogueSet = 2;
+	// 			this.speak();
+	// 			doneQuest2 = true;
+	// 		} 
+	// 	}
     	
-		else if (doneQuest2 == true) { 
-			goalReached = false;
-			int goalCol = 27;
-			int goalRow = 11;
-			searchPath(goalCol, goalRow);
+	// 	else if (doneQuest2 == true) { 
+	// 		goalReached = false;
+	// 		int goalCol = 27;
+	// 		int goalRow = 11;
+	// 		searchPath(goalCol, goalRow);
 
-			if (goalReached == true){
-				direction = "down";
-				sleep = true;
-			}
-		}
-    }
+	// 		if (goalReached == true){
+	// 			direction = "down";
+	// 			sleep = true;
+	// 		}
+	// 	}
+    // }
 
-    public void speak(){
-        facePlayer();
-        startDialogue(this, dialogueSet);
-        dialogueSet++;
+    // public void speak(){
+    //     facePlayer();
+    //     startDialogue(this, dialogueSet);
+    //     dialogueSet++;
         
-        if(doneQuest1 == false) {
-    		if (dialogueSet > 1) {
-    			dialogueSet = 0;
-    		}
-    	}
+    //     if(doneQuest1 == false) {
+    // 		if (dialogueSet > 1) {
+    // 			dialogueSet = 0;
+    // 		}
+    // 	}
         
-        if (doneQuest2 == true) {
-        	dialogueSet = 2;
-        }   
-    }
+    //     if (doneQuest2 == true) {
+    //     	dialogueSet = 2;
+    //     }   
+    // }
 }

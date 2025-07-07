@@ -2,6 +2,11 @@ package data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import main.QuestEvent;
 
 public class DataStorage implements Serializable{
 
@@ -52,8 +57,7 @@ public class DataStorage implements Serializable{
     int mapNPCWorldX[][];
     int mapNPCWorldY[][];
     String mapNPCRewardName[][];
-    boolean mapNPCDoneQuest1[][];
-    boolean mapNPCDoneQuest2[][];
+    public Map<String, Set<QuestEvent>> npcQuestProgress = new HashMap<>();
     boolean mapNPCReceivedReward[][];
     boolean mapNPCPickedQuestObject[][];
     boolean mapNPCStandby[][];

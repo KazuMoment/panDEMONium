@@ -16,7 +16,9 @@ import javax.swing.JPanel;
 
 import ai.Pathfinder;
 import data.SaveLoad;
+import enemy.Enemy_GreenSlime;
 import entity.Entity;
+import entity.NPC_Reul;
 import entity.Player;
 import environment.EnvironmentManager;
 import tile.Map;
@@ -256,6 +258,8 @@ public class GamePanel extends JPanel implements Runnable{
                         }
                     }
                 }
+                player.checkQuestsKill();
+                
                 // Projectile
                 for (int i = 0; i < projectile[1].length; i++){
                         if (projectile[currentMap][i] != null){

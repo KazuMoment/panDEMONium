@@ -1,0 +1,21 @@
+package main;
+
+public enum QuestEvent {
+
+    // Generalized Events
+    INTRO_DONE,
+    PICK_QUEST_OBJECT_ACCEPTED,
+    PICK_QUEST_OBJECT_COMPLETED,
+    REWARD_RECEIVED,
+
+    // Reul Quest Events
+    REUL_TREE_CUT_ACCEPTED,
+    REUL_TREE_CUT_COMPLETED,
+    REUL_KILL_SLIMES_ACCEPTED,
+    REUL_MOVED,
+    REUL_KILL_SLIMES_COMPLETED,
+
+    // Piyaye Quest Events
+    PIYAYE_PADDLE_GIVEN,
+    
+}

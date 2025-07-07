@@ -4,6 +4,9 @@ import main.GamePanel;
 
 public class IT_WitheredTrunk extends InteractiveTile{
 
+    GamePanel gp;
+    public static final String tileName = "WitheredTrunk";
+
     public IT_WitheredTrunk(GamePanel gp, int column, int row) {
         super(gp, column, row);
         this.gp = gp;

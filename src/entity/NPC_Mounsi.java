@@ -69,51 +69,51 @@ public class NPC_Mounsi extends Entity{
 
     }
 
-    public void speak(){
-    	facePlayer();
-        startDialogue(this, dialogueSet);
+    // public void speak(){
+    // 	facePlayer();
+    //     startDialogue(this, dialogueSet);
         
-        if (introDone == false){
-            activateBogart();
-        }
+    //     if (introDone == false){
+    //         activateBogart();
+    //     }
         
-        if (introDone == true && doneQuest1 == false){
-            dialogueSet = 1;
-            searchSacredRose();
-        }
+    //     if (introDone == true && doneQuest1 == false){
+    //         dialogueSet = 1;
+    //         searchSacredRose();
+    //     }
         
-        if (doneQuest1 == true){
-            dialogueSet = 3;
-        }
+    //     if (doneQuest1 == true){
+    //         dialogueSet = 3;
+    //     }
 
-        if (Progress.completedGame == true){
-            dialogueSet = 4;
-        }
+    //     if (Progress.completedGame == true){
+    //         dialogueSet = 4;
+    //     }
 
-    }
+    // }
 
-    public void activateBogart(){
-        for (int mapNum = 0; mapNum < gp.maxMap; mapNum++){
-        	for (int i = 0; i < gp.npc[1].length; i++){
-        		if (gp.npc[mapNum][i] != null && 
-                    gp.npc[mapNum][i].name == (NPC_Bogart.npcName)){
-                    gp.npc[mapNum][i].doneQuest1 = true;
-                    gp.npc[mapNum][i].sleep = false;
-                    break;
-                }
-        	}	
-        }
-    }
+    // public void activateBogart(){
+    //     for (int mapNum = 0; mapNum < gp.maxMap; mapNum++){
+    //     	for (int i = 0; i < gp.npc[1].length; i++){
+    //     		if (gp.npc[mapNum][i] != null && 
+    //                 gp.npc[mapNum][i].name == (NPC_Bogart.npcName)){
+    //                 gp.npc[mapNum][i].doneQuest1 = true;
+    //                 gp.npc[mapNum][i].sleep = false;
+    //                 break;
+    //             }
+    //     	}	
+    //     }
+    // }
 
-    public void searchSacredRose(){
-        int index = gp.player.searchItemInInventory(Object_Sacred_Rose.objectName);
-        if (index != 999){
-            dialogueSet = 2;
-            gp.player.inventory.remove(index);
-            openBoat();
-            doneQuest1 = true;
-        }
-    }
+    // public void searchSacredRose(){
+    //     int index = gp.player.searchItemInInventory(Object_Sacred_Rose.objectName);
+    //     if (index != 999){
+    //         dialogueSet = 2;
+    //         gp.player.inventory.remove(index);
+    //         openBoat();
+    //         doneQuest1 = true;
+    //     }
+    // }
 
     public void openBoat(){
         for (int mapNum = 0; mapNum < gp.maxMap; mapNum++){

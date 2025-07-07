@@ -52,58 +52,58 @@ public class NPC_Cally extends Entity {
 		
 	}
 
-	public void setMovement(){
-		if (introDone == false){
-			searchPath(getGoalColumn(gp.player), getGoalRow(gp.player));
-			if (gp.collisionChecker.checkPlayer(this) == true){
-				this.speak();
-			} 
-		}
-		else if (introDone == true && doneQuest1 == false){ 
-			goalReached = false;
-			int goalCol = 15;
-			int goalRow = 22;
-			searchPath(goalCol, goalRow);
+	// public void setMovement(){
+	// 	if (introDone == false){
+	// 		searchPath(getGoalColumn(gp.player), getGoalRow(gp.player));
+	// 		if (gp.collisionChecker.checkPlayer(this) == true){
+	// 			this.speak();
+	// 		} 
+	// 	}
+	// 	else if (introDone == true && doneQuest1 == false){ 
+	// 		goalReached = false;
+	// 		int goalCol = 15;
+	// 		int goalRow = 22;
+	// 		searchPath(goalCol, goalRow);
 
-			if (goalReached == true){
-				direction = "down";
-				sleep = true;
-			}
-		}
+	// 		if (goalReached == true){
+	// 			direction = "down";
+	// 			sleep = true;
+	// 		}
+	// 	}
 
-		else if (doneQuest1 == true && doneQuest2 == false){
-			dialogueSet = 2;
-			searchPath(getGoalColumn(gp.player), getGoalRow(gp.player));
-			if (gp.collisionChecker.checkPlayer(this) == true){
-				this.speak();
-				for (int i = 0; i < gp.obj[1].length; i++){
-					if (gp.obj[gp.currentMap][i] != null && gp.obj[gp.currentMap][i].name.equals(Object_Iron_Gate.objectName)){
-						gp.obj[gp.currentMap][i] = null;
-					}
-				}
-				doneQuest2 = true;
-			}
-		}
+	// 	else if (doneQuest1 == true && doneQuest2 == false){
+	// 		dialogueSet = 2;
+	// 		searchPath(getGoalColumn(gp.player), getGoalRow(gp.player));
+	// 		if (gp.collisionChecker.checkPlayer(this) == true){
+	// 			this.speak();
+	// 			for (int i = 0; i < gp.obj[1].length; i++){
+	// 				if (gp.obj[gp.currentMap][i] != null && gp.obj[gp.currentMap][i].name.equals(Object_Iron_Gate.objectName)){
+	// 					gp.obj[gp.currentMap][i] = null;
+	// 				}
+	// 			}
+	// 			doneQuest2 = true;
+	// 		}
+	// 	}
 
-		else if (doneQuest2 == true){
-			int goalCol = 19;
-			int goalRow = 8;
-			goalReached = false;
-			searchPath(goalCol, goalRow);
+	// 	else if (doneQuest2 == true){
+	// 		int goalCol = 19;
+	// 		int goalRow = 8;
+	// 		goalReached = false;
+	// 		searchPath(goalCol, goalRow);
 
-			if (goalReached == true){
-				sleep = true;
-				dialogueSet = 3;
-			}
-		}
-	}
+	// 		if (goalReached == true){
+	// 			sleep = true;
+	// 			dialogueSet = 3;
+	// 		}
+	// 	}
+	// }
 	
-	public void speak(){
-		facePlayer();
-		startDialogue(this, dialogueSet);
+	// public void speak(){
+	// 	facePlayer();
+	// 	startDialogue(this, dialogueSet);
 		
-		if (introDone == true && doneQuest1 == false) {
-			dialogueSet = 1;
-		}
-	}
+	// 	if (introDone == true && doneQuest1 == false) {
+	// 		dialogueSet = 1;
+	// 	}
+	// }
 }

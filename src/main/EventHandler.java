@@ -121,6 +121,34 @@ public class EventHandler {
 
     }
 
+    public void triggerQuestEvent(QuestEvent event){
+        for (Entity npc : gp.npc[gp.currentMap]) {
+            if (npc instanceof QuestListener) {
+                ((QuestListener) npc).onQuestEvent(event);
+            }
+        }
+    }
+
+    public boolean isAnyInteractiveTileDestroyed(String tileName){
+        for (int i = 0; i < gp.iTile[gp.currentMap].length; i++){
+            if (gp.iTile[gp.currentMap][i] != null 
+                && gp.iTile[gp.currentMap][i].name.equals(tileName) 
+                && gp.iTile[gp.currentMap][i].HP <= 0) {
+                return true; 
+            }
+        }
+        return false;
+    }
+
+    public boolean isItemPickedUp(String itemName) {
+        for (int i = 0; i < gp.obj[gp.currentMap].length; i++) {
+            if (gp.obj[gp.currentMap][i] != null && gp.obj[gp.currentMap][i].name.equals(itemName)) {
+                return false; 
+            }
+        }
+        return true; 
+    }
+
     public boolean hit (int map, int column, int row, String requiredDirection){
 
         boolean hit = false;

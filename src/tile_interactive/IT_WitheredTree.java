@@ -9,6 +9,8 @@ public class IT_WitheredTree extends InteractiveTile{
 
     GamePanel gp;
 
+    public static final String tileName = "WitheredTree";
+
     public IT_WitheredTree(GamePanel gp, int column, int row) {
         super(gp, column, row);
         this.gp = gp;

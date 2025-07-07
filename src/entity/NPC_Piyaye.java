@@ -3,6 +3,8 @@ package entity;
 import java.awt.Rectangle;
 
 import main.GamePanel;
+import main.QuestEvent;
+import object.Object_Shield_Wood;
 
 public class NPC_Piyaye extends Entity {
 
@@ -15,7 +17,8 @@ public class NPC_Piyaye extends Entity {
         defaultSpeed = 2;
         speed = defaultSpeed;
         name = npcName;
-        sleep = true;
+        homeCol = 10;
+        homeRow = 12;
 
         solidArea = new Rectangle(8, 16, 32, 32);
         solidAreaDefaultX = solidArea.x;
@@ -74,9 +77,7 @@ public class NPC_Piyaye extends Entity {
         }
 
         else{
-            if (sleep == true){
-                direction = "down";
-            }
+            roam(homeCol, homeRow);
         }
     }
 
@@ -84,18 +85,16 @@ public class NPC_Piyaye extends Entity {
         facePlayer();
         startDialogue(this, dialogueSet);
 
-        if (introDone == true && 
-            gp.player.currentShield == null && 
-            doneQuest1 == false) {
+        if (!gp.player.hasNpcQuestEvent(npcName, QuestEvent.INTRO_DONE)){
             dialogueSet = 1;
         }
         else if (gp.player.currentShield != null 
-            && gp.player.currentShield.name == "Wooden Shield" 
-            && doneQuest1 == false){
+            && gp.player.currentShield.name == Object_Shield_Wood.objectName
+            && !gp.player.hasNpcQuestEvent(NPC_Piyaye.npcName, QuestEvent.PIYAYE_PADDLE_GIVEN)){
             dialogueSet = 2;
         }
 
-        else if (introDone == true && doneQuest1 == true){
+        else if (!gp.player.hasNpcQuestEvent(npcName, QuestEvent.PIYAYE_PADDLE_GIVEN)){
             dialogueSet = 3;
         }
 

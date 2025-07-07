@@ -560,7 +560,10 @@ public class UI {
             }
         }
         else{ // If no text is in array
-            npc.introDone = true;
+
+            if (!gp.player.isNpcIntroDone(npc.name)) {
+                gp.player.setNpcIntroDone(npc.name);
+            }
             npc.dialogueIndex = 0;
 
             if (gp.gameState == gp.dialogueState){

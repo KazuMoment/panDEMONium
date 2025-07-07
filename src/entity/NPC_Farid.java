@@ -65,14 +65,14 @@ public class NPC_Farid extends Entity {
         
     }
 
-    public void speak(){
-        facePlayer();
-        startDialogue(this, dialogueSet);
+    // public void speak(){
+    //     facePlayer();
+    //     startDialogue(this, dialogueSet);
 
-        if (introDone == true){
-            dialogueSet = 1;
-            gp.gameState = gp.shopState;
-        }
+    //     if (introDone == true){
+    //         dialogueSet = 1;
+    //         gp.gameState = gp.shopState;
+    //     }
         
-    }
+    // }
 }

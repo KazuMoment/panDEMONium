@@ -4,9 +4,17 @@ import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
+import enemy.Enemy_GreenSlime;
 import main.GamePanel;
 import main.KeyHandler;
+import main.QuestEvent;
+import object.Object_Axe_Normal;
 import object.Object_Fireball;
 import object.Object_Health_Potion_Small;
 import object.Object_Torch;
@@ -20,9 +28,8 @@ public class Player extends Entity{
     int snapFirstSpriteCounter = 0;
     public boolean lightUpdated = false;
 
-    // Quests
-    public boolean slimeQuest = false;
-    public boolean hasBoots = false;
+    public Map<String, Set<QuestEvent>> npcQuestProgress = new HashMap<>();
+
     
     
     public Player (GamePanel gp, KeyHandler keyH){
@@ -251,7 +258,28 @@ public class Player extends Entity{
 
         }
     }
+
+    public boolean isNpcIntroDone(String npcName) {
+        Set<QuestEvent> progress = npcQuestProgress.get(npcName);
+        return progress != null && progress.contains(QuestEvent.INTRO_DONE);
+    }
     
+    public void setNpcIntroDone(String npcName) {
+        npcQuestProgress.computeIfAbsent(npcName, k -> new HashSet<>()).add(QuestEvent.INTRO_DONE);
+    }
+
+    public boolean hasNpcQuestEvent(String npcName, QuestEvent event) {
+        return npcQuestProgress.getOrDefault(npcName, Collections.emptySet()).contains(event);
+    }
+
+    public void completeQuestMilestone(String npcName, QuestEvent event) {
+        addNpcQuestEvent(npcName, event);
+    }
+
+    public void addNpcQuestEvent(String npcName, QuestEvent event) {
+        npcQuestProgress.computeIfAbsent(npcName, k -> new HashSet<>()).add(event);
+    }
+
 
     public void update(){
 
@@ -311,14 +339,14 @@ public class Player extends Entity{
                 direction = "right";
             }
 
-            if (keyH.shiftPressed == true){
-                if (hasBoots == true){
-                    speed = 6;
-                }
-            }
-            else if (keyH.shiftPressed == false){
-                speed = defaultSpeed;
-            }
+            // if (keyH.shiftPressed == true){
+            //     if (hasBoots == true){
+            //         speed = 6;
+            //     }
+            // }
+            // else if (keyH.shiftPressed == false){
+            //     speed = defaultSpeed;
+            // }
 
             if (keyH.ePressed == true && currentWeapon !=  null){
                 attacking = true;
@@ -439,13 +467,19 @@ public class Player extends Entity{
 
         if (i != 999){
 
+            // Check Quests
+            checkQuestsPickUp(i);
+            if (gp.obj[gp.currentMap][i] == null){
+                return; 
+            }
+
             // Pickup Only Items
             if (gp.obj[gp.currentMap][i].type == type_pickuponly){
 
                 gp.obj[gp.currentMap][i].use(this);
                 gp.obj[gp.currentMap][i] = null;
 
-            }
+            } 
 
             // Obstacle
             else if (gp.obj[gp.currentMap][i].type == type_obstacle){
@@ -553,6 +587,9 @@ public class Player extends Entity{
             generateParticle(gp.iTile[gp.currentMap][i], gp.iTile[gp.currentMap][i]);
 
             if (gp.iTile[gp.currentMap][i].HP == 0){
+
+                checkQuestsDestroy();
+
                 gp.iTile[gp.currentMap][i] = gp.iTile[gp.currentMap][i].getDestroyedForm();
             }
         }
@@ -564,6 +601,57 @@ public class Player extends Entity{
             Entity projectile  = gp.projectile[gp.currentMap][i];
             projectile.alive = false;
             generateParticle(projectile, projectile);
+        }
+    }
+
+    public void checkQuestsPickUp(int i){
+        // Reul's Quest: Collect Axe
+        if (hasNpcQuestEvent(NPC_Reul.npcName, QuestEvent.PICK_QUEST_OBJECT_ACCEPTED)
+        && !hasNpcQuestEvent(NPC_Reul.npcName, QuestEvent.PICK_QUEST_OBJECT_COMPLETED)) {
+            if (gp.obj[gp.currentMap][i].name.equals(Object_Axe_Normal.objectName)) {
+                if (canObtainItem(gp.obj[gp.currentMap][i])) {
+                    gp.playSoundEffect(2);
+                    // Mark quest as completed
+                    npcQuestProgress.computeIfAbsent(NPC_Reul.npcName, k -> new HashSet<>())
+                        .add(QuestEvent.PICK_QUEST_OBJECT_COMPLETED);
+                    gp.ui.addMessage("Picked up " + gp.obj[gp.currentMap][i].name + "!");
+                    gp.obj[gp.currentMap][i] = null;
+                } else {
+                    gp.ui.addMessage("You cannot carry any more items!");
+                }
+                return; 
+            }
+        }
+    }
+
+    public void checkQuestsDestroy(){
+        // Reul's Quest: Cut Tree
+        if (hasNpcQuestEvent(NPC_Reul.npcName, QuestEvent.REUL_TREE_CUT_ACCEPTED) 
+        && !hasNpcQuestEvent(NPC_Reul.npcName, QuestEvent.REUL_TREE_CUT_COMPLETED)){
+            addNpcQuestEvent(NPC_Reul.npcName, QuestEvent.REUL_TREE_CUT_COMPLETED);
+        }
+
+    }
+
+
+    public void checkQuestsKill(){
+
+        // Reul's Quest: Kill Slimes
+        if (hasNpcQuestEvent(NPC_Reul.npcName, QuestEvent.REUL_KILL_SLIMES_ACCEPTED)
+        && !hasNpcQuestEvent(NPC_Reul.npcName, QuestEvent.REUL_KILL_SLIMES_COMPLETED)){
+            boolean allSlimesKilled = true;
+            for (int j = 0; j < gp.enemy[gp.currentMap].length; j++) {
+                if (gp.enemy[gp.currentMap][j] != null
+                && gp.enemy[gp.currentMap][j].alive
+                && gp.enemy[gp.currentMap][j].name.equals(Enemy_GreenSlime.enemyName)) {
+                    allSlimesKilled = false;
+                    break;
+                }
+            }
+            if (allSlimesKilled) {
+                addNpcQuestEvent(NPC_Reul.npcName, QuestEvent.REUL_KILL_SLIMES_COMPLETED);
+                gp.ui.addMessage("You have defeated all the slimes!");
+            }
         }
     }
 

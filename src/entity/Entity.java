@@ -12,6 +12,7 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import main.QuestEvent;
 import main.UtilityTool;
 
 public class Entity {
@@ -32,6 +33,7 @@ public class Entity {
     public boolean temp = false;
    
     // State
+    public int homeCol, homeRow;
     public int worldX, worldY;
     public String direction = "down";
     public boolean collisionOn = false;
@@ -53,11 +55,6 @@ public class Entity {
     public Entity loot;
     public Entity reward;
     public boolean opened = false;
-    public boolean introDone = false;
-    public boolean pickedQuestObject = false;
-    public boolean doneQuest1 = false;
-    public boolean doneQuest2 = false;
-    public boolean receivedReward = false;
     public boolean goalReached = false;
     boolean unmovable = true;
     public boolean rage = false;
@@ -323,6 +320,123 @@ public class Entity {
             damagePlayer(attack);
         } 
     }
+
+    public void moveThenStop(int goalColumn, int goalRow) {
+        searchPath(goalColumn, goalRow);
+        if (goalReached == true){
+            standby = true;
+        }
+    }
+
+    public void moveAndQuestAdvance(int goalColumn, int goalRow, String npcName, QuestEvent event) {
+        goalReached = false;
+        searchPath(goalColumn, goalRow);
+        if (goalReached == true){
+            standby = true;
+            gp.player.addNpcQuestEvent(npcName, event);
+        }
+    }
+
+    public void roam(int homeCol, int homeRow){
+        standby = false;
+        speed = defaultSpeed;
+        actionLockCounter++;
+        if (actionLockCounter >= 120){
+            Random random = new Random();
+            int i = random.nextInt(100) + 1;
+
+            if (i <= 25) {
+                direction = "up";
+            } else if (i > 25 && i <= 50) {
+                direction = "down";
+            } else if (i > 50 && i <= 75) {
+                direction = "left";
+            } else if (i > 75 && i <= 100) {
+                direction = "right";
+            }
+
+            actionLockCounter = 0;
+        }
+
+        // Predict next tile after moving
+        int nextCol = getColumn();
+        int nextRow = getRow();
+        switch (direction) {
+            case "up":
+                nextRow = getRow() - 1;
+                break;
+            case "down":
+                nextRow = getRow() + 1;
+                break;
+            case "left":
+                nextCol = getColumn() - 1;
+                break;
+            case "right":
+                nextCol = getColumn() + 1;
+                break;
+        }
+
+        // If next step is outside the 3x3 area, stop at the edge
+        if (nextCol < homeCol - 1 || nextCol > homeCol + 1 ||
+            nextRow < homeRow - 1 || nextRow > homeRow + 1) {
+            speed = 0; // Stop at the edge
+        } else {
+            speed = defaultSpeed; // Move normally
+        }
+
+    } 
+
+    protected void handleQuestMilestone(String npcName, QuestEvent event, boolean isStandby) {
+        goalReached = false;
+        standby = false;
+        speed = defaultSpeed;
+        searchPath(getGoalColumn(gp.player), getGoalRow(gp.player));
+        if (gp.collisionChecker.checkPlayer(this)) {
+            this.speak();
+            standby = isStandby;
+            gp.player.addNpcQuestEvent(npcName, event);
+        }
+    }
+
+    protected void handleQuestMilestoneSpeak(String npcName, QuestEvent event, boolean isStandby) {
+        speed = defaultSpeed;   
+        this.speak();
+        standby = isStandby;
+        gp.player.addNpcQuestEvent(npcName, event);
+    }
+
+    protected void handleIntroMilestone() {
+        onPath = true;
+        searchPath(getGoalColumn(gp.player), getGoalRow(gp.player));
+        if (gp.collisionChecker.checkPlayer(this)) {
+            this.speak();
+            standby = true;
+        }
+    }
+
+    protected void talkToPlayer(boolean isStandby) {
+        onPath = true;
+        searchPath(getGoalColumn(gp.player), getGoalRow(gp.player));
+        if (gp.collisionChecker.checkPlayer(this)) {
+            gp.player.faceEntity(this);
+            this.speak();
+            standby = isStandby;
+        }
+    }
+
+    public void faceEntity(Entity target) {
+        if (getCenterX() < target.getCenterX()) {
+            direction = "right";
+        } else if (getCenterX() > target.getCenterX()) {
+            direction = "left";
+        } else if (getCenterY() < target.getCenterY()) {
+            direction = "down";
+        } else if (getCenterY() > target.getCenterY()) {
+            direction = "up";
+        }
+    }
+
+    public void onQuestEvent(QuestEvent event) {}
 
     public void update(){
 
@@ -893,7 +1007,6 @@ public class Entity {
             }
         }
         return index;
-        
     }
 
 

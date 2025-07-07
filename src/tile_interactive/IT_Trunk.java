@@ -6,6 +6,8 @@ public class IT_Trunk extends InteractiveTile {
 
     GamePanel gp;
 
+    public static final String tileName = "Trunk";
+
     public IT_Trunk(GamePanel gp, int column, int row) {
         super(gp, column, row);
         this.gp = gp;

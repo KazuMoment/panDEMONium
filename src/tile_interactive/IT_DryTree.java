@@ -9,6 +9,8 @@ public class IT_DryTree extends InteractiveTile{
 
     GamePanel gp;
 
+    public static final String tileName = "DryTree";
+
     public IT_DryTree(GamePanel gp, int column, int row) {
         super(gp, column, row);
         this.gp = gp;

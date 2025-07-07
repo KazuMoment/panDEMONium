@@ -63,44 +63,44 @@ public class NPC_Fischer extends Entity {
         
     }
 
-    public void speak() {
-        facePlayer();
-        startDialogue(this, dialogueSet);
+    // public void speak() {
+    //     facePlayer();
+    //     startDialogue(this, dialogueSet);
         
-        if(doneQuest1 == false){
-            if (introDone == true) {
-                dialogueSet = 1;
-            }
-        }
+    //     if(doneQuest1 == false){
+    //         if (introDone == true) {
+    //             dialogueSet = 1;
+    //         }
+    //     }
 
-        else {
-            dialogueSet = 3;
-        }
+    //     else {
+    //         dialogueSet = 3;
+    //     }
 
-        if (Progress.completedGame == true){
-            dialogueSet = 4;
-        }
+    //     if (Progress.completedGame == true){
+    //         dialogueSet = 4;
+    //     }
 
-        int index = gp.player.searchItemInInventory(Object_Seal.objectName);
-        if (index != 999){
-            dialogueSet = 2;
-            gp.player.inventory.remove(index);
-            doneQuest1 = true;
-            searchCally();            
-        }
-    }
+    //     int index = gp.player.searchItemInInventory(Object_Seal.objectName);
+    //     if (index != 999){
+    //         dialogueSet = 2;
+    //         gp.player.inventory.remove(index);
+    //         doneQuest1 = true;
+    //         searchCally();            
+    //     }
+    // }
 
-    public void searchCally(){
-        for(int mapNum = 0; mapNum < gp.maxMap; mapNum++){
-            for (int i = 0; i < gp.npc[1].length; i++){
-                if (gp.npc[mapNum][i] != null && 
-                    gp.npc[mapNum][i].name == NPC_Cally.npcName){
-                    gp.npc[mapNum][i].sleep = false;
-                    gp.npc[mapNum][i].doneQuest1 = true;
-                } 
-            }	
-        }
-    }
+    // public void searchCally(){
+    //     for(int mapNum = 0; mapNum < gp.maxMap; mapNum++){
+    //         for (int i = 0; i < gp.npc[1].length; i++){
+    //             if (gp.npc[mapNum][i] != null && 
+    //                 gp.npc[mapNum][i].name == NPC_Cally.npcName){
+    //                 gp.npc[mapNum][i].sleep = false;
+    //                 gp.npc[mapNum][i].doneQuest1 = true;
+    //             } 
+    //         }	
+    //     }
+    // }
 
 
 }

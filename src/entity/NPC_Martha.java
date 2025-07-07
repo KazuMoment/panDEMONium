@@ -58,54 +58,54 @@ public class NPC_Martha extends Entity{
   
     }
 
-    public void setMovement(){
+    // public void setMovement(){
 
-        if (onPath == true){
+    //     if (onPath == true){
 
-            int goalColumn = 24;
-            int goalRow = 43;
+    //         int goalColumn = 24;
+    //         int goalRow = 43;
 
-            searchPath(goalColumn, goalRow);
+    //         searchPath(goalColumn, goalRow);
 
-        }
+    //     }
 
-        else{
+    //     else{
 
-            if (introDone == true){
-                onPath = true;
-            }
+    //         if (introDone == true){
+    //             onPath = true;
+    //         }
 
-             actionLockCounter++;
+    //          actionLockCounter++;
 
-            if (actionLockCounter == 120){
-                Random random = new Random();
-                int i = random.nextInt(100)+1; // random number from 1 to 100
-                if (i <= 25){
-                    direction = "up";
-                }
-                if (i > 25 && i <= 50){
-                    direction = "down";
-                }
-                if (i > 50 && i <= 75){
-                    direction = "left";
-                }
-                if (i > 75 && i <= 100){
-                    direction = "right";
-                }
-                actionLockCounter = 0;
-            }
-        }
-    }
+    //         if (actionLockCounter == 120){
+    //             Random random = new Random();
+    //             int i = random.nextInt(100)+1; // random number from 1 to 100
+    //             if (i <= 25){
+    //                 direction = "up";
+    //             }
+    //             if (i > 25 && i <= 50){
+    //                 direction = "down";
+    //             }
+    //             if (i > 50 && i <= 75){
+    //                 direction = "left";
+    //             }
+    //             if (i > 75 && i <= 100){
+    //                 direction = "right";
+    //             }
+    //             actionLockCounter = 0;
+    //         }
+    //     }
+    // }
 
-    public void speak(){
-    	facePlayer();
-        startDialogue(this, dialogueSet);
-        dialogueSet++;
+    // public void speak(){
+    // 	facePlayer();
+    //     startDialogue(this, dialogueSet);
+    //     dialogueSet++;
         
-        if (introDone == true && dialogueSet > 2){
-            dialogueSet = 3;
-        }
+    //     if (introDone == true && dialogueSet > 2){
+    //         dialogueSet = 3;
+    //     }
 
-    }
+    // }
     
 }

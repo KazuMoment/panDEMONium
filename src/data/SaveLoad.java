@@ -5,7 +5,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+
 import main.GamePanel;
+import main.QuestEvent;
 
 public class SaveLoad {
 
@@ -92,8 +97,6 @@ public class SaveLoad {
             ds.mapNPCWorldX = new int[gp.maxMap][gp.npc[1].length];
             ds.mapNPCWorldY = new int[gp.maxMap][gp.npc[1].length];
             ds.mapNPCRewardName = new String[gp.maxMap][gp.npc[1].length];
-            ds.mapNPCDoneQuest1 = new boolean[gp.maxMap][gp.npc[1].length];
-            ds.mapNPCDoneQuest2 = new boolean[gp.maxMap][gp.npc[1].length];;
             ds.mapNPCReceivedReward = new boolean [gp.maxMap][gp.npc[1].length];
             ds.mapNPCPickedQuestObject = new boolean[gp.maxMap][gp.npc[1].length];
             ds.mapNPCStandby = new boolean[gp.maxMap][gp.npc[1].length];
@@ -112,10 +115,7 @@ public class SaveLoad {
                         if (gp.npc[mapNum][i].reward != null){
                             ds.mapNPCRewardName[mapNum][i] = gp.npc[mapNum][i].reward.name;
                         }
-                        ds.mapNPCDoneQuest1[mapNum][i] = gp.npc[mapNum][i].doneQuest1;
-                        ds.mapNPCDoneQuest2[mapNum][i] = gp.npc[mapNum][i].doneQuest2;
-                        ds.mapNPCReceivedReward[mapNum][i] = gp.npc[mapNum][i].receivedReward;
-                        ds.mapNPCPickedQuestObject[mapNum][i] = gp.npc[mapNum][i].pickedQuestObject;
+                        ds.npcQuestProgress = new HashMap<>(gp.player.npcQuestProgress);
                         ds.mapNPCStandby[mapNum][i] = gp.npc[mapNum][i].standby;
                         ds.mapNPCSleep[mapNum][i] = gp.npc[mapNum][i].sleep;
                     }
@@ -249,10 +249,7 @@ public class SaveLoad {
                         if (ds.mapNPCRewardName[mapNum][i] != null){
                             gp.npc[mapNum][i].setReward(gp.eGenerator.getObject(ds.mapNPCRewardName[mapNum][i]));   
                         }
-                        gp.npc[mapNum][i].doneQuest1 = ds.mapNPCDoneQuest1[mapNum][i];
-                        gp.npc[mapNum][i].doneQuest2 = ds.mapNPCDoneQuest2[mapNum][i];
-                        gp.npc[mapNum][i].receivedReward = ds.mapNPCReceivedReward[mapNum][i];
-                        gp.npc[mapNum][i].pickedQuestObject = ds.mapNPCPickedQuestObject[mapNum][i];
+                        gp.player.npcQuestProgress = ds.npcQuestProgress != null ? ds.npcQuestProgress : new HashMap<>();
                         gp.npc[mapNum][i].standby = ds.mapNPCStandby[mapNum][i];
                         gp.npc[mapNum][i].sleep = ds.mapNPCSleep[mapNum][i];
                     }
