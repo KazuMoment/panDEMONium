@@ -113,6 +113,7 @@ public class Player extends Entity{
 
         HP = maxHP;
         MP = maxMP;
+        speed = defaultSpeed;
         invulnerable = false;
         transparent = false;
         attacking = false;
@@ -661,7 +662,7 @@ public class Player extends Entity{
         while (EXP >= nextLevelEXP){
             level++;
             EXP -= nextLevelEXP;
-            nextLevelEXP *= 1.5;
+            nextLevelEXP *= 3;
             maxHP += 2;
             maxMP += 1;
             HP = maxHP;

@@ -1,15 +1,11 @@
 package entity;
 
 import java.awt.Rectangle;
-import java.awt.desktop.QuitStrategy;
 
 import data.Progress;
-import enemy.Enemy_GreenSlime;
 import main.GamePanel;
 import main.QuestEvent;
 import main.QuestListener;
-import object.Object_Axe_Normal;
-import tile_interactive.IT_DryTree;
 
 public class NPC_Reul extends Entity implements QuestListener{
 

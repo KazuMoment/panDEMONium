@@ -345,6 +345,7 @@ public class Entity {
         for (int i = 0; i < gp.npc[1].length; i++){
 			if (gp.npc[gp.currentMap][i].name.equals(npcName)){
 				gp.npc[gp.currentMap][i].onPath = true;
+                gp.npc[gp.currentMap][i].goalReached = false;
 				gp.player.addNpcQuestEvent(npcName, event);
 				break;
 			}
